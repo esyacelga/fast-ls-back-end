@@ -1,0 +1,16 @@
+{
+  "name": "ley-rutas-app-back-end",
+  "version": "1.0.0",
+  "description": "servidor back-end del proyecto mensajeria",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "santiag.yacelga",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "tedious": "^6.2.0"
+  }
+}
