@@ -23,19 +23,20 @@ var config = {
 };
 
 var connection = new Connection(config);
-connection.on('connect', function(err) {
+connection.on('connect', function (err) {
     // If no error, then good to proceed.
     console.log("Connected");
 });
 
 
-//Rutas
-app.get('/', (req, res, next)=>{
-    res.status(200).json({
-        ok:true,
-        mensaje:'Peticion realizada correctamente'
-    })
-})
+//Importar Rutas
+var appRoutes = require('./routes/app');
+var articulosRoutes = require('./routes/articulo');
+
+
+//Rutasuse('/', appRoutes);
+app.use('/', appRoutes);
+app.use('/', articulosRoutes);
 
 //Escuchar peticiones
 app.listen(3000, () => {
