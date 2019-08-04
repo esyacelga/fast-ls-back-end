@@ -10,8 +10,10 @@
   "author": "santiag.yacelga",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "mongoose": "^5.6.8",
+    "mongoose-unique-validator": "^2.0.3",
     "mssql": "^5.1.0",
     "tedious": "^6.2.0"
   }
