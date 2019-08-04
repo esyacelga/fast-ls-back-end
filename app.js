@@ -26,9 +26,11 @@ mongoose.connect('mongodb://localhost:27017/mensajeria-ley-seevice', (err, res) 
 var appRoutes = require('./routes/app');
 var usuarioRoutes = require('./routes/usuario');
 var loqinRoutes = require('./routes/login');
+var tipoArticulo = require('./routes/TipoArticuloRoute');
 
 
 //Rutasuse('/', appRoutes);
+app.use('/tipoArticulo', tipoArticulo);
 app.use('/usuario', usuarioRoutes);
 app.use('/login', loqinRoutes);
 app.use('/', appRoutes);
