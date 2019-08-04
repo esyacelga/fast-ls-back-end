@@ -27,7 +27,7 @@ var responceCrear = function (peticion, respuesta, error,objeto) {
     })
 };
 
-var responceActualizar = function (peticion, respuesta, error, objeto,) {
+var responceActualizar = function (peticion, respuesta, error, objeto) {
     var id = peticion.params.id;
     if (error) {
         return respuesta.status(500).json({
@@ -46,7 +46,7 @@ var responceActualizar = function (peticion, respuesta, error, objeto,) {
 };
 
 
-var responceGuardar = function (peticion, respuesta, error, objeto,) {
+var responceGuardar = function (peticion, respuesta, error, objeto) {
     if (error) {
         return res.status(400).json({
             ok: false,
@@ -60,7 +60,33 @@ var responceGuardar = function (peticion, respuesta, error, objeto,) {
     })
 };
 
+var responceEliminar = function (peticion, respuesta, error, objeto) {
+    var id = peticion.params.id;
+    console.log(id);
+    if (error) {
+        return res.status(500).json({
+            ok: false,
+            mensaje: 'Error errorrrar usuario',
+            errors: error
+        });
+    }
+
+    if (!objeto) {
+        return respuesta.status(400).json({
+            ok: false,
+            mensaje: 'No existe un usuario con ese id',
+            errors: {message: 'No existe un usuario con ese id'}
+        });
+    }
+
+    respuesta.status(200).json({
+        ok: true,
+        objeto: objeto
+    });
+};
+
 module.exports.responceActualizar = responceActualizar;
 module.exports.responceGuardar = responceGuardar;
 module.exports.responceBuscar = responceBuscar;
 module.exports.responceCrear = responceCrear;
+module.exports.responceEliminar = responceEliminar;
