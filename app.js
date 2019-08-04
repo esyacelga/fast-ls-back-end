@@ -15,12 +15,13 @@ mongoose.connect('mongodb://localhost:27017/mensajeria-ley-seevice', (err, res) 
 
 //Importar Rutas
 var appRoutes = require('./routes/app');
-var articulosRoutes = require('./routes/articulo');
+var usuarioRoutes = require('./routes/usuario');
 
 
 //Rutasuse('/', appRoutes);
+app.use('/usuario', usuarioRoutes);
 app.use('/', appRoutes);
-app.use('/', articulosRoutes);
+
 
 //Escuchar peticiones
 app.listen(3000, () => {
