@@ -49,7 +49,7 @@ app.use('/', (req, res, next) => {
 /**
  * Actualiza usuario
  */
-app.put('/:id', (req, res) => {
+app.put('/:id', mdAuth.verificaToken, (req, res) => {
 
     var id = req.params.id;
     var body = req.body;
@@ -103,7 +103,7 @@ app.put('/:id', (req, res) => {
 /**
  * Eliminacion de usuario
  */
-app.delete('/:id', (req, res) => {
+app.delete('/:id', mdAuth.verificaToken, (req, res) => {
 
     var id = req.params.id;
 
@@ -154,7 +154,8 @@ app.post('', mdAuth.verificaToken, (req, res) => {
         }
         res.status(201).json({
             ok: true,
-            usuario: usuarioGuardado
+            usuario: usuarioGuardado,
+            usuarioToken: req.usuario
         })
     });
 
