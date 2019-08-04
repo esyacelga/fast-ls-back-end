@@ -1,10 +1,15 @@
 var express = require('express');
 var Usuario = require('../models/usuario');
 var bcrypt = require('bcryptjs');
+var jwt = require('jsonwebtoken');
+var SEED = require('../config/config').SEED;
+
 
 var app = express();
 //Rutas
 //OBTIENE TODOS LOS USUARIOS
+
+
 app.get('/', (req, res, next) => {
     Usuario.find({}, 'nombre email img role').exec(
         (error, usuarios) => {
@@ -23,6 +28,22 @@ app.get('/', (req, res, next) => {
 
 
 })
+
+app.use('/', (req, res, next) => {
+    var token = req.query.token;
+    jwt.verify(token, SEED, (error, decoded) => {
+        if (error) {
+            return res.status(401).json({
+                ok: false,
+                mensaje: 'Token invalido',
+                errors: error
+            });
+        }
+        next();
+    });
+
+})
+
 
 /**
  * Actualiza usuario
