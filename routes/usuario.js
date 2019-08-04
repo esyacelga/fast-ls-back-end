@@ -3,13 +3,14 @@ var Usuario = require('../models/usuario');
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 var SEED = require('../config/config').SEED;
-
+var mdAuth = require('../middleware/autenticacion')
 
 var app = express();
-//Rutas
-//OBTIENE TODOS LOS USUARIOS
 
 
+/**
+ * Obtiene todos los usuarios
+ */
 app.get('/', (req, res, next) => {
     Usuario.find({}, 'nombre email img role').exec(
         (error, usuarios) => {
@@ -133,7 +134,7 @@ app.delete('/:id', (req, res) => {
 
 });
 
-app.post('', (req, res) => {
+app.post('', mdAuth.verificaToken, (req, res) => {
     var body = req.body;
     var usuario = new Usuario({
         nombre: body.nombre,
