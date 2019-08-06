@@ -1,4 +1,4 @@
-var responceBuscar = function (peticion, respuesta, error,objeto) {
+var responceBuscar = function (peticion, respuesta, error, objeto) {
     if (error) {
         return respuesta.status(500).json({
             ok: false,
@@ -13,12 +13,13 @@ var responceBuscar = function (peticion, respuesta, error,objeto) {
 };
 
 
-var responceCrear = function (peticion, respuesta, error,objeto) {
+var responceCrear = function (peticion, respuesta, error, objeto) {
     if (error) {
+        console.error(error);
         return respuesta.status(400).json({
             ok: false,
             mensaje: 'Error al crear objeto',
-            errors: err
+            errors: error
         })
     }
     respuesta.status(201).json({
@@ -33,7 +34,7 @@ var responceActualizar = function (peticion, respuesta, error, objeto) {
         return respuesta.status(500).json({
             ok: false,
             mensaje: 'Error al actualizar objeto',
-            errors: err
+            errors: error
         });
     }
     if (!objeto) {

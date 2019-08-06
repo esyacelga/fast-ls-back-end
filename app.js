@@ -7,8 +7,18 @@ var bodyParser = require('body-parser')
 //inicializar variables
 var app = express();
 
+
+//CORS
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
+    next();
+});
+
+
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({extended: false}))
 
 // parse application/json
 app.use(bodyParser.json())
@@ -34,7 +44,6 @@ app.use('/tipoArticulo', tipoArticulo);
 app.use('/usuario', usuarioRoutes);
 app.use('/login', loqinRoutes);
 app.use('/', appRoutes);
-
 
 
 //Escuchar peticiones

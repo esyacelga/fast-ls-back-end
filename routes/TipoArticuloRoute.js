@@ -2,20 +2,18 @@ var express = require('express');
 var mdlTipoArticulo = require('../models/TipoArticulo');
 var responceActualizar = require('../system/SystemUtils');
 var responceGuardar = require('../system/SystemUtils');
-var responceBuscar = require('../system/SystemUtils');
 var responceCrear = require('../system/SystemUtils');
 var responceEliminar = require('../system/SystemUtils');
+var svrTipoArticulo = require('../servicios/svrTipoArticulo');
+
 var app = express();
 
 
 /**
- * Obtiene todos los usuarios
+ * Obtiene todos los tipos de articulos
  */
-app.get('/', (req, res, next) => {
-    mdlTipoArticulo.find({}, (error, objeto) => {
-        res = responceBuscar.responceBuscar(req, res, error, objeto);
-    });
-})
+app.get('/', svrTipoArticulo.obtenerTodos)
+
 
 /**
  * Inserta un nuevo tipo articulo
