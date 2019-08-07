@@ -12,7 +12,10 @@ var app = express();
 /**
  * Obtiene todos los tipos de articulos
  */
-app.get('/', svrTipoArticulo.obtenerTodos)
+app.get('/', svrTipoArticulo.obtenerTodos);
+
+
+app.put('/obtenerTodosTipoArticulo/', svrTipoArticulo.obtenerTodos);
 
 
 /**
@@ -35,11 +38,12 @@ app.post('', (req, res) => {
 /**
  * Actualiza usuario
  */
-app.put('/:id', (req, res) => {
+app.put('/', (req, res) => {
 
-    var id = req.params.id;
+
     var body = req.body;
-
+    var id = body._id;
+    console.log(body._id);
     mdlTipoArticulo.findById(id, (err, obj) => {
         var ret = responceActualizar.responceActualizar(req, res, err, obj);
         if (ret) {

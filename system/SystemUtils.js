@@ -49,7 +49,7 @@ var responceActualizar = function (peticion, respuesta, error, objeto) {
 
 var responceGuardar = function (peticion, respuesta, error, objeto) {
     if (error) {
-        return res.status(400).json({
+        return respuesta.status(400).json({
             ok: false,
             mensaje: 'Error al crear objeto',
             errors: error

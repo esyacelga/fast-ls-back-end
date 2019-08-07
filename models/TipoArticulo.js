@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 
 var tipoArticulo = new Schema({
-    descripcion: { type: String, required: [true, 'El nombre es necesario'] },
+    descripcion: { type: String, required: [true, 'la descripcion es necesario'] },
     codigo: { type: String, required: [true, 'El codigo es necesario'] },
     estado: { type: Number, required: [true, 'El estado es necesario'] }
 });
