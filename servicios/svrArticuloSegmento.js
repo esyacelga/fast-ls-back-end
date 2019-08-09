@@ -34,6 +34,7 @@ function actualizar(req, res) {
         if (ret) {
             return ret;
         }
+        obj.tipoArticulo=body.tipoArticulo,
         obj.descripcion = body.descripcion;
         obj.estado = body.estado;
         obj.save((err, objGuardado) => {
