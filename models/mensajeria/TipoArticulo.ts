@@ -1,0 +1,11 @@
+import {model, Schema,} from "mongoose";
+import uniqueValidator from "mongoose-unique-validator";
+
+const tipoArticulo = new Schema({
+    descripcion: {type: String, required: [true, 'la descripcion es necesario']},
+    codigo: {type: String, unique: true, required: [true, 'El codigo es necesario']},
+    estado: {type: Number, required: [true, 'El estado es necesario']}
+});
+tipoArticulo.plugin(uniqueValidator, {message: '{PATH} debe de ser único'});
+
+export const TipoArticulo = model('TipoArticulo', tipoArticulo);

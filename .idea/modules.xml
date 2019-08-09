@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/ley-rutas-app-back-end.iml" filepath="$PROJECT_DIR$/.idea/ley-rutas-app-back-end.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/08-fotosgram-server.iml" filepath="$PROJECT_DIR$/.idea/08-fotosgram-server.iml" />
     </modules>
   </component>
 </project>
