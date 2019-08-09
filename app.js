@@ -37,6 +37,7 @@ var appRoutes = require('./routes/app');
 var usuarioRoutes = require('./routes/usuario');
 var loqinRoutes = require('./routes/login');
 var tipoArticulo = require('./routes/TipoArticuloRoute');
+var articulo = require('./routes/ArticuloRoute');
 var articuloSegmento = require('./routes/ArticuloSegmentoRoute');
 
 
@@ -44,6 +45,7 @@ var articuloSegmento = require('./routes/ArticuloSegmentoRoute');
 app.use('/articuloSegmento', articuloSegmento);
 app.use('/tipoArticulo', tipoArticulo);
 app.use('/usuario', usuarioRoutes);
+app.use('/articulo', articulo);
 app.use('/login', loqinRoutes);
 app.use('/', appRoutes);
 
