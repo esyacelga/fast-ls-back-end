@@ -44,7 +44,7 @@ function actualizar(req, res) {
 
 function eliminar(req, res) {
     var id = req.params.id;
-    mdlArticuloSegmento.findByIdAndRemove(id, (err, objeto) => {
+    mdlArticuloSegmento.findOneAndDelete(id, (err, objeto) => {
         res = responceEliminar.responceEliminar(req, res, err, objeto);
     });
 }
