@@ -37,9 +37,11 @@ var appRoutes = require('./routes/app');
 var usuarioRoutes = require('./routes/usuario');
 var loqinRoutes = require('./routes/login');
 var tipoArticulo = require('./routes/TipoArticuloRoute');
+var articuloSegmento = require('./routes/ArticuloSegmentoRoute');
 
 
 //Rutasuse('/', appRoutes);
+app.use('/articuloSegmento', articuloSegmento);
 app.use('/tipoArticulo', tipoArticulo);
 app.use('/usuario', usuarioRoutes);
 app.use('/login', loqinRoutes);
