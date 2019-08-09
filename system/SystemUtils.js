@@ -40,7 +40,7 @@ var responceActualizar = function (peticion, respuesta, error, objeto) {
     if (!objeto) {
         return respuesta.status(400).json({
             ok: false,
-            mensaje: 'El usuario con el id ' + id + ' no existe',
+            mensaje: 'El objeto con el id ' + id + ' no existe',
             errors: {message: 'No existe un objeto con ese ID'}
         });
     }
