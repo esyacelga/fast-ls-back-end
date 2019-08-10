@@ -6,7 +6,7 @@ const tipoArticulo = Router();
 /**
  * Obtiene todos
  */
-tipoArticulo.get('/', ObtenerTodos);
+tipoArticulo.put('/obtenerTodosTipoArticulo', ObtenerTodos);
 
 /**
  * Crea un registro

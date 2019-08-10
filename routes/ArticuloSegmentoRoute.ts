@@ -10,7 +10,7 @@ const articuloSegmentoRoute = Router();
 /**
  * Obtiene todos
  */
-articuloSegmentoRoute.get('/', ObtenerTodosArticuloSegmento);
+articuloSegmentoRoute.put('/obtenerTodosArticuloSegmento', ObtenerTodosArticuloSegmento);
 
 /**
  * Crea un registro

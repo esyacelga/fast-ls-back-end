@@ -6,7 +6,7 @@ const tipoArticulo = express_1.Router();
 /**
  * Obtiene todos
  */
-tipoArticulo.get('/', TipoArticuloService_1.ObtenerTodos);
+tipoArticulo.put('/obtenerTodosTipoArticulo', TipoArticuloService_1.ObtenerTodos);
 /**
  * Crea un registro
  */

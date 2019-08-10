@@ -6,7 +6,7 @@ const articuloSegmentoRoute = express_1.Router();
 /**
  * Obtiene todos
  */
-articuloSegmentoRoute.get('/', ArticuloSegmentoService_1.ObtenerTodosArticuloSegmento);
+articuloSegmentoRoute.put('/obtenerTodosArticuloSegmento', ArticuloSegmentoService_1.ObtenerTodosArticuloSegmento);
 /**
  * Crea un registro
  */
