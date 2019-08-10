@@ -6,6 +6,24 @@ import FileSystem from "../../classes/file-system";
 const util = new CommonsMethods();
 const fileSystem = new FileSystem();
 
+export const PaginarArticulos = async (req: Request, res: Response) => {
+    let pagina = Number(req.body.pagina) || 1;
+    let skip = pagina - 1;
+    skip = skip * 10;
+    const posts = await Articulo.find()
+        .sort({_id: -1})
+        .skip(skip)
+        .limit(10)
+        //   .populate('usuario', '-password')
+        .exec();
+    res.json({
+        ok: true,
+        pagina,
+        items: posts
+    });
+}
+
+
 export const ObtenerTodos = (req: Request, res: Response) => {
     var body = req.body;
     Articulo.find({}, (error, objeto) => {

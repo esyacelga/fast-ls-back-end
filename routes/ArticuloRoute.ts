@@ -1,8 +1,14 @@
 import {Router} from 'express';
-import {Actualizar, ObtenerTodos, Registrar} from "./service/ArticuloService";
+import {Actualizar, ObtenerTodos, PaginarArticulos, Registrar} from "./service/ArticuloService";
 import {SubirImagen} from "./service/UploadGenericService";
 
 const articuloRoute = Router();
+
+/**
+ * Obtiene todos
+ */
+articuloRoute.put('/paginadoArticulo', PaginarArticulos);
+
 /**
  * Obtiene todos
  */
@@ -13,13 +19,14 @@ articuloRoute.put('/obtenerTodos', ObtenerTodos);
  */
 articuloRoute.post('/', Registrar);
 
-
 /**
  * Actualiza un registro
  */
 articuloRoute.put('/', Actualizar);
 
-
+/**
+ * Servicio de subida
+ */
 articuloRoute.post('/upload', SubirImagen);
 
 
