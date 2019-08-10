@@ -9,15 +9,12 @@ export default class FileSystem {
     constructor() { };
 
     guardarImagenTemporal( file: FileUpload, userId: string ) {
-
         return new Promise(  (resolve, reject) => {
-
             // Crear carpetas
             const path = this.crearCarpetaUsuario( userId );
-    
             // Nombre archivo
             const nombreArchivo = this.generarNombreUnico( file.name );
-            
+            console.log(path);
             // Mover el archivo del Temp a nuestra carpeta
             file.mv( `${ path }/${ nombreArchivo }`, ( err: any) => {
     
@@ -26,9 +23,7 @@ export default class FileSystem {
                 } else {
                     resolve();
                 }
-    
             });
-
         });
 
 
@@ -69,6 +64,7 @@ export default class FileSystem {
 
         const pathTemp = path.resolve(  __dirname, '../uploads/', userId, 'temp' );
         const pathPost = path.resolve(  __dirname, '../uploads/', userId, 'posts' );
+
 
         if ( !fs.existsSync( pathTemp ) ) {
             return [];

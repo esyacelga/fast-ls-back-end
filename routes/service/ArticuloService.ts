@@ -18,7 +18,8 @@ export const Registrar = (req: Request, res: Response) => {
         unidadCosto: req.body.unidadCosto,
         unidadAlmacenada: req.body.unidadAlmacenada,
         descripcion: req.body.descripcion,
-        estado: req.body.estado
+        estado: req.body.estado,
+        fechaCreacion: new Date()
     };
     Articulo.create(data, (err: any, objeto: any) => {
         res = util.responceCrear(req, res, err, objeto);
