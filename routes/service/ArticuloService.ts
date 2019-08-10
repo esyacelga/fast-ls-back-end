@@ -1,8 +1,10 @@
 import {CommonsMethods} from "../../commons/CommonsMethods";
 import {Request, Response} from "express";
 import {Articulo} from "../../models/mensajeria/ArticuloModel";
+import FileSystem from "../../classes/file-system";
 
 const util = new CommonsMethods();
+const fileSystem = new FileSystem();
 
 export const ObtenerTodos = (req: Request, res: Response) => {
     var body = req.body;
@@ -13,13 +15,15 @@ export const ObtenerTodos = (req: Request, res: Response) => {
 
 
 export const Registrar = (req: Request, res: Response) => {
+    req.body.img = fileSystem.imagenesDeTempHaciaPost(req.body.articuloSegmento);
     const data = {
         articuloSegmento: req.body.articuloSegmento,
         unidadCosto: req.body.unidadCosto,
         unidadAlmacenada: req.body.unidadAlmacenada,
         descripcion: req.body.descripcion,
         estado: req.body.estado,
-        fechaCreacion: new Date()
+        fechaCreacion: new Date(),
+        imgs: req.body.img
     };
     Articulo.create(data, (err: any, objeto: any) => {
         res = util.responceCrear(req, res, err, objeto);

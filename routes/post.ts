@@ -42,7 +42,6 @@ postRoutes.post('/', (req: any, res: Response) => {
     body.imgs = imagenes;
     console.log(imagenes);
     Post.create(body).then(async postDB => {
-        console.log("1212");
         await postDB.populate('usuario', '-password').execPopulate();
 
         res.json({
