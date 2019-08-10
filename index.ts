@@ -8,6 +8,7 @@ import userRoutes from './routes/usuario';
 import postRoutes from './routes/post';
 import tipoArticulo from "./routes/TipoArticuloRoute";
 import articuloSegmentoRoute from "./routes/ArticuloSegmentoRoute";
+import articuloRoute from "./routes/ArticuloRoute";
 
 const server = new Server();
 
@@ -24,6 +25,7 @@ server.app.use(fileUpload({useTempFiles: true}));
 // Rutas de mi app
 server.app.use('/user', userRoutes);
 server.app.use('/posts', postRoutes);
+server.app.use('/articulo', articuloRoute);
 server.app.use('/tipoArticulo', tipoArticulo);
 server.app.use('/articuloSegmento', articuloSegmentoRoute);
 

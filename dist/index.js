@@ -12,6 +12,7 @@ const usuario_1 = __importDefault(require("./routes/usuario"));
 const post_1 = __importDefault(require("./routes/post"));
 const TipoArticuloRoute_1 = __importDefault(require("./routes/TipoArticuloRoute"));
 const ArticuloSegmentoRoute_1 = __importDefault(require("./routes/ArticuloSegmentoRoute"));
+const ArticuloRoute_1 = __importDefault(require("./routes/ArticuloRoute"));
 const server = new server_1.default();
 // Body parser
 server.app.use(body_parser_1.default.urlencoded({ extended: true }));
@@ -22,6 +23,7 @@ server.app.use(express_fileupload_1.default({ useTempFiles: true }));
 // Rutas de mi app
 server.app.use('/user', usuario_1.default);
 server.app.use('/posts', post_1.default);
+server.app.use('/articulo', ArticuloRoute_1.default);
 server.app.use('/tipoArticulo', TipoArticuloRoute_1.default);
 server.app.use('/articuloSegmento', ArticuloSegmentoRoute_1.default);
 // Conectar DB
