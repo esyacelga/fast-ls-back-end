@@ -13,7 +13,7 @@ import sectorRoute from "./routes/route/direccion/SectorRoute";
 import tipoUsuaroRoute from "./routes/route/persona/TipoUsuarioRoute";
 import personaRoute from "./routes/route/persona/PersonaRoute";
 import usuarioRoute from "./routes/route/persona/UsuarioRoute";
-//import tipoUsuarioPersonaRoute from "./routes/route/persona/TipoUsuarioPersonaRoute";
+import tipoUsuarioPersonaRoute from "./routes/route/persona/TipoUsuarioPersonaRoute";
 
 const server = new Server();
 
@@ -38,7 +38,7 @@ server.app.use('/articulo', articuloRoute);
 server.app.use('/tipoArticulo', tipoArticulo);
 server.app.use('/tipoUsuario', tipoUsuaroRoute);
 server.app.use('/articuloSegmento', articuloSegmentoRoute);
-//server.app.use('/tipoUsuarioPersona', tipoUsuarioPersonaRoute);
+server.app.use('/tipoUsuarioPersona', tipoUsuarioPersonaRoute);
 
 
 

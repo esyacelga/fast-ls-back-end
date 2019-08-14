@@ -6,7 +6,6 @@ import {TipoUsuarioPersona} from "../../../models/persona/TipoUsuarioPersonaMode
 const util = new CommonsMethods();
 
 export const ObtenerTodos = (req: Request, res: Response) => {
-    var body = req.body;
     TipoUsuarioPersona.find({}, (error, objeto) => {
         res = util.responceBuscar(req, res, error, objeto);
     });

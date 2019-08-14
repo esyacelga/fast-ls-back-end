@@ -9,4 +9,5 @@ const tipoUsuarioPersona = new Schema({
 tipoUsuarioPersona.plugin(uniqueValidator, {message: '{PATH} debe de ser único'});
 
 
-export const TipoUsuarioPersona = model('TipoUsuario', tipoUsuarioPersona);
+export const TipoUsuarioPersona = model('TipoUsuarioPersona', tipoUsuarioPersona);
+
