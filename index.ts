@@ -9,6 +9,9 @@ import postRoutes from './routes/post';
 import tipoArticulo from "./routes/TipoArticuloRoute";
 import articuloSegmentoRoute from "./routes/ArticuloSegmentoRoute";
 import articuloRoute from "./routes/ArticuloRoute";
+import sectorRoute from "./routes/route/direccion/SectorRoute";
+import tipoUsuaroRoute from "./routes/route/persona/TipoUsuarioRoute";
+import personaRoute from "./routes/route/persona/PersonaRoute";
 
 const server = new Server();
 
@@ -25,16 +28,17 @@ server.app.use(fileUpload({useTempFiles: true}));
 // Rutas de mi app
 server.app.use('/user', userRoutes);
 server.app.use('/posts', postRoutes);
+server.app.use('/sector', sectorRoute);
+server.app.use('/persona', personaRoute);
 server.app.use('/articulo', articuloRoute);
 server.app.use('/tipoArticulo', tipoArticulo);
+server.app.use('/tipoUsuario', tipoUsuaroRoute);
 server.app.use('/articuloSegmento', articuloSegmentoRoute);
 
 // Conectar DB
 mongoose.connect('mongodb://localhost:27017/fotosgram',
     {useNewUrlParser: true, useCreateIndex: true}, (err) => {
-
         if (err) throw err;
-
         console.log('Base de datos ONLINE');
     })
 
