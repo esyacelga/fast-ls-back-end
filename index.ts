@@ -12,8 +12,11 @@ import articuloRoute from "./routes/ArticuloRoute";
 import sectorRoute from "./routes/route/direccion/SectorRoute";
 import tipoUsuaroRoute from "./routes/route/persona/TipoUsuarioRoute";
 import personaRoute from "./routes/route/persona/PersonaRoute";
+import usuarioRoute from "./routes/route/persona/UsuarioRoute";
+//import tipoUsuarioPersonaRoute from "./routes/route/persona/TipoUsuarioPersonaRoute";
 
 const server = new Server();
+
 
 
 // Body parser
@@ -29,11 +32,15 @@ server.app.use(fileUpload({useTempFiles: true}));
 server.app.use('/user', userRoutes);
 server.app.use('/posts', postRoutes);
 server.app.use('/sector', sectorRoute);
+server.app.use('/usuario', usuarioRoute);
 server.app.use('/persona', personaRoute);
 server.app.use('/articulo', articuloRoute);
 server.app.use('/tipoArticulo', tipoArticulo);
 server.app.use('/tipoUsuario', tipoUsuaroRoute);
 server.app.use('/articuloSegmento', articuloSegmentoRoute);
+//server.app.use('/tipoUsuarioPersona', tipoUsuarioPersonaRoute);
+
+
 
 // Conectar DB
 mongoose.connect('mongodb://localhost:27017/fotosgram',
