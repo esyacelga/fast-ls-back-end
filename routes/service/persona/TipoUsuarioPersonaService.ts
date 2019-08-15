@@ -15,11 +15,11 @@ export const ObtenerTodos = (req: Request, res: Response) => {
 
 export const Registrar = async (req: Request, res: Response) => {
     const persona = await crearPersona(req, res);
-    console.log("Hola humao");
     const usuario = await crearUsuario(req, res);
-
+    console.log(persona);
+    console.log(usuario);
     //  req.persona = persona;
-    return null;
+    return res;
 }
 
 async function crearPersona(request: Request, res: Response) {
@@ -33,11 +33,7 @@ async function crearPersona(request: Request, res: Response) {
         fechaNacimiento: request.body.fechaNacimiento,
         sector: request.body.sector,
     }
-    await Persona.create(persona, (err: any, objeto: any) => {
-        res = util.responceCrear(request, res, err, objeto);
-        // @ts-ignore
-        console.log("2")
-    });
+    return await Persona.create(persona)
 }
 
 
@@ -48,10 +44,7 @@ async function crearUsuario(req: Request, res: Response) {
         clave: req.body.clave,
         estado: req.body.estado
     };
-    await UsuarioModel.create(data, (err: any, objeto: any) => {
-        res = util.responceCrear(req, res, err, objeto);
-        console.log("1")
-    });
+    return await UsuarioModel.create(data);
 }
 
 
