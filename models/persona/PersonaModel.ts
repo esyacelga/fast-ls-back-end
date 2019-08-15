@@ -7,8 +7,9 @@ const persona = new Schema({
     primerApellido: {type: String, required: [true, 'primerApellido es necesario']},
     segundoApellido: {type: String},
     cedula: {type: String},
+    correo: {type: String},
     sector: {required: [true, 'sector es necesario'], type: Schema.Types.ObjectId, ref: 'Sector'},
-    fechaNacimiento: {type: Date, required: [true, 'El estado es necesario'], default: 1}
+    fechaNacimiento: {type: Date}
 });
 persona.plugin(uniqueValidator, {message: '{PATH} debe de ser único'});
 

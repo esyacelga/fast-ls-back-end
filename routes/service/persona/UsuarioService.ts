@@ -16,6 +16,7 @@ export const Registrar = (req: Request, res: Response) => {
     const data = {
         avatar: req.body.avatar,
         playerId: req.body.playerId,
+        clave: req.body.clave,
         estado: req.body.estado
     };
     UsuarioModel.create(data, (err: any, objeto: any) => {

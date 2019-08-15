@@ -3,6 +3,7 @@ import uniqueValidator from "mongoose-unique-validator";
 
 const usuarioModel = new Schema({
     playerId: {type: String},
+    clave: {type: String},
     avatar: {
         type: String,
         default: 'av-1.png'
