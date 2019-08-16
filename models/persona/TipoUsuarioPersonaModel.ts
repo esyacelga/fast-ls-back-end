@@ -5,7 +5,7 @@ const tipoUsuarioPersona = new Schema({
     persona: {required: [true, 'El estado es necesario'], type: Schema.Types.ObjectId, ref: 'Persona'},
     usuario: {required: [true, 'El estado es necesario'], type: Schema.Types.ObjectId, ref: 'UsuarioModel'},
     tipoUsuario: {required: [true, 'El estado es necesario'], type: Schema.Types.ObjectId, ref: 'TipoUsuario'},
-    estado: {type: Number, required: [true, 'El estado es necesario'], default: 1}
+    estado: {type: Number, default: 1}
 });
 tipoUsuarioPersona.plugin(uniqueValidator, {message: '{PATH} debe de ser único'});
 

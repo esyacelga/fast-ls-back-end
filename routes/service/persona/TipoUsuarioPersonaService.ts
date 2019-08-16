@@ -12,15 +12,26 @@ export const ObtenerTodos = (req: Request, res: Response) => {
     });
 }
 
+async function crearTipoUsuarioPersona(persona: any, usuario: any, request: Request) {
+    const tipoUsuarioPersona = {
+        persona: persona._id,
+        usuario: usuario._id,
+        tipoUsuario: request.body.tipoUsuario,
+    }
+    return await TipoUsuarioPersona.create(tipoUsuarioPersona);
+}
 
 export const Registrar = async (req: Request, res: Response) => {
     const persona = await crearPersona(req, res);
     const usuario = await crearUsuario(req, res);
-    console.log(persona);
-    console.log(usuario);
-    //  req.persona = persona;
+    const tipoUsuarioPersona = await crearTipoUsuarioPersona(persona, usuario, req);
+    res.status(200).json({
+        ok: true,
+        objeto: tipoUsuarioPersona
+    })
     return res;
 }
+
 
 async function crearPersona(request: Request, res: Response) {
     const persona = {
@@ -33,7 +44,7 @@ async function crearPersona(request: Request, res: Response) {
         fechaNacimiento: request.body.fechaNacimiento,
         sector: request.body.sector,
     }
-    return await Persona.create(persona)
+    return await Persona.create(persona);
 }
 
 
