@@ -35,10 +35,8 @@ export const Registrar = async (req: Request, res: Response) => {
 
 async function crearPersona(request: Request, res: Response) {
     const persona = {
-        primerNombre: request.body.primerNombre,
-        segundoNombre: request.body.segundoNombre,
-        primerApellido: request.body.primerApellido,
-        segundoApellido: request.body.segundoApellido,
+        nombres: request.body.nombres,
+        apellidos: request.body.apellidos,
         cedula: request.body.cedula,
         correo: request.body.correo,
         fechaNacimiento: request.body.fechaNacimiento,

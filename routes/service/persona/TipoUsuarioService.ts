@@ -11,6 +11,16 @@ export const ObtenerTodos = (req: Request, res: Response) => {
     }).where('estado').equals(1);
 }
 
+export const ObtenerPorCampoValor = (req: Request, res: Response) => {
+    var body = req.body;
+    const campo = body.campo;
+    const valor = body.valor;
+    console.log(campo);
+    console.log(valor);
+    TipoUsuario.findOne({}, (error, objeto) => {
+        res = util.responceBuscar(req, res, error, objeto);
+    }).where(campo).equals(valor);
+}
 
 export const Registrar = (req: Request, res: Response) => {
     const data = {

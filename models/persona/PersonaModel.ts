@@ -2,10 +2,8 @@ import {model, Schema,} from "mongoose";
 import uniqueValidator from "mongoose-unique-validator";
 
 const persona = new Schema({
-    primerNombre: {type: String, required: [true, 'primerNombre es necesario']},
-    segundoNombre: {type: String},
-    primerApellido: {type: String, required: [true, 'primerApellido es necesario']},
-    segundoApellido: {type: String},
+    nombres: {type: String, required: [true, 'Los nombres son necesarios']},
+    apellidos: {type: String, required: [true, 'Apellidos son necesarios']},
     cedula: {type: String},
     correo: {type: String},
     sector: {required: [true, 'sector es necesario'], type: Schema.Types.ObjectId, ref: 'Sector'},
