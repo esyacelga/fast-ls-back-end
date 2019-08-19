@@ -12,6 +12,23 @@ export const ObtenerTodos = (req: Request, res: Response) => {
     });
 }
 
+
+export const BusquedaPersonaClave = (req: Request, res: Response) => {
+    TipoUsuarioPersona.findOne({}, (error, objeto) => {
+        // @ts-ignore
+        if (objeto.persona === null ||objeto.usuario === null ) {
+            objeto = null;
+        }
+
+        res = util.responceBuscar(req, res, error, objeto);
+    }).populate({path: 'persona', match: {'correo': {$eq: req.body.correo}},})
+        .populate({path: 'usuario', match: {'clave': {$eq: req.body.clave}},})
+        .exec()
+
+
+}
+
+
 async function crearTipoUsuarioPersona(persona: any, usuario: any, request: Request) {
     const tipoUsuarioPersona = {
         persona: persona._id,
