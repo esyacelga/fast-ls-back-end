@@ -44,7 +44,7 @@ export default class FileSystem {
 
 
     private crearCarpetaUsuario( userId: string ) {
-
+        console.log(userId);
         const pathUser = path.resolve(  __dirname, '../uploads/', userId );
         const pathUserTemp = pathUser + '/temp';
         // console.log(pathUser);
