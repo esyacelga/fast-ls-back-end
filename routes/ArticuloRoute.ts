@@ -1,8 +1,11 @@
 import {Router} from 'express';
-import {Actualizar, ObtenerTodos, PaginarArticulos, Registrar} from "./service/ArticuloService";
+import {Actualizar, ObtenerTodos, ObtnerArticuloImagenes, PaginarArticulos, Registrar} from "./service/ArticuloService";
 import {SubirImagen} from "./service/UploadGenericService";
 
 const articuloRoute = Router();
+
+
+articuloRoute.get('/imagen/:directorio/:img', ObtnerArticuloImagenes);
 
 /**
  * Obtiene todos

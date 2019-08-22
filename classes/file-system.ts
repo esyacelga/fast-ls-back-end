@@ -63,7 +63,7 @@ export default class FileSystem {
     imagenesDeTempHaciaPost( userId: string ) {
 
         const pathTemp = path.resolve(  __dirname, '../uploads/', userId, 'temp' );
-        const pathPost = path.resolve(  __dirname, '../uploads/', userId, 'posts' );
+        const pathPost = path.resolve(  __dirname, '../uploads/', userId, 'archivos' );
 
 
         if ( !fs.existsSync( pathTemp ) ) {
@@ -93,21 +93,15 @@ export default class FileSystem {
     }
 
 
-    getFotoUrl( userId: string, img: string ) {
-
+    getFotoUrl( directorio: string, img: string ) {
         // Path POSTs
-        const pathFoto = path.resolve( __dirname, '../uploads', userId, 'posts', img );
-
-
+        const pathFoto = path.resolve( __dirname, '../uploads', directorio, 'archivos', img );
         // Si la imagen existe
         const existe = fs.existsSync( pathFoto );
         if ( !existe ) {
             return path.resolve( __dirname, '../assets/400x250.jpg' );
         }
-
-
         return pathFoto;
-
     }
 
 

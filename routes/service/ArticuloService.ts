@@ -6,6 +6,14 @@ import FileSystem from "../../classes/file-system";
 const util = new CommonsMethods();
 const fileSystem = new FileSystem();
 
+
+export const ObtnerArticuloImagenes = async (req: any, res: Response) => {
+    const directorio = req.params.directorio;
+    const img = req.params.img;
+    const pathFoto = fileSystem.getFotoUrl(directorio, img);
+    res.sendFile(pathFoto);
+};
+
 export const PaginarArticulos = async (req: Request, res: Response) => {
     let pagina = Number(req.body.pagina) || 1;
     let skip = pagina - 1;
