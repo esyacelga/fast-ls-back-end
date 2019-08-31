@@ -1,6 +1,6 @@
 import {Router} from 'express';
 import {
-    ActualizarArticuloSegmento,
+    ActualizarArticuloSegmento, ObtenerSegmentoPortTipoArticulo,
     ObtenerTodosArticuloSegmento,
     RegistrarArticuloSegmento
 } from "./service/ArticuloSegmentoService";
@@ -11,6 +11,12 @@ const articuloSegmentoRoute = Router();
  * Obtiene todos
  */
 articuloSegmentoRoute.put('/obtenerTodosArticuloSegmento', ObtenerTodosArticuloSegmento);
+
+
+/**
+ * Obtiene por tipo articulo
+ */
+articuloSegmentoRoute.put('/obtenerPorTipoArticulo', ObtenerSegmentoPortTipoArticulo);
 
 /**
  * Crea un registro

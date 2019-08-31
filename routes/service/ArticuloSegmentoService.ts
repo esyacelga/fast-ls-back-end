@@ -12,6 +12,14 @@ export const ObtenerTodosArticuloSegmento = (req: Request, res: Response) => {
 }
 
 
+export const ObtenerSegmentoPortTipoArticulo = (req: Request, res: Response) => {
+    var body = req.body;
+    ArticuloSegmento.find({}, (error, objeto) => {
+        res = util.responceBuscar(req, res, error, objeto);
+    }).where('tipoArticulo').equals(body.tipoArticulo);
+}
+
+
 export const RegistrarArticuloSegmento = (req: Request, res: Response) => {
     const data = {
         tipoArticulo: req.body.tipoArticulo,

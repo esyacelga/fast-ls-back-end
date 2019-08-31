@@ -5,7 +5,6 @@ import {Request, Response} from "express";
 const util = new CommonsMethods();
 
 export const ObtenerTodos = (req: Request, res: Response) => {
-    var body = req.body;
     TipoArticulo.find({}, (error, objeto) => {
         res = util.responceBuscar(req, res, error, objeto);
     }).where('estado').equals(1);
@@ -14,6 +13,7 @@ export const ObtenerTodos = (req: Request, res: Response) => {
 
 export const RegistrarTipoArticulo = (req: Request, res: Response) => {
     const data = {
+        nombre: req.body.nombre,
         codigo: req.body.codigo,
         descripcion: req.body.descripcion,
         estado: req.body.estado
@@ -25,6 +25,7 @@ export const RegistrarTipoArticulo = (req: Request, res: Response) => {
 
 export const ActualizarTipoArticulo = (req: Request, res: Response) => {
     const tipoArt = {
+        nombre: req.body.nombre,
         codigo: req.body.codigo,
         descripcion: req.body.descripcion,
         estado: req.body.estado,
