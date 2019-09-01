@@ -7,6 +7,7 @@ const articulo = new Schema({
     unidadCosto: {type: Number, required: [true, 'unidadCosto es necesario']},
     articuloSegmento: {type: Schema.Types.ObjectId, ref: 'ArticuloSegmento'},
     fechaCreacion: {type: Date},
+    portada:{type:String},
     imgs: [{
         type: String
     }],

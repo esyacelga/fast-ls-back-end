@@ -40,6 +40,7 @@ export const ObtenerTodos = (req: Request, res: Response) => {
 }
 
 export const Registrar = (req: Request, res: Response) => {
+    console.log("paso por aca");
     req.body.img = fileSystem.imagenesDeTempHaciaPost(req.body.articuloSegmento);
     const data = {
         articuloSegmento: req.body.articuloSegmento,
@@ -55,8 +56,27 @@ export const Registrar = (req: Request, res: Response) => {
     });
 }
 
+
+export const RegistrarArticulo = (req: Request, res: Response) => {
+    const data = {
+        portada: req.body.portada,
+        articuloSegmento: req.body.articuloSegmento,
+        unidadCosto: req.body.unidadCosto,
+        unidadAlmacenada: req.body.unidadAlmacenada,
+        descripcion: req.body.descripcion,
+        estado: req.body.estado,
+        fechaCreacion: new Date(),
+        imgs: req.body.img
+    };
+    Articulo.create(data, (err: any, objeto: any) => {
+        res = util.responceCrear(req, res, err, objeto);
+    });
+}
+
 export const Actualizar = (req: Request, res: Response) => {
+    const imagen = fileSystem.imagenesDeTempHaciaPost(req.body.articuloSegmento);
     const tipoArt = {
+        portada: imagen,
         articuloSegmento: req.body.articuloSegmento,
         unidadCosto: req.body.unidadCosto,
         unidadAlmacenada: req.body.unidadAlmacenada,

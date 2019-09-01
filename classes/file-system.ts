@@ -60,10 +60,10 @@ export default class FileSystem {
 
     }
 
-    imagenesDeTempHaciaPost( userId: string ) {
+    imagenesDeTempHaciaPost( idDirectorio: string ) {
 
-        const pathTemp = path.resolve(  __dirname, '../uploads/', userId, 'temp' );
-        const pathPost = path.resolve(  __dirname, '../uploads/', userId, 'archivos' );
+        const pathTemp = path.resolve(  __dirname, '../uploads/', idDirectorio, 'temp' );
+        const pathPost = path.resolve(  __dirname, '../uploads/', idDirectorio, 'archivos' );
 
 
         if ( !fs.existsSync( pathTemp ) ) {
@@ -74,15 +74,23 @@ export default class FileSystem {
             fs.mkdirSync( pathPost );
         }
 
-        const imagenesTemp = this.obtenerImagenesEnTemp( userId );
+        const imagenesTemp = this.obtenerImagenesEnTemp( idDirectorio );
 
         imagenesTemp.forEach( imagen => {
             fs.renameSync( `${ pathTemp }/${ imagen }`, `${ pathPost }/${ imagen }` )
         });
 
-        return imagenesTemp;
+        console.log("****************");
+        console.log(imagenesTemp);
 
+        if (imagenesTemp.length>1)
+            return imagenesTemp
+        else
+        return imagenesTemp[0];
     }
+
+
+
 
     private obtenerImagenesEnTemp( userId: string ) {
 
