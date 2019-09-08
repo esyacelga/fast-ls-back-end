@@ -18,6 +18,14 @@ export class CommonsMethods {
     };
 
 
+    obtenerListaIDs(data: any[]): string[] {
+        let lsRet: string[]=[];
+        data.forEach(function (value) {
+            lsRet.push(value._id);
+        });
+        return lsRet;
+    }
+
     responceCrear(peticion: Request, respuesta: Response, error: any, objeto: any) {
         if (error) {
             console.error(error);
