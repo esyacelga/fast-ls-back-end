@@ -9,6 +9,7 @@ const solicitudCabecera = new Schema({
 
 const solicitudDetalle = new Schema({
     cantidad: {type: Number},
+    unidadCosto: {type: Number},
     articulo: {type: Schema.Types.ObjectId, ref: 'Articulo'},
     estado: {type: Number, required: [true, 'El estado es necesario']}
 });
