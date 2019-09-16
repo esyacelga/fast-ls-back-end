@@ -12,7 +12,6 @@ export const Registrar = (req: Request, res: Response) => {
     const data = <SolcitudCabeceraModel>req.body;
     SolicitudDetalle.insertMany(data.lstSolcitudDetalle, (err: any, lstResultado: any) => {
         const solicitudCabecera = new SolicitudClass(data.usuario, data.estado, util.obtenerListaIDs(lstResultado));
-        console.log(solicitudCabecera);
         SolicitudCabecera.create(solicitudCabecera, (err: any, objeto: any) => {
             res = util.responceCrear(req, res, err, objeto);
         });
