@@ -3,6 +3,7 @@ import {CommonsMethods} from "../../../commons/CommonsMethods";
 import {Persona} from "../../../models/persona/PersonaModel";
 import {TipoUsuarioPersona} from "../../../models/persona/TipoUsuarioPersonaModel";
 import {UsuarioModel} from "../../../models/security/UsuarioModel";
+import {Usuario} from "../../../models/usuario.model";
 
 const util = new CommonsMethods();
 
@@ -14,17 +15,35 @@ export const ObtenerTodos = (req: Request, res: Response) => {
 
 
 export const BusquedaPersonaClave = (req: Request, res: Response) => {
-    TipoUsuarioPersona.findOne({}, (error, objeto) => {
-        // @ts-ignore
-        if (objeto.persona === null || objeto.usuario === null) {
-            objeto = null;
+    TipoUsuarioPersona.find({}, (error, objeto) => {
+        let tipoUsuario = null;
+        for (let entry of objeto) {
+            // @ts-ignore
+            if (entry.persona && entry.usuario && entry.usuario._id) {
+                // @ts-ignore
+                console.log(entry.usuario);
+                tipoUsuario = entry;
+            }
         }
-        res = util.responceBuscar(req, res, error, objeto);
+        console.log("Login..............");
+        console.log(tipoUsuario);
+        console.log("Login............../");
+        res = util.responceBuscar(req, res, error, tipoUsuario);
     }).populate({path: 'persona', match: {'correo': {$eq: req.body.correo}},})
         .populate({path: 'usuario', match: {'clave': {$eq: req.body.clave}},})
         .exec()
 
 
+}
+
+function actualizarUsuario(usuario: any, playerId: string) {
+    usuario.playerId = playerId;
+    console.log(usuario);
+    Usuario.findByIdAndUpdate(usuario._id, usuario, {new: true}, (err, userDB) => {
+        if (err) throw err;
+        console.log(userDB);
+        return 0;
+    });
 }
 
 

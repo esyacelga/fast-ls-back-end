@@ -26,10 +26,12 @@ export const Registrar = (req: Request, res: Response) => {
 
 export const Actualizar = (req: Request, res: Response) => {
     const data = {
+        _id: req.body._id,
         avatar: req.body.avatar,
         playerId: req.body.playerId,
         estado: req.body.estado
     };
+    console.log(data);
     UsuarioModel.findByIdAndUpdate(req.body._id, data, {new: true}, (err, userDB) => {
         res = util.responceGuardar(req, res, err, userDB);
     });
