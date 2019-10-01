@@ -15,6 +15,7 @@ import personaRoute from "./routes/route/persona/PersonaRoute";
 import usuarioRoute from "./routes/route/persona/UsuarioRoute";
 import tipoUsuarioPersonaRoute from "./routes/route/persona/TipoUsuarioPersonaRoute";
 import solcitudRoute from "./routes/route/mensajeria/SolicitudRoute";
+import notificacionRoute from "./routes/route/notificacion/PushNotificationRoute";
 
 const server = new Server();
 
@@ -38,6 +39,7 @@ server.app.use('/articulo', articuloRoute);
 server.app.use('/solicitud', solcitudRoute);
 server.app.use('/tipoArticulo', tipoArticulo);
 server.app.use('/tipoUsuario', tipoUsuaroRoute);
+server.app.use('/notificacion', notificacionRoute);
 server.app.use('/articuloSegmento', articuloSegmentoRoute);
 server.app.use('/tipoUsuarioPersona', tipoUsuarioPersonaRoute);
 
