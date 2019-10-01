@@ -21,24 +21,19 @@ export const BusquedaPersonaClave = (req: Request, res: Response) => {
             // @ts-ignore
             if (entry.persona && entry.usuario && entry.usuario._id) {
                 // @ts-ignore
-                console.log(entry.usuario);
+                actualizarUsuario(entry.usuario, req.body.playerId);
                 tipoUsuario = entry;
             }
         }
-        console.log("Login..............");
         console.log(tipoUsuario);
-        console.log("Login............../");
         res = util.responceBuscar(req, res, error, tipoUsuario);
     }).populate({path: 'persona', match: {'correo': {$eq: req.body.correo}},})
         .populate({path: 'usuario', match: {'clave': {$eq: req.body.clave}},})
         .exec()
-
-
 }
 
 function actualizarUsuario(usuario: any, playerId: string) {
     usuario.playerId = playerId;
-    console.log(usuario);
     Usuario.findByIdAndUpdate(usuario._id, usuario, {new: true}, (err, userDB) => {
         if (err) throw err;
         console.log(userDB);

@@ -5,7 +5,6 @@ export class OneSignalMessage {
     contents: Contents = new Contents();
     headings: Headings = new Headings();
     include_player_ids: string[];
-
 }
 
 
@@ -13,15 +12,11 @@ export class Data {
     key: string;
     valor: string;
     ruta: string;
-
 }
-
 
 export class Contents {
     en: string;
-
 }
-
 
 export class Headings {
     en: string;
