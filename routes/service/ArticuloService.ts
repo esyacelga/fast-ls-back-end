@@ -40,7 +40,6 @@ export const ObtenerTodos = (req: Request, res: Response) => {
 }
 
 export const Registrar = (req: Request, res: Response) => {
-    console.log("paso por aca");
     req.body.img = fileSystem.imagenesDeTempHaciaPost(req.body.articuloSegmento);
     const data = {
         articuloSegmento: req.body.articuloSegmento,

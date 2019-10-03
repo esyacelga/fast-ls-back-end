@@ -4,6 +4,7 @@ import {Persona} from "../../../models/persona/PersonaModel";
 import {TipoUsuarioPersona} from "../../../models/persona/TipoUsuarioPersonaModel";
 import {UsuarioModel} from "../../../models/security/UsuarioModel";
 import {Usuario} from "../../../models/usuario.model";
+import {TipoUsuario} from "../../../models/persona/TipoUsuarioModel";
 
 const util = new CommonsMethods();
 
@@ -30,6 +31,50 @@ export const BusquedaPersonaClave = (req: Request, res: Response) => {
     }).populate({path: 'persona', match: {'correo': {$eq: req.body.correo}},})
         .populate({path: 'usuario', match: {'clave': {$eq: req.body.clave}},})
         .exec()
+}
+
+
+export const obtenerUsuariosNotificacion = async (tipoUsuario: string) => {
+    const lstPlayerId: string[] = [];
+    const tipoUsuaro = await obtenerTipoUsuarioXDescripcion(tipoUsuario);
+    if (!tipoUsuaro)
+        return [];
+
+    // @ts-ignore
+    const lstIpoUsuario = <[]>await obtenerTipoUsuarioPersona(tipoUsuaro._id);
+    if (!lstIpoUsuario)
+        return [];
+    // @ts-ignore
+    for (let entry of lstIpoUsuario) {
+        // @ts-ignore
+        if (entry.usuario && entry.usuario.playerId) {
+            // @ts-ignore
+            lstPlayerId.push(entry.usuario.playerId);
+        }
+    }
+    return lstPlayerId;
+
+}
+
+function obtenerTipoUsuarioXDescripcion(tipoUsuario: string) {
+    const promesa = new Promise(async (resolve: any, reject: any) => {
+        TipoUsuario.findOne({}, (error, objeto) => {
+            resolve(objeto);
+        }).where('descripcion').equals(tipoUsuario);
+    })
+
+    return promesa;
+}
+
+function obtenerTipoUsuarioPersona(idTipoUsuario: string) {
+    const promesa = new Promise(async (resolve: any, reject: any) => {
+        TipoUsuarioPersona.find({}, (error, objeto) => {
+            resolve(objeto);
+        }).populate('usuario').where('tipoUsuario').equals(idTipoUsuario);
+    })
+
+    return promesa;
+
 }
 
 function actualizarUsuario(usuario: any, playerId: string) {

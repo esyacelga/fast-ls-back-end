@@ -22,6 +22,11 @@ export const ObtenerPorCampoValor = (req: Request, res: Response) => {
     }).where(campo).equals(valor);
 }
 
+
+export const ObtenerUsuarios=()=>{
+
+}
+
 export const Registrar = (req: Request, res: Response) => {
     const data = {
         descripcion: req.body.descripcion,
