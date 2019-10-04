@@ -5,6 +5,7 @@ import {TipoUsuarioPersona} from "../../../models/persona/TipoUsuarioPersonaMode
 import {UsuarioModel} from "../../../models/security/UsuarioModel";
 import {Usuario} from "../../../models/usuario.model";
 import {TipoUsuario} from "../../../models/persona/TipoUsuarioModel";
+import {Persona as Per} from "../../../classes/persona/Persona";
 
 const util = new CommonsMethods();
 
@@ -15,7 +16,21 @@ export const ObtenerTodos = (req: Request, res: Response) => {
 }
 
 
-export const BusquedaPersonaClave = (req: Request, res: Response) => {
+function obtenerPersonaCorreo(correo: string) {
+    const promesa = new Promise(async (resolve: any, reject: any) => {
+        Persona.findOne({}, (error, objeto) => {
+            resolve(objeto);
+        }).where('correo').equals(correo);
+    })
+    return promesa;
+}
+
+
+
+export const BusquedaPersonaClave = async (req: Request, res: Response) => {
+
+    const persona = (await obtenerPersonaCorreo(req.body.correo)) as Per;
+
     TipoUsuarioPersona.find({}, (error, objeto) => {
         let tipoUsuario = null;
         for (let entry of objeto) {

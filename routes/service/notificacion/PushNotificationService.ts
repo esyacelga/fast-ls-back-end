@@ -16,6 +16,6 @@ export const enviarNotificacion = async (req: Request, res: Response) => {
     const notificacion = new EnvioNotificacion();
     console.log('Enviando notificacion...');
     console.log(lstPlayer);
-    notificacion.enviar(data.tittuloNotificacion, data.detalleNotificacion, lstPlayer, 'pruebas', 'pruebas-valor', 'pruebas-ruta');
+    notificacion.enviar(data.tittuloNotificacion, data.detalleNotificacion, lstPlayer, data.key, data.valor, '');
     res = util.responceBuscar(req, res, null, data);
 }

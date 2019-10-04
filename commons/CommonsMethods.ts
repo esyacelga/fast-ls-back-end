@@ -2,6 +2,21 @@ import {Request, Response} from "express";
 
 export class CommonsMethods {
 
+    convertirObjListaArreglo(listaObjeto: any[]): string[] {
+        const lstKeys: string[] = []
+        if (!listaObjeto)
+            return [];
+
+        if (listaObjeto.length === 0)
+            return [];
+
+        for (let iterador of listaObjeto) {
+            lstKeys.push(iterador._id)
+        }
+        return lstKeys;
+    }
+
+
     responceBuscar(peticion: Request, respuesta: Response, error: any, objeto: any) {
         if (error) {
             return respuesta.status(500).json({
@@ -19,7 +34,7 @@ export class CommonsMethods {
 
 
     obtenerListaIDs(data: any[]): string[] {
-        let lsRet: string[]=[];
+        let lsRet: string[] = [];
         data.forEach(function (value) {
             lsRet.push(value._id);
         });
