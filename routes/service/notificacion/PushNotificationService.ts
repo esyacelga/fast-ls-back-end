@@ -10,13 +10,12 @@ export const enviarNotificacion = async (req: Request, res: Response) => {
         detalleNotificacion: req.body.detalleNotificacion,
         key: req.body.key,
         valor: req.body.valor,
-        ruta: req.body.ruta,
+        grupoUsuarios: req.body.grupoUsuarios
     };
-    const lstPlayer: string[] = await obtenerUsuariosNotificacion('CLIENTE');
+    const lstPlayer: string[] = await obtenerUsuariosNotificacion(data.grupoUsuarios);
     const notificacion = new EnvioNotificacion();
     console.log('Enviando notificacion...');
     console.log(lstPlayer);
-    //notificacion.enviar(data.tittuloNotificacion, data.detalleNotificacion, lstPlayer, 'pruebas', 'pruebas-valor', 'pruebas-ruta');
-
+    notificacion.enviar(data.tittuloNotificacion, data.detalleNotificacion, lstPlayer, 'pruebas', 'pruebas-valor', 'pruebas-ruta');
     res = util.responceBuscar(req, res, null, data);
 }

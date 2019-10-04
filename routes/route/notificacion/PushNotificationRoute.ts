@@ -7,7 +7,7 @@ const notificacionRoute = Router();
 /**
  * Crea un registro
  */
-notificacionRoute.post('/', enviarNotificacion);
+notificacionRoute.put('/', enviarNotificacion);
 
 
 export default notificacionRoute;
