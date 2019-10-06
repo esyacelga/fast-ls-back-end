@@ -12,7 +12,7 @@ const util = new CommonsMethods();
 export const ObtenerTodos = (req: Request, res: Response) => {
     TipoUsuarioPersona.find({}, (error, objeto) => {
         res = util.responceBuscar(req, res, error, objeto);
-    });
+    }).populate('persona').populate('tipoUsuario').populate('usuario');
 }
 
 
@@ -24,7 +24,6 @@ function obtenerPersonaCorreo(correo: string) {
     })
     return promesa;
 }
-
 
 
 export const BusquedaPersonaClave = async (req: Request, res: Response) => {

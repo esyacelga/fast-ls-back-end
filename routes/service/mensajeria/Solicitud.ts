@@ -5,7 +5,6 @@ import {SolcitudCabeceraModel} from "./class/SolcitudMap";
 import {SolicitudClass} from "./class/SolicitudClass";
 import {Pedido, PedidoDetalle} from "../../../classes/mensajeria/solicitud/Pedido";
 import {Articulo} from "../../../models/mensajeria/ArticuloModel";
-import {TipoUsuarioPersona} from "../../../models/persona/TipoUsuarioPersonaModel";
 
 const util = new CommonsMethods();
 
@@ -21,8 +20,14 @@ export const Registrar = (req: Request, res: Response) => {
 }
 export const obtenerPedidos = async (req: Request, res: Response) => {
     const lstCab: Pedido[] = (await obtenerCabecera(1)) as Pedido[];
-  //  const lstKeys = util.convertirObjListaArreglo(lstCab);
-  //  const lstPed: PedidoDetalle[] = (await obtenerDetalle(lstKeys)) as PedidoDetalle[];
+    for (let i of lstCab){
+        i.usuario = 'hola'
+        // @ts-ignore
+        i.de ='tttas';
+        console.log(i);
+    }
+   /* const lstKeys = util.convertirObjListaArreglo(lstCab);
+    const lstPed: PedidoDetalle[] = (await obtenerDetalle(lstKeys)) as PedidoDetalle[];*/
     //console.log(lstCab)
     res = util.responceCrear(req, res, null, lstCab);
 }
@@ -30,17 +35,15 @@ export const obtenerPedidos = async (req: Request, res: Response) => {
 export const obtenerCabecera = async (estado: number) => {
     const promesa = new Promise(async (resolve: any, reject: any) => {
         SolicitudCabecera.find({}, async (error, lstPedido: Pedido[]) => {
-            for (let it of lstPedido) {
-                it.usuario = '****444';
-                console.log('esto',it.usuario);
-               /* for (let ita of it.solicitudDetalle) {
+            let lstAuxiliar:Pedido[]=lstPedido;
+            for (let it of lstAuxiliar) {
+                for (let ita of it.solicitudDetalle) {
                     // @ts-ignore
                     ita.articulo = await Articulo.findOne().where('_id').equals(ita.articulo._id);
-                }*/
-
+                }
+                it.usuario = 'hola......77712123234.............';
             }
-
-            resolve(lstPedido);
+            resolve(lstAuxiliar);
         }).populate({
             path: 'solicitudDetalle',
             populate: {

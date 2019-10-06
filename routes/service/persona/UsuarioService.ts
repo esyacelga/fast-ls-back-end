@@ -9,8 +9,15 @@ export const ObtenerTodos = (req: Request, res: Response) => {
     UsuarioModel.find({}, (error, objeto) => {
         res = util.responceBuscar(req, res, error, objeto);
     });
-}
+};
 
+
+export const obtenerUsuarioPorId = (req: Request, res: Response) => {
+    var body = req.body;
+    UsuarioModel.findById({}, (error, objeto) => {
+        res = util.responceBuscar(req, res, error, objeto);
+    }).where();
+};
 
 export const Registrar = (req: Request, res: Response) => {
     const data = {
