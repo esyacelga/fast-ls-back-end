@@ -3,10 +3,21 @@ import {SolicitudCabecera, SolicitudDetalle} from "../../../models/mensajeria/So
 import {Request, Response} from "express";
 import {SolcitudCabeceraModel} from "./class/SolcitudMap";
 import {SolicitudClass} from "./class/SolicitudClass";
-import {Pedido, PedidoDetalle} from "../../../classes/mensajeria/solicitud/Pedido";
+import {Pedido} from "../../../classes/mensajeria/solicitud/Pedido";
 import {Articulo} from "../../../models/mensajeria/ArticuloModel";
 
 const util = new CommonsMethods();
+
+export const actualizarSolicitud = (req: Request, res: Response) => {
+    const solicitud = {
+        estado: req.body.estado,
+        fechaModificacion: new Date()
+    }
+    console.log(solicitud);
+    SolicitudCabecera.findByIdAndUpdate(req.body._id, solicitud, {new: true}, (err, userDB) => {
+        res = util.responceGuardar(req, res, err, userDB);
+    });
+}
 
 
 export const Registrar = (req: Request, res: Response) => {
@@ -20,14 +31,14 @@ export const Registrar = (req: Request, res: Response) => {
 }
 export const obtenerPedidos = async (req: Request, res: Response) => {
     const lstCab: Pedido[] = (await obtenerCabecera(1)) as Pedido[];
-    for (let i of lstCab){
+    for (let i of lstCab) {
         i.usuario = 'hola'
         // @ts-ignore
-        i.de ='tttas';
+        i.de = 'tttas';
         console.log(i);
     }
-   /* const lstKeys = util.convertirObjListaArreglo(lstCab);
-    const lstPed: PedidoDetalle[] = (await obtenerDetalle(lstKeys)) as PedidoDetalle[];*/
+    /* const lstKeys = util.convertirObjListaArreglo(lstCab);
+     const lstPed: PedidoDetalle[] = (await obtenerDetalle(lstKeys)) as PedidoDetalle[];*/
     //console.log(lstCab)
     res = util.responceCrear(req, res, null, lstCab);
 }
@@ -35,7 +46,7 @@ export const obtenerPedidos = async (req: Request, res: Response) => {
 export const obtenerCabecera = async (estado: number) => {
     const promesa = new Promise(async (resolve: any, reject: any) => {
         SolicitudCabecera.find({}, async (error, lstPedido: Pedido[]) => {
-            let lstAuxiliar:Pedido[]=lstPedido;
+            let lstAuxiliar: Pedido[] = lstPedido;
             for (let it of lstAuxiliar) {
                 for (let ita of it.solicitudDetalle) {
                     // @ts-ignore

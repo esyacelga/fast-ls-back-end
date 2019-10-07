@@ -40,7 +40,6 @@ export const BusquedaPersonaClave = async (req: Request, res: Response) => {
                 tipoUsuario = entry;
             }
         }
-        console.log(tipoUsuario);
         res = util.responceBuscar(req, res, error, tipoUsuario);
     }).populate({path: 'persona', match: {'correo': {$eq: req.body.correo}},})
         .populate({path: 'usuario', match: {'clave': {$eq: req.body.clave}},})
@@ -111,8 +110,13 @@ async function crearTipoUsuarioPersona(persona: any, usuario: any, request: Requ
 }
 
 export const Registrar = async (req: Request, res: Response) => {
+    let usuario = await Persona.findOne().where('correo').equals(req.body.correo);
+    if (usuario) {
+        res = util.responceCrear(req, res, {error: 'El correo ingresado ya existe'});
+        return res;
+    }
     const persona = await crearPersona(req, res);
-    const usuario = await crearUsuario(req, res);
+    usuario = await crearUsuario(req, res);
     const tipoUsuarioPersona = await crearTipoUsuarioPersona(persona, usuario, req);
     res.status(200).json({
         ok: true,
@@ -124,10 +128,10 @@ export const Registrar = async (req: Request, res: Response) => {
 
 async function crearPersona(request: Request, res: Response) {
     const persona = {
-        nombres: request.body.nombres,
-        apellidos: request.body.apellidos,
+        nombres: request.body.nombres.toUpperCase(),
+        apellidos: request.body.apellidos.toUpperCase(),
         cedula: request.body.cedula,
-        correo: request.body.correo,
+        correo: request.body.correo.toLowerCase(),
         fechaNacimiento: request.body.fechaNacimiento,
         sector: request.body.sector,
     }
@@ -136,12 +140,14 @@ async function crearPersona(request: Request, res: Response) {
 
 
 async function crearUsuario(req: Request, res: Response) {
+    console.log('Entrando a guarda usuario');
     const data = {
         avatar: req.body.avatar,
         playerId: req.body.playerId,
         clave: req.body.clave,
         estado: req.body.estado
     };
+    console.log(data);
     return await UsuarioModel.create(data);
 }
 

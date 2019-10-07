@@ -3,6 +3,7 @@ import {model, Schema} from "mongoose";
 const solicitudCabecera = new Schema({
     usuario: {required: [true, 'El estado es necesario'], type: Schema.Types.ObjectId, ref: 'UsuarioModel'},
     fechaCreacion: {type: Date},
+    fechaModificacion: {type: Date},
     solicitudDetalle: [{type: Schema.Types.ObjectId, ref: 'SolicitudDetalle'}],
     estado: {type: Number, required: [true, 'El estado es necesario']}
 });

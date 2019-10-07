@@ -41,7 +41,7 @@ export class CommonsMethods {
         return lsRet;
     }
 
-    responceCrear(peticion: Request, respuesta: Response, error: any, objeto: any) {
+    responceCrear(peticion: Request, respuesta: Response, error: any, objeto?: any) {
         if (error) {
             console.error(error);
             return respuesta.status(400).json({

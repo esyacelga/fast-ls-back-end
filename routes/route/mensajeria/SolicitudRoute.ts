@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {obtenerPedidos, Registrar} from "../../service/mensajeria/Solicitud";
+import {actualizarSolicitud, obtenerPedidos, Registrar} from "../../service/mensajeria/Solicitud";
 
 const solcitudRoute = Router();
 
@@ -12,6 +12,8 @@ solcitudRoute.post('/', Registrar);
 
 solcitudRoute.put('/obtenerPedidos', obtenerPedidos);
 
+
+solcitudRoute.put('/actualizar', actualizarSolicitud);
 
 
 export default solcitudRoute;
