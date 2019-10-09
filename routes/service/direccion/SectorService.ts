@@ -14,6 +14,7 @@ export const ObtenerSectores = (req: Request, res: Response) => {
 
 export const Registrar = (req: Request, res: Response) => {
     const data = {
+        codigo: req.body.codigo,
         descripcion: req.body.descripcion,
         estado: req.body.estado
     };
@@ -24,6 +25,7 @@ export const Registrar = (req: Request, res: Response) => {
 
 export const Actualizar = (req: Request, res: Response) => {
     const tipoArt = {
+        codigo: req.body.codigo,
         descripcion: req.body.descripcion,
         estado: req.body.estado,
     }

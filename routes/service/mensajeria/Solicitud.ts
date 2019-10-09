@@ -60,7 +60,7 @@ export const obtenerCabecera = async (estado: number) => {
             populate: {
                 path: 'solicitudDetalle'
             }
-        }).where('estado').equals(estado);
+        })
     })
 
     return promesa;

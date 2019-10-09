@@ -27,9 +27,6 @@ function obtenerPersonaCorreo(correo: string) {
 
 
 export const BusquedaPersonaClave = async (req: Request, res: Response) => {
-
-    const persona = (await obtenerPersonaCorreo(req.body.correo)) as Per;
-
     TipoUsuarioPersona.find({}, (error, objeto) => {
         let tipoUsuario = null;
         for (let entry of objeto) {
@@ -40,9 +37,11 @@ export const BusquedaPersonaClave = async (req: Request, res: Response) => {
                 tipoUsuario = entry;
             }
         }
+        console.log(tipoUsuario);
         res = util.responceBuscar(req, res, error, tipoUsuario);
     }).populate({path: 'persona', match: {'correo': {$eq: req.body.correo}},})
         .populate({path: 'usuario', match: {'clave': {$eq: req.body.clave}},})
+        .populate('tipoUsuario')
         .exec()
 }
 
