@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {enviarNotificacion} from "../../service/notificacion/PushNotificationService";
+import {enviarNotificacion, registrarNotificacion} from "../../service/notificacion/PushNotificationService";
 
 const notificacionRoute = Router();
 
@@ -8,6 +8,8 @@ const notificacionRoute = Router();
  * Crea un registro
  */
 notificacionRoute.put('/', enviarNotificacion);
+
+notificacionRoute.post('/', registrarNotificacion);
 
 
 export default notificacionRoute;
