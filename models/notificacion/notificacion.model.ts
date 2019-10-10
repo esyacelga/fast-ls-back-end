@@ -1,5 +1,4 @@
-
-import { Schema, Document, model } from 'mongoose';
+import {model, Schema} from 'mongoose';
 
 const notificacionModel = new Schema({
     titulo: {

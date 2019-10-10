@@ -111,7 +111,7 @@ async function crearTipoUsuarioPersona(persona: any, usuario: any, request: Requ
 export const Registrar = async (req: Request, res: Response) => {
     let usuario = await Persona.findOne().where('correo').equals(req.body.correo);
     if (usuario) {
-        res = util.responceCrear(req, res, {error: 'El correo ingresado ya existe'});
+        res = util.responceCrear(req, res, {message: 'El correo ingresado ya existe'});
         return res;
     }
     const persona = await crearPersona(req, res);

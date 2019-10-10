@@ -22,15 +22,29 @@ export const enviarNotificacion = async (req: Request, res: Response) => {
 }
 
 
-export const registrarNotificacion = async (req: Request, res: Response)=>{
+export const obtenerTodos = (req: Request, res: Response) => {
+    NotificacionModel.find({}, (error, objeto) => {
+        res = util.responceBuscar(req, res, error, objeto);
+    });
+}
+
+
+export const enviarNotificacionMasiva = (req: Request, res: Response) => {
+    NotificacionModel.find({}, (error, objeto) => {
+        res = util.responceBuscar(req, res, error, objeto);
+    });
+}
+
+
+export const registrarNotificacion = async (req: Request, res: Response) => {
     const data = {
         titulo: req.body.titulo,
         mensajeTitulo: req.body.mensajeTitulo,
         key: req.body.key,
         keyPayload: req.body.keyPayload,
-        tipoUsuario:req.body.tipoUsuario,
-        estado:1,
-        created:new Date()
+        tipoUsuario: req.body.tipoUsuario,
+        estado: 1,
+        created: new Date()
     };
     NotificacionModel.create(data, (err: any, objeto: any) => {
         res = util.responceCrear(req, res, err, objeto);
