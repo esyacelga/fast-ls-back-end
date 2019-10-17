@@ -1,5 +1,6 @@
 import {Router} from 'express';
 import {
+    actualizarNotificacion,
     enviarNotificacion, enviarNotificacionMasiva,
     obtenerTodos,
     registrarNotificacion
@@ -18,7 +19,11 @@ notificacionRoute.put('/enviarNotificacionMasiva', enviarNotificacionMasiva);
 
 notificacionRoute.post('/', registrarNotificacion);
 
-notificacionRoute.put('/', obtenerTodos);
+
+notificacionRoute.put('/actualizar', actualizarNotificacion);
+
+notificacionRoute.put('/obtenerTodos', obtenerTodos);
 
 
 export default notificacionRoute;
+

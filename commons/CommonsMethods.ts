@@ -73,6 +73,7 @@ export class CommonsMethods {
                 errors: {message: 'No existe un objeto con ese ID'}
             });
         }
+        return respuesta;
     };
 
 

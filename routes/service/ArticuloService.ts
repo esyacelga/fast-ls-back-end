@@ -40,7 +40,8 @@ export const ObtenerTodos = (req: Request, res: Response) => {
 }
 
 export const Registrar = (req: Request, res: Response) => {
-    req.body.img = fileSystem.imagenesDeTempHaciaPost(req.body.articuloSegmento);
+    if (req.body.articuloSegmento)
+        req.body.img = fileSystem.imagenesDeTempHaciaPost(req.body.articuloSegmento);
     const data = {
         articuloSegmento: req.body.articuloSegmento,
         unidadCosto: req.body.unidadCosto,
