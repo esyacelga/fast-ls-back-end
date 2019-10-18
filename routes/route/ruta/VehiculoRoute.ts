@@ -1,6 +1,5 @@
 import {Router} from 'express';
-import {Actualizar, Registrar} from "../../service/ruta/VehiculoService";
-import {obtenerTodos} from "../../service/notificacion/PushNotificationService";
+import {Actualizar, ObtenerTodos, Registrar} from "../../service/ruta/VehiculoService";
 
 const vehiculoRoute = Router();
 
@@ -11,7 +10,7 @@ const vehiculoRoute = Router();
 vehiculoRoute.post('/', Registrar);
 
 
-vehiculoRoute.put('/obtenerTodos', obtenerTodos);
+vehiculoRoute.put('/obtenerTodos', ObtenerTodos);
 
 
 vehiculoRoute.put('/', Actualizar);
