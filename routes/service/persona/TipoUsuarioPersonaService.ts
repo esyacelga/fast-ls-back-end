@@ -5,7 +5,6 @@ import {TipoUsuarioPersona} from "../../../models/persona/TipoUsuarioPersonaMode
 import {UsuarioModel} from "../../../models/security/UsuarioModel";
 import {Usuario} from "../../../models/usuario.model";
 import {TipoUsuario} from "../../../models/persona/TipoUsuarioModel";
-import {Persona as Per} from "../../../classes/persona/Persona";
 
 const util = new CommonsMethods();
 
@@ -13,6 +12,12 @@ export const ObtenerTodos = (req: Request, res: Response) => {
     TipoUsuarioPersona.find({}, (error, objeto) => {
         res = util.responceBuscar(req, res, error, objeto);
     }).populate('persona').populate('tipoUsuario').populate('usuario');
+}
+
+export const ObtenerPorPersona = (req: Request, res: Response) => {
+    TipoUsuarioPersona.find({}, (error, objeto) => {
+        res = util.responceBuscar(req, res, error, objeto);
+    }).populate('persona').populate('tipoUsuario').populate('usuario').where('persona').equals(req.body.persona);
 }
 
 
