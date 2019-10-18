@@ -127,6 +127,7 @@ export const Registrar = async (req: Request, res: Response) => {
 
 async function crearPersona(request: Request, res: Response) {
     const persona = {
+        avatar: request.body.avatar,
         nombres: request.body.nombres.toUpperCase(),
         apellidos: request.body.apellidos.toUpperCase(),
         cedula: request.body.cedula,
@@ -139,14 +140,12 @@ async function crearPersona(request: Request, res: Response) {
 
 
 async function crearUsuario(req: Request, res: Response) {
-    console.log('Entrando a guarda usuario');
     const data = {
         avatar: req.body.avatar,
         playerId: req.body.playerId,
         clave: req.body.clave,
         estado: req.body.estado
     };
-    console.log(data);
     return await UsuarioModel.create(data);
 }
 
