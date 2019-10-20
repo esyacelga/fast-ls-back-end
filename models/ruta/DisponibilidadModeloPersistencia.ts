@@ -11,6 +11,7 @@ const disponibilidadModeloPersistencia = new Schema({
     vehiculo: {
         required: [true, 'La persona es necesario'],
         type: Schema.Types.ObjectId,
+        unique: true,
         ref: 'VehiculoModeloPersistencia'
     },
     numeroTurno: {type: Number},

@@ -13,6 +13,7 @@ export const ObtenerTodos = (req: Request, res: Response) => {
 
 export const Registrar = (req: Request, res: Response) => {
     const data = {
+        color:req.body.color.toUpperCase(),
         modelo: req.body.modelo,
         placa: req.body.placa,
         marca: req.body.marca,
@@ -29,6 +30,7 @@ export const Registrar = (req: Request, res: Response) => {
 
 export const Actualizar = (req: Request, res: Response) => {
     const data = {
+        color:req.body.color.toUpperCase(),
         modelo: req.body.modelo,
         placa: req.body.placa,
         marca: req.body.marca,
