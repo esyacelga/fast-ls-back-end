@@ -5,7 +5,6 @@ import {TipoUsuarioPersona} from "../../../models/persona/TipoUsuarioPersonaMode
 import {UsuarioModel} from "../../../models/security/UsuarioModel";
 import {Usuario} from "../../../models/usuario.model";
 import {TipoUsuario} from "../../../models/persona/TipoUsuarioModel";
-import {Persona as Per} from "../../../classes/persona/Persona";
 
 const util = new CommonsMethods();
 
@@ -14,6 +13,19 @@ export const ObtenerTodos = (req: Request, res: Response) => {
         res = util.responceBuscar(req, res, error, objeto);
     }).populate('persona').populate('tipoUsuario').populate('usuario');
 }
+
+export const ObtenerPorPersona = (req: Request, res: Response) => {
+    TipoUsuarioPersona.find({}, (error, objeto) => {
+        res = util.responceBuscar(req, res, error, objeto);
+    }).populate('persona').populate('tipoUsuario').populate('usuario').where('persona').equals(req.body.persona);
+}
+
+export const ObtenerPorTipoUsuario = (req: Request, res: Response) => {
+    TipoUsuarioPersona.find({}, (error, objeto) => {
+        res = util.responceBuscar(req, res, error, objeto);
+    }).populate('persona').populate('tipoUsuario').populate('usuario').where('tipoUsuario').equals(req.body.tipoUsuario);
+}
+
 
 
 function obtenerPersonaCorreo(correo: string) {
@@ -108,6 +120,12 @@ async function crearTipoUsuarioPersona(persona: any, usuario: any, request: Requ
     return await TipoUsuarioPersona.create(tipoUsuarioPersona);
 }
 
+/**
+ * Registra un persona en  todas las tablas relacionadas a este
+ * @param req
+ * @param res
+ * @constructor
+ */
 export const Registrar = async (req: Request, res: Response) => {
     let usuario = await Persona.findOne().where('correo').equals(req.body.correo);
     if (usuario) {
@@ -122,6 +140,16 @@ export const Registrar = async (req: Request, res: Response) => {
         objeto: tipoUsuarioPersona
     })
     return res;
+}
+
+
+export const Insertar = async (req: Request, res: Response) => {
+    const tipoUsuarioPersona = {
+        persona: req.body.persona,
+        usuario: req.body.usuario,
+        tipoUsuario: req.body.tipoUsuario,
+    }
+     return util.responceCrear(req, res, null, await TipoUsuarioPersona.create(tipoUsuarioPersona));
 }
 
 
