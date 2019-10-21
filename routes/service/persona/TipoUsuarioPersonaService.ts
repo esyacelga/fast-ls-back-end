@@ -1,10 +1,12 @@
 import {Request, Response} from "express";
 import {CommonsMethods} from "../../../commons/CommonsMethods";
-import {Persona} from "../../../models/persona/PersonaModel";
 import {TipoUsuarioPersona} from "../../../models/persona/TipoUsuarioPersonaModel";
 import {UsuarioModel} from "../../../models/security/UsuarioModel";
 import {Usuario} from "../../../models/usuario.model";
 import {TipoUsuario} from "../../../models/persona/TipoUsuarioModel";
+import {PersonaModeloPersistencia} from "../../../models/persona/PersonaModel";
+import {PersonaDto} from "../../../classes/persona/Persona";
+import {ModeloTipoUsuarioPersona} from "../../../classes/persona/ModeloTipoUsuarioPersona";
 
 const util = new CommonsMethods();
 
@@ -27,10 +29,9 @@ export const ObtenerPorTipoUsuario = (req: Request, res: Response) => {
 }
 
 
-
 function obtenerPersonaCorreo(correo: string) {
     const promesa = new Promise(async (resolve: any, reject: any) => {
-        Persona.findOne({}, (error, objeto) => {
+        PersonaModeloPersistencia.findOne({}, (error, objeto) => {
             resolve(objeto);
         }).where('correo').equals(correo);
     })
@@ -39,22 +40,19 @@ function obtenerPersonaCorreo(correo: string) {
 
 
 export const BusquedaPersonaClave = async (req: Request, res: Response) => {
-    TipoUsuarioPersona.find({}, (error, objeto) => {
-        let tipoUsuario = null;
-        for (let entry of objeto) {
-            // @ts-ignore
-            if (entry.persona && entry.usuario && entry.usuario._id) {
-                // @ts-ignore
-                actualizarUsuario(entry.usuario, req.body.playerId);
-                tipoUsuario = entry;
-            }
+    console.log(req.body.correo);
+    const objPersona: PersonaDto = (await PersonaModeloPersistencia.findOne().where('correo').equals(req.body.correo)) as unknown as PersonaDto;
+    if (!objPersona)
+        return util.responceBuscar(req, res, null, null);
+    const lstTipoUsuarioPersona:ModeloTipoUsuarioPersona[] = (await TipoUsuarioPersona.find().populate('persona').populate('usuario').where('persona').equals(objPersona._id)) as unknown as ModeloTipoUsuarioPersona[];
+    console.log(lstTipoUsuarioPersona);
+    if(!lstTipoUsuarioPersona || lstTipoUsuarioPersona.length===0)
+        return util.responceBuscar(req, res, null, null);
+    for (let item of lstTipoUsuarioPersona){
+        if(item.usuario.clave===req.body.clave){
+            return util.responceBuscar(req, res, null, item);
         }
-        console.log(tipoUsuario);
-        res = util.responceBuscar(req, res, error, tipoUsuario);
-    }).populate({path: 'persona', match: {'correo': {$eq: req.body.correo}},})
-        .populate({path: 'usuario', match: {'clave': {$eq: req.body.clave}},})
-        .populate('tipoUsuario')
-        .exec()
+    }
 }
 
 
@@ -127,7 +125,7 @@ async function crearTipoUsuarioPersona(persona: any, usuario: any, request: Requ
  * @constructor
  */
 export const Registrar = async (req: Request, res: Response) => {
-    let usuario = await Persona.findOne().where('correo').equals(req.body.correo);
+    let usuario = await PersonaModeloPersistencia.findOne().where('correo').equals(req.body.correo);
     if (usuario) {
         res = util.responceCrear(req, res, {message: 'El correo ingresado ya existe'});
         return res;
@@ -149,7 +147,7 @@ export const Insertar = async (req: Request, res: Response) => {
         usuario: req.body.usuario,
         tipoUsuario: req.body.tipoUsuario,
     }
-     return util.responceCrear(req, res, null, await TipoUsuarioPersona.create(tipoUsuarioPersona));
+    return util.responceCrear(req, res, null, await TipoUsuarioPersona.create(tipoUsuarioPersona));
 }
 
 
@@ -163,7 +161,7 @@ async function crearPersona(request: Request, res: Response) {
         fechaNacimiento: request.body.fechaNacimiento,
         sector: request.body.sector,
     }
-    return await Persona.create(persona);
+    return await PersonaModeloPersistencia.create(persona);
 }
 
 

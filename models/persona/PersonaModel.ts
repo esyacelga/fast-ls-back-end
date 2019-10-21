@@ -1,7 +1,7 @@
 import {model, Schema,} from "mongoose";
 import uniqueValidator from "mongoose-unique-validator";
 
-const persona = new Schema({
+const personaModeloPersistencia = new Schema({
     avatar: {
         type: String,
         default: 'av-1.png'
@@ -13,6 +13,6 @@ const persona = new Schema({
     sector: {required: [true, 'sector es necesario'], type: Schema.Types.ObjectId, ref: 'Sector'},
     fechaNacimiento: {type: Date}
 });
-persona.plugin(uniqueValidator, {message: '{PATH} debe de ser único'});
+personaModeloPersistencia.plugin(uniqueValidator, {message: '{PATH} debe de ser único'});
 
-export const Persona = model('Persona', persona);
+export const PersonaModeloPersistencia = model('PersonaModeloPersistencia', personaModeloPersistencia);
