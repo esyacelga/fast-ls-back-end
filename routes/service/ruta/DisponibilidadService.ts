@@ -2,6 +2,9 @@ import {Request, Response} from "express";
 import {CommonsMethods} from "../../../commons/CommonsMethods";
 import {DisponibilidadModeloPersistencia} from "../../../models/ruta/DisponibilidadModeloPersistencia";
 import {ModeloDisponibilidad} from "../../../classes/ruta/ModeloDisponibilidad";
+import {TipoUsuarioPersona} from "../../../models/persona/TipoUsuarioPersonaModel";
+import {TipoUsuario} from "../../../models/persona/TipoUsuarioModel";
+import {ModeloTipoUsuario, ModeloTipoUsuarioPersona} from "../../../classes/persona/ModeloTipoUsuarioPersona";
 
 const util = new CommonsMethods();
 
@@ -9,6 +12,28 @@ export const ObtenerTodos = (req: Request, res: Response) => {
     DisponibilidadModeloPersistencia.find({}, (error, objeto) => {
         res = util.responceBuscar(req, res, error, objeto);
     }).populate('tipoUsuarioPersona').populate('vehiculo');
+}
+
+export const ObtenerDisponibilidad = async (req: Request, res: Response) => {
+    const objTipoUsuario: ModeloTipoUsuario = (await TipoUsuario.findOne().where('codigo').equals('CHOFER')) as ModeloTipoUsuario;
+
+    const lstTipoUsuarioPersona: ModeloTipoUsuarioPersona[] = (await TipoUsuarioPersona.find().populate('usuario').populate('persona').where('tipoUsuario').equals(objTipoUsuario._id)) as unknown as ModeloTipoUsuarioPersona[];
+
+    const lstDisponibilidad: ModeloDisponibilidad[] = (await DisponibilidadModeloPersistencia.find().populate('tipoUsuarioPersona').populate('vehiculo').where('enTurno').equals(true)) as unknown as ModeloDisponibilidad[];
+
+    for (let item of lstDisponibilidad) {
+        for (let tups of lstTipoUsuarioPersona) {
+
+            if (item.tipoUsuarioPersona._id.toString() == tups._id.toString()) {
+                console.log(item.tipoUsuarioPersona._id, tups._id);
+
+                item.tipoUsuarioPersona.persona = tups.persona;
+                item.tipoUsuarioPersona.usuario = tups.usuario;
+            }
+        }
+    }
+    return util.responceBuscar(req, res, null, lstDisponibilidad);
+
 }
 
 export const Registrar = async (req: Request, res: Response) => {
@@ -31,7 +56,7 @@ export const Actualizar = (req: Request, res: Response) => {
         vehiculo: req.body.vehiculo,
         numeroTurno: req.body.numeroTurno,
         enTurno: req.body.enTurno,
-        nombreAlias:req.body.nombreAlias,
+        nombreAlias: req.body.nombreAlias,
         estadoDiponibilidad: req.body.estadoDiponibilidad
     };
     data.nombreAlias = data.nombreAlias.toUpperCase();
