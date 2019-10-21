@@ -1,7 +1,10 @@
+import {Persona} from "./Persona";
+
 export class ModeloTipoUsuarioPersona {
     _id: string = '';
     usuario: ModeloUsuario = new ModeloUsuario();
     tipoUsuario: ModeloTipoUsuario = new ModeloTipoUsuario();
+    persona: Persona = new Persona();
 }
 
 export class ModeloUsuario {
@@ -13,3 +16,4 @@ export class ModeloUsuario {
 export class ModeloTipoUsuario {
     _id: string = '';
 }
+

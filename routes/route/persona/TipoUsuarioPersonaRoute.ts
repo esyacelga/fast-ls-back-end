@@ -2,6 +2,8 @@ import {Router} from 'express';
 import {
     Actualizar,
     BusquedaPersonaClave,
+    Insertar,
+    ObtenerPorPersona, ObtenerPorTipoUsuario,
     ObtenerTodos,
     Registrar
 } from "../../service/persona/TipoUsuarioPersonaService";
@@ -13,14 +15,34 @@ const tipoUsuarioPersonaRoute = Router();
  */
 tipoUsuarioPersonaRoute.put('/obtenerTodos', ObtenerTodos);
 
+/**
+ * Obtiene Persona Usuario por id_persona
+ */
+tipoUsuarioPersonaRoute.put('/ObtenerPorPersona', ObtenerPorPersona);
 
+
+/**
+ * Obtiene Persona Usuario por id_persona
+ */
+tipoUsuarioPersonaRoute.put('/ObtenerPorTipoUsuario', ObtenerPorTipoUsuario);
+
+
+
+/**
+ * Validación del correo y clave
+ */
 tipoUsuarioPersonaRoute.put('/BusquedaPersonaClave', BusquedaPersonaClave);
 
 /**
- * Crea un registro
+ * Crea un registro en persona, usuario y tipo_usuario
  */
 tipoUsuarioPersonaRoute.post('/', Registrar);
 
+
+/**
+ * Inser un registro en el documento
+ */
+tipoUsuarioPersonaRoute.post('/insertar', Insertar);
 
 /**
  * Actualiza un registro

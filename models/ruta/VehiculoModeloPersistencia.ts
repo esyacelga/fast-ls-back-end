@@ -3,6 +3,7 @@ import uniqueValidator from "mongoose-unique-validator";
 
 const vehiculoModeloPersistencia = new Schema({
     modelo: {type: String},
+    color: {type: String},
     placa: {type: String, unique: true},
     marca: {type: String},
     tipo: {type: String},

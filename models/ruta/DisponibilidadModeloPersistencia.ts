@@ -2,6 +2,7 @@ import {model, Schema,} from "mongoose";
 import uniqueValidator from "mongoose-unique-validator";
 
 const disponibilidadModeloPersistencia = new Schema({
+    nombreAlias: {type: String},
     tipoUsuarioPersona: {
         required: [true, 'La persona es necesario'],
         type: Schema.Types.ObjectId,
@@ -10,11 +11,12 @@ const disponibilidadModeloPersistencia = new Schema({
     vehiculo: {
         required: [true, 'La persona es necesario'],
         type: Schema.Types.ObjectId,
+        unique: true,
         ref: 'VehiculoModeloPersistencia'
     },
     numeroTurno: {type: Number},
-    enTurno: {type: Number, required: [true, 'El estado del turno es necesario'], default: 1},
-    estadoDiponibilidad: {type: String, required: [true, 'El estado es necesario']}
+    enTurno: {type: Boolean, default: true},
+    estadoDiponibilidad: {type: Boolean, default: true}
 });
 disponibilidadModeloPersistencia.plugin(uniqueValidator, {message: '{PATH} debe de ser único'});
 
