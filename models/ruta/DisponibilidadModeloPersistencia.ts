@@ -16,7 +16,10 @@ const disponibilidadModeloPersistencia = new Schema({
     },
     numeroTurno: {type: Number},
     enTurno: {type: Boolean, default: true},
-    estadoDiponibilidad: {type: Boolean, default: true}
+    estadoDiponibilidad: {
+        type: Schema.Types.ObjectId,
+        ref: 'EstadoRutaModeloPersistencia'
+    }
 });
 disponibilidadModeloPersistencia.plugin(uniqueValidator, {message: '{PATH} debe de ser único'});
 

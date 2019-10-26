@@ -18,6 +18,7 @@ import solcitudRoute from "./routes/route/mensajeria/SolicitudRoute";
 import notificacionRoute from "./routes/route/notificacion/PushNotificationRoute";
 import vehiculoRoute from "./routes/route/ruta/VehiculoRoute";
 import disponibilidadRoute from "./routes/route/ruta/DisponibilidadRoute";
+import estadoRutaRoute from "./routes/route/ruta/EstadoRutaRoute";
 
 const server = new Server();
 
@@ -42,6 +43,7 @@ server.app.use('/solicitud', solcitudRoute);
 server.app.use('/tipoArticulo', tipoArticulo);
 server.app.use('/tipoUsuario', tipoUsuaroRoute);
 server.app.use('/vehiculoRoute', vehiculoRoute);
+server.app.use('/estadoRutaRoute', estadoRutaRoute);
 server.app.use('/notificacion', notificacionRoute);
 server.app.use('/articuloSegmento', articuloSegmentoRoute);
 server.app.use('/disponibilidadRoute', disponibilidadRoute);

@@ -44,13 +44,13 @@ export const BusquedaPersonaClave = async (req: Request, res: Response) => {
     const objPersona: PersonaDto = (await PersonaModeloPersistencia.findOne().where('correo').equals(req.body.correo)) as unknown as PersonaDto;
     if (!objPersona)
         return util.responceBuscar(req, res, null, null);
-    const lstTipoUsuarioPersona:ModeloTipoUsuarioPersona[] = (await TipoUsuarioPersona.find().populate('persona').populate('usuario').where('persona').equals(objPersona._id)) as unknown as ModeloTipoUsuarioPersona[];
+    const lstTipoUsuarioPersona:ModeloTipoUsuarioPersona[] = (await TipoUsuarioPersona.find().populate('tipoUsuario').populate('persona').populate('usuario').where('persona').equals(objPersona._id)) as unknown as ModeloTipoUsuarioPersona[];
     console.log(lstTipoUsuarioPersona);
     if(!lstTipoUsuarioPersona || lstTipoUsuarioPersona.length===0)
         return util.responceBuscar(req, res, null, null);
     for (let item of lstTipoUsuarioPersona){
         if(item.usuario.clave===req.body.clave){
-            return util.responceBuscar(req, res, null, item);
+            return util.responceBuscar(req, res, null, lstTipoUsuarioPersona);
         }
     }
 }
@@ -163,6 +163,7 @@ async function crearPersona(request: Request, res: Response) {
     }
     return await PersonaModeloPersistencia.create(persona);
 }
+
 
 
 async function crearUsuario(req: Request, res: Response) {

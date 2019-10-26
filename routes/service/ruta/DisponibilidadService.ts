@@ -35,7 +35,7 @@ export const ObtenerDisponibilidad = async (req: Request, res: Response) => {
 
 export const Registrar = async (req: Request, res: Response) => {
     const objDisponibilidad: ModeloDisponibilidad = req.body as ModeloDisponibilidad;
-    const disp: ModeloDisponibilidad = <ModeloDisponibilidad><unknown>(await DisponibilidadModeloPersistencia.findOne().sort({'numeroTurno': -1}).where('estadoDiponibilidad').equals(true));
+    const disp: ModeloDisponibilidad = <ModeloDisponibilidad><unknown>(await DisponibilidadModeloPersistencia.findOne().sort({'numeroTurno': -1}).where('estadoDiponibilidad').equals(objDisponibilidad.estadoDiponibilidad._id));
     if (!disp) {
         objDisponibilidad.numeroTurno = 1
     } else {
