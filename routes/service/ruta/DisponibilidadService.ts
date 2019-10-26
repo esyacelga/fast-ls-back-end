@@ -19,7 +19,7 @@ export const ObtenerDisponibilidad = async (req: Request, res: Response) => {
 
     const lstTipoUsuarioPersona: ModeloTipoUsuarioPersona[] = (await TipoUsuarioPersona.find().populate('usuario').populate('persona').where('tipoUsuario').equals(objTipoUsuario._id)) as unknown as ModeloTipoUsuarioPersona[];
 
-    const lstDisponibilidad: ModeloDisponibilidad[] = (await DisponibilidadModeloPersistencia.find().populate('tipoUsuarioPersona').populate('vehiculo').where('enTurno').equals(true).sort({'numeroTurno':-1})) as unknown as ModeloDisponibilidad[];
+    const lstDisponibilidad: ModeloDisponibilidad[] = (await DisponibilidadModeloPersistencia.find().populate('estadoDiponibilidad').populate('tipoUsuarioPersona').populate('vehiculo').where('enTurno').equals(true).sort({'numeroTurno':-1})) as unknown as ModeloDisponibilidad[];
 
     for (let item of lstDisponibilidad) {
         for (let tups of lstTipoUsuarioPersona) {

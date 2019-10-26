@@ -15,6 +15,7 @@ export const Registrar = (req: Request, res: Response) => {
     const data = {
         nombre: req.body.nombre.toUpperCase(),
         codigo: req.body.codigo.toUpperCase(),
+        color: req.body.color,
         estado: req.body.estado,
     };
     EstadoRutaModeloPersistencia.create(data, (err: any, objeto: any) => {
@@ -25,7 +26,8 @@ export const Registrar = (req: Request, res: Response) => {
 export const Actualizar = (req: Request, res: Response) => {
     const data = {
         nombre: req.body.nombre.toUpperCase(),
-        codigo: req.body.modelo.toUpperCase(),
+        codigo: req.body.codigo.toUpperCase(),
+        color: req.body.color,
         estado: req.body.estado,
     };
     EstadoRutaModeloPersistencia.findByIdAndUpdate(req.body._id, data, {new: true}, (err, userDB) => {
