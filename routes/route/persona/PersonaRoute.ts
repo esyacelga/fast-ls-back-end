@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {Actualizar, ObtenerTodos, Registrar} from "../../service/persona/PersonaService";
+import {Actualizar, ObtenerPersonaPorId, ObtenerTodos, Registrar} from "../../service/persona/PersonaService";
 
 const personaRoute = Router();
 
@@ -7,6 +7,11 @@ const personaRoute = Router();
  * Obtiene todos
  */
 personaRoute.put('/obtenerTodos', ObtenerTodos);
+
+/**
+ * Obtiene la persona por ID
+ */
+personaRoute.put('/obtenerPersonaPorID', ObtenerPersonaPorId);
 
 /**
  * Crea un registro

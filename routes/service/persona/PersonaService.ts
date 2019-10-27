@@ -5,11 +5,17 @@ import {PersonaModeloPersistencia} from "../../../models/persona/PersonaModel";
 const util = new CommonsMethods();
 
 export const ObtenerTodos = (req: Request, res: Response) => {
-    var body = req.body;
     PersonaModeloPersistencia.find({}, (error, objeto) => {
         res = util.responceBuscar(req, res, error, objeto);
     });
 }
+
+export const ObtenerPersonaPorId = (req: Request, res: Response) => {
+    PersonaModeloPersistencia.findOne({}, (error, objeto) => {
+        res = util.responceBuscar(req, res, error, objeto);
+    }).where('_id').equals(req.body.idPersona);
+}
+
 
 
 export const Registrar = (req: Request, res: Response) => {
