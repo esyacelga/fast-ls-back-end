@@ -7,9 +7,10 @@ import {TipoUsuario} from "../../../models/persona/TipoUsuarioModel";
 import {PersonaModeloPersistencia} from "../../../models/persona/PersonaModel";
 import {PersonaDto} from "../../../classes/persona/Persona";
 import {ModeloTipoUsuarioPersona} from "../../../classes/persona/ModeloTipoUsuarioPersona";
+import FileSystem from "../../../classes/file-system";
 
 const util = new CommonsMethods();
-
+const fileSystem = new FileSystem();
 export const ObtenerTodos = (req: Request, res: Response) => {
     TipoUsuarioPersona.find({}, (error, objeto) => {
         res = util.responceBuscar(req, res, error, objeto);
@@ -44,12 +45,12 @@ export const BusquedaPersonaClave = async (req: Request, res: Response) => {
     const objPersona: PersonaDto = (await PersonaModeloPersistencia.findOne().where('correo').equals(req.body.correo)) as unknown as PersonaDto;
     if (!objPersona)
         return util.responceBuscar(req, res, null, null);
-    const lstTipoUsuarioPersona:ModeloTipoUsuarioPersona[] = (await TipoUsuarioPersona.find().populate('tipoUsuario').populate('persona').populate('usuario').where('persona').equals(objPersona._id)) as unknown as ModeloTipoUsuarioPersona[];
+    const lstTipoUsuarioPersona: ModeloTipoUsuarioPersona[] = (await TipoUsuarioPersona.find().populate('tipoUsuario').populate('persona').populate('usuario').where('persona').equals(objPersona._id)) as unknown as ModeloTipoUsuarioPersona[];
     console.log(lstTipoUsuarioPersona);
-    if(!lstTipoUsuarioPersona || lstTipoUsuarioPersona.length===0)
+    if (!lstTipoUsuarioPersona || lstTipoUsuarioPersona.length === 0)
         return util.responceBuscar(req, res, null, null);
-    for (let item of lstTipoUsuarioPersona){
-        if(item.usuario.clave===req.body.clave){
+    for (let item of lstTipoUsuarioPersona) {
+        if (item.usuario.clave === req.body.clave) {
             return util.responceBuscar(req, res, null, lstTipoUsuarioPersona);
         }
     }
@@ -156,14 +157,13 @@ async function crearPersona(request: Request, res: Response) {
         avatar: request.body.avatar,
         nombres: request.body.nombres.toUpperCase(),
         apellidos: request.body.apellidos.toUpperCase(),
-        cedula: request.body.cedula,
+        identificacion: request.body.identificacion,
         correo: request.body.correo.toLowerCase(),
         fechaNacimiento: request.body.fechaNacimiento,
         sector: request.body.sector,
     }
     return await PersonaModeloPersistencia.create(persona);
 }
-
 
 
 async function crearUsuario(req: Request, res: Response) {
@@ -176,6 +176,15 @@ async function crearUsuario(req: Request, res: Response) {
     return await UsuarioModel.create(data);
 }
 
+export const ActualizarPhoto = (req: Request, res: Response) => {
+    const imagen = fileSystem.imagenesDeTempHaciaPost(req.body._id);
+    const data = {
+        imagen: imagen
+    };
+    TipoUsuarioPersona.findByIdAndUpdate(req.body._id, data, {new: true}, (err, userDB) => {
+        res = util.responceGuardar(req, res, err, userDB);
+    });
+};
 
 export const Actualizar = (req: Request, res: Response) => {
     const data = {

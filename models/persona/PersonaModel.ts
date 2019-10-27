@@ -8,7 +8,7 @@ const personaModeloPersistencia = new Schema({
     },
     nombres: {type: String, required: [true, 'Los nombres son necesarios']},
     apellidos: {type: String, required: [true, 'Apellidos son necesarios']},
-    cedula: {type: String},
+    identificacion: {type: String},
     correo: {type: String},
     sector: {required: [true, 'sector es necesario'], type: Schema.Types.ObjectId, ref: 'Sector'},
     fechaNacimiento: {type: Date}

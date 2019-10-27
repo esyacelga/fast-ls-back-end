@@ -1,6 +1,6 @@
 import {Router} from 'express';
 import {
-    Actualizar,
+    Actualizar, ActualizarPhoto,
     BusquedaPersonaClave,
     Insertar,
     ObtenerPorPersona, ObtenerPorTipoUsuario,
@@ -48,6 +48,11 @@ tipoUsuarioPersonaRoute.post('/insertar', Insertar);
  * Actualiza un registro
  */
 tipoUsuarioPersonaRoute.put('/', Actualizar);
+
+/**
+ * Actualiza la foto de perfil del usuario
+ */
+tipoUsuarioPersonaRoute.put('/actualizarPhoto', ActualizarPhoto);
 
 
 export default tipoUsuarioPersonaRoute;

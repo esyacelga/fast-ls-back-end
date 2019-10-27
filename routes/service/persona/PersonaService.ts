@@ -24,7 +24,7 @@ export const Registrar = (req: Request, res: Response) => {
         segundoNombre: req.body.segundoNombre,
         primerApellido: req.body.primerApellido,
         segundoApellido: req.body.segundoApellido,
-        cedula: req.body.cedula,
+        identificacion: req.body.identificacion,
         sector: req.body.sector,
         fechaNacimiento: req.body.fechaNacimiento,
         descripcion: req.body.descripcion
@@ -36,14 +36,12 @@ export const Registrar = (req: Request, res: Response) => {
 
 export const Actualizar = (req: Request, res: Response) => {
     const data = {
-        primerNombre: req.body.primerNombre,
-        segundoNombre: req.body.segundoNombre,
-        primerApellido: req.body.primerApellido,
-        segundoApellido: req.body.segundoApellido,
-        cedula: req.body.cedula,
+        nombres: req.body.nombres,
+        apellidos: req.body.apellidos,
+        identificacion: req.body.identificacion,
+        correo: req.body.correo,
         sector: req.body.sector,
-        fechaNacimiento: req.body.fechaNacimiento,
-        descripcion: req.body.descripcion
+        fechaNacimiento: req.body.fechaNacimiento
     };
     PersonaModeloPersistencia.findByIdAndUpdate(req.body._id, data, {new: true}, (err, userDB) => {
         res = util.responceGuardar(req, res, err, userDB);
