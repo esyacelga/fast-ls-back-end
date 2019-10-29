@@ -2,11 +2,12 @@ import {Request, Response} from "express";
 import {CommonsMethods} from "../../../commons/CommonsMethods";
 import {RutaModeloPersistencia} from "../../../models/ruta/RutaModeloPersistencia";
 import {RutaDto} from "../../../classes/ruta/RutaDto";
+import {RutaIntegranteModeloPersistencia} from "../../../models/ruta/RutaIntegranteModeloPersistencia";
 
 const util = new CommonsMethods();
 
 export const ObtenerTodos = (req: Request, res: Response) => {
-    RutaModeloPersistencia.find({}, (error, objeto) => {
+    RutaIntegranteModeloPersistencia.find({}, (error, objeto) => {
         res = util.responceBuscar(req, res, error, objeto);
     });
 }
