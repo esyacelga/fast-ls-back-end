@@ -19,6 +19,7 @@ import notificacionRoute from "./routes/route/notificacion/PushNotificationRoute
 import vehiculoRoute from "./routes/route/ruta/VehiculoRoute";
 import disponibilidadRoute from "./routes/route/ruta/DisponibilidadRoute";
 import estadoRutaRoute from "./routes/route/ruta/EstadoRutaRoute";
+import rutaRoute from "./routes/route/ruta/RutaRoute";
 
 const server = new Server();
 
@@ -33,6 +34,7 @@ server.app.use(fileUpload({useTempFiles: true}));
 
 
 // Rutas de mi app
+server.app.use('/ruta', rutaRoute);
 server.app.use('/user', userRoutes);
 server.app.use('/posts', postRoutes);
 server.app.use('/sector', sectorRoute);
@@ -43,8 +45,8 @@ server.app.use('/solicitud', solcitudRoute);
 server.app.use('/tipoArticulo', tipoArticulo);
 server.app.use('/tipoUsuario', tipoUsuaroRoute);
 server.app.use('/vehiculoRoute', vehiculoRoute);
-server.app.use('/estadoRutaRoute', estadoRutaRoute);
 server.app.use('/notificacion', notificacionRoute);
+server.app.use('/estadoRutaRoute', estadoRutaRoute);
 server.app.use('/articuloSegmento', articuloSegmentoRoute);
 server.app.use('/disponibilidadRoute', disponibilidadRoute);
 server.app.use('/tipoUsuarioPersona', tipoUsuarioPersonaRoute);

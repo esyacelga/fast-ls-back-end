@@ -1,19 +1,19 @@
 import {Router} from 'express';
-import {Actualizar, ObtenerTodos, Registrar} from "../../service/ruta/VehiculoService";
+import {Actualizar, ObtenerTodos, Registrar} from "../../service/ruta/RutaService";
 
-const vehiculoRoute = Router();
+const rutaRoute = Router();
 
 
 /**
  * Crea un registro
  */
-vehiculoRoute.post('/', Registrar);
+rutaRoute.post('/', Registrar);
 
 
-vehiculoRoute.put('/obtenerTodos', ObtenerTodos);
+rutaRoute.put('/obtenerTodos', ObtenerTodos);
 
 
-vehiculoRoute.put('/', Actualizar);
+rutaRoute.put('/', Actualizar);
 
 
-export default vehiculoRoute;
+export default rutaRoute;
