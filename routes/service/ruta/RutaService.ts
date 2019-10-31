@@ -4,6 +4,7 @@ import {RutaModeloPersistencia} from "../../../models/ruta/RutaModeloPersistenci
 import {RutaDto, RutaIntegranteDto} from "../../../classes/ruta/RutaDto";
 import {isNullOrUndefined} from "util";
 import {RutaIntegranteModeloPersistencia} from "../../../models/ruta/RutaIntegranteModeloPersistencia";
+import {TipoUsuarioPersona} from "../../../models/persona/TipoUsuarioPersonaModel";
 
 const util = new CommonsMethods();
 
@@ -14,6 +15,21 @@ export const ObtenerTodos = (req: Request, res: Response) => {
     });
 }
 
+export const ObtenerIntegrantes = async (req: Request, res: Response) => {
+    let objRuta: RutaDto = (await RutaModeloPersistencia.findOne().where('disponibilidad').equals(req.body.idDisponibilidad).where('finalizado').equals(0)) as unknown as RutaDto;
+    if (isNullOrUndefined(objRuta)) {
+        res = util.responceBuscar(req, res, null, null);
+        return;
+    }
+    const lstIntegrantes: RutaIntegranteDto[] = (await RutaIntegranteModeloPersistencia.find({}).where('rutaModeloPersistencia').equals(objRuta._id)) as unknown as RutaIntegranteDto[];
+    if (lstIntegrantes) {
+        const lstIds: string[] = util.obtenerListaIDs(lstIntegrantes);
+        const respuesta = await TipoUsuarioPersona.find().where('_id').in(lstIds);
+        res = util.responceBuscar(req, res, null, respuesta);
+        return;
+    }
+
+}
 
 export const Registrar = async (req: Request, res: Response) => {
     let rutaDetalle: RutaIntegranteDto;
@@ -31,8 +47,6 @@ export const Registrar = async (req: Request, res: Response) => {
         objRuta = (await RutaModeloPersistencia.create(data)) as unknown as RutaDto;
     }
 
-
-    console.log(objRuta);
     if (data && data.lstIntegrantes && data.lstIntegrantes.length > 0) {
         let objRutaDetalle: RutaIntegranteDto = data.lstIntegrantes[0];
         objRutaDetalle.rutaModeloPersistencia = objRuta._id;

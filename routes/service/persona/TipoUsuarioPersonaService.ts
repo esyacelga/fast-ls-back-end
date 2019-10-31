@@ -17,6 +17,13 @@ export const ObtenerTodos = (req: Request, res: Response) => {
     }).populate('persona').populate('tipoUsuario').populate('usuario');
 }
 
+
+export const ObtenerPersonaPor = (req: Request, res: Response) => {
+    TipoUsuarioPersona.find({}, (error, objeto) => {
+        res = util.responceBuscar(req, res, error, objeto);
+    }).populate('persona').populate('tipoUsuario').populate('usuario');
+}
+
 export const ObtenerPorPersona = (req: Request, res: Response) => {
     TipoUsuarioPersona.find({}, (error, objeto) => {
         res = util.responceBuscar(req, res, error, objeto);
