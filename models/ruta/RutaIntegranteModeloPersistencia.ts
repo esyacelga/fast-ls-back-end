@@ -2,7 +2,7 @@ import {model, Schema,} from "mongoose";
 import uniqueValidator from "mongoose-unique-validator";
 
 const rutaIntegranteModeloPersistencia = new Schema({
-    rutaModeloPersistencia:{required: [true, 'La persona es necesaria'],
+    rutaModeloPersistencia:{required: [true, 'La Ruta es Necesaria'],
         type: Schema.Types.ObjectId,
         ref: 'RutaModeloPersistencia'},
     tipoUsuarioPersona: {
