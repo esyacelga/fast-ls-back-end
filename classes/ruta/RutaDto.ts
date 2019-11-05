@@ -16,6 +16,7 @@ export class RutaDto {
 
 
 export class RutaIntegranteDto {
+    // @ts-ignore
     _id: string;
     rutaModeloPersistencia: string = '';
     tipoUsuarioPersona: string = '';

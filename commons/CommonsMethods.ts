@@ -41,6 +41,24 @@ export class CommonsMethods {
         return lsRet;
     }
 
+    obtenerListaCampo(valores: any[], campo: string): string[] {
+        let lsRet: string[] = [];
+        valores.forEach(function (value) {
+            lsRet.push(value[campo]);
+        });
+
+        return lsRet;
+    }
+
+
+    /*
+     for (const aux in valores) {
+       if (aux === campo) {
+       lista[i][aux] = this.toBoolean(lista[i][aux]);
+   }
+   }
+   */
+
     responceCrear(peticion: Request, respuesta: Response, error: any, objeto?: any) {
         if (error) {
             console.error(error);

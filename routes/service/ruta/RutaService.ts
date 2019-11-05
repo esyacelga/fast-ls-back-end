@@ -17,14 +17,19 @@ export const ObtenerTodos = (req: Request, res: Response) => {
 
 export const ObtenerIntegrantes = async (req: Request, res: Response) => {
     let objRuta: RutaDto = (await RutaModeloPersistencia.findOne().where('disponibilidad').equals(req.body.idDisponibilidad).where('finalizado').equals(0)) as unknown as RutaDto;
+
     if (isNullOrUndefined(objRuta)) {
         res = util.responceBuscar(req, res, null, null);
         return;
     }
     const lstIntegrantes: RutaIntegranteDto[] = (await RutaIntegranteModeloPersistencia.find({}).where('rutaModeloPersistencia').equals(objRuta._id)) as unknown as RutaIntegranteDto[];
+
+
     if (lstIntegrantes) {
-        const lstIds: string[] = util.obtenerListaIDs(lstIntegrantes);
-        const respuesta = await TipoUsuarioPersona.find().where('_id').in(lstIds);
+        const lstIds: string[] = util.obtenerListaCampo(lstIntegrantes,'tipoUsuarioPersona');
+        console.log('Aca: ',lstIds);
+        const respuesta = await TipoUsuarioPersona.find().populate('persona').where('_id').in(lstIds);
+
         res = util.responceBuscar(req, res, null, respuesta);
         return;
     }

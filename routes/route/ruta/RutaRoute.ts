@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {Actualizar, ObtenerTodos, Registrar} from "../../service/ruta/RutaService";
+import {Actualizar, ObtenerIntegrantes, ObtenerTodos, Registrar} from "../../service/ruta/RutaService";
 
 const rutaRoute = Router();
 
@@ -11,6 +11,9 @@ rutaRoute.post('/', Registrar);
 
 
 rutaRoute.put('/obtenerTodos', ObtenerTodos);
+
+
+rutaRoute.put('/ObtenerIntegrantes', ObtenerIntegrantes);
 
 
 rutaRoute.put('/', Actualizar);
