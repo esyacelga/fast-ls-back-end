@@ -5,6 +5,7 @@ import {ModeloDisponibilidad} from "../../../classes/ruta/ModeloDisponibilidad";
 import {TipoUsuarioPersona} from "../../../models/persona/TipoUsuarioPersonaModel";
 import {TipoUsuario} from "../../../models/persona/TipoUsuarioModel";
 import {ModeloTipoUsuario, ModeloTipoUsuarioPersona} from "../../../classes/persona/ModeloTipoUsuarioPersona";
+import {isNullOrUndefined} from "util";
 
 const util = new CommonsMethods();
 
@@ -17,9 +18,32 @@ export const ObtenerTodos = (req: Request, res: Response) => {
 export const ObtenerDisponibilidad = async (req: Request, res: Response) => {
     const objTipoUsuario: ModeloTipoUsuario = (await TipoUsuario.findOne().where('codigo').equals('CHOFER')) as ModeloTipoUsuario;
 
-    const lstTipoUsuarioPersona: ModeloTipoUsuarioPersona[] = (await TipoUsuarioPersona.find().populate('usuario').populate('persona').where('tipoUsuario').equals(objTipoUsuario._id)) as unknown as ModeloTipoUsuarioPersona[];
+    if(isNullOrUndefined(objTipoUsuario)){
+        res = util.responceBuscar(req, res, null, null);
+        return;
+    }
 
-    const lstDisponibilidad: ModeloDisponibilidad[] = (await DisponibilidadModeloPersistencia.find().populate('estadoDiponibilidad').populate('tipoUsuarioPersona').populate('vehiculo').where('enTurno').equals(true).sort({'numeroTurno':-1})) as unknown as ModeloDisponibilidad[];
+
+    const lstTipoUsuarioPersona: ModeloTipoUsuarioPersona[] = (await TipoUsuarioPersona.find().populate('usuario').populate('persona').where('tipoUsuario').equals(objTipoUsuario._id)) as unknown as ModeloTipoUsuarioPersona[];
+    if(isNullOrUndefined(lstTipoUsuarioPersona)){
+        res = util.responceBuscar(req, res, null, null);
+        return;
+    }
+
+    let lstDisponibilidad: ModeloDisponibilidad[]=[];
+    try {
+        lstDisponibilidad  = (await DisponibilidadModeloPersistencia.find().populate('estadoDiponibilidad').populate('tipoUsuarioPersona').populate('vehiculo').where('enTurno').equals(true).sort({'numeroTurno':-1})) as unknown as ModeloDisponibilidad[];
+        if(isNullOrUndefined(lstTipoUsuarioPersona)){
+            res = util.responceBuscar(req, res, null, null);
+            return;
+        }
+    }
+    catch (e) {
+        res = util.responceBuscar(req, res, {message:e}, null);
+        return;
+    }
+
+
 
     for (let item of lstDisponibilidad) {
         for (let tups of lstTipoUsuarioPersona) {

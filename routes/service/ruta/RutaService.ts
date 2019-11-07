@@ -50,6 +50,9 @@ export const Registrar = async (req: Request, res: Response) => {
         // @ts-ignore
         data._id = null;
         objRuta = (await RutaModeloPersistencia.create(data)) as unknown as RutaDto;
+    }else{
+        res = util.responceCrear(req, res, {messaje:'Ruta no encontrada'}, null);
+        return res;
     }
 
     if (data && data.lstIntegrantes && data.lstIntegrantes.length > 0) {

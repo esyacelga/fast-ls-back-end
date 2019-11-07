@@ -20,6 +20,7 @@ export const ObtenerTodos = (req: Request, res: Response) => {
 
 export const ObtenerPersonaPor = (req: Request, res: Response) => {
     TipoUsuarioPersona.find({}, (error, objeto) => {
+        console.log('Esto es el objeto',objeto);
         res = util.responceBuscar(req, res, error, objeto);
     }).populate('persona').populate('tipoUsuario').populate('usuario');
 }
@@ -32,10 +33,10 @@ export const ObtenerPorPersona = (req: Request, res: Response) => {
 
 export const ObtenerPorTipoUsuario = (req: Request, res: Response) => {
     TipoUsuarioPersona.find({}, (error, objeto) => {
+        console.log('Esto es el objeto...',objeto);
         res = util.responceBuscar(req, res, error, objeto);
     }).populate('persona').populate('tipoUsuario').populate('usuario').where('tipoUsuario').equals(req.body.tipoUsuario);
 }
-
 
 function obtenerPersonaCorreo(correo: string) {
     const promesa = new Promise(async (resolve: any, reject: any) => {
