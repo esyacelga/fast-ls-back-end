@@ -54,7 +54,7 @@ server.app.use('/tipoUsuarioPersona', tipoUsuarioPersonaRoute);
 
 
 // Conectar DB
-mongoose.connect('mongodb://localhost:27017/fotosgram',
+mongoose.connect('mongodb://localhost:27017/black-cat',
     {useNewUrlParser: true, useCreateIndex: true}, (err) => {
         if (err) throw err;
         console.log('Base de datos ONLINE');

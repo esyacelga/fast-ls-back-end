@@ -1,4 +1,5 @@
 import {Request, Response} from "express";
+import {ErrorMessaje} from "../models/common/ErrorMessaje";
 
 export class CommonsMethods {
 
@@ -16,13 +17,21 @@ export class CommonsMethods {
         return lstKeys;
     }
 
+    cargarError(sms: string, opcion: boolean): ErrorMessaje {
+        let datoError: ErrorMessaje = new ErrorMessaje(sms, opcion);
+        return datoError;
+    }
 
     responceBuscar(peticion: Request, respuesta: Response, error: any, objeto: any) {
         if (error) {
+            const mensaje = error.messaje;
+            const opcion = error.opcion;
+            console.log(mensaje)
+            console.log(opcion)
             return respuesta.status(500).json({
                 ok: false,
-                mensaje: 'Error cargando la lista de obejtos',
-                errors: error
+                message: 'Error cargando la lista de obejtos',
+                errors: this.cargarError(mensaje, opcion)
             })
         }
         respuesta.status(200).json({

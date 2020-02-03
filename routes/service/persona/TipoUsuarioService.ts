@@ -33,12 +33,15 @@ export const ObtenerUsuarios = () => {
 }
 
 export const Registrar = (req: Request, res: Response) => {
+    console.log('*11*');
     const data = {
         codigo: req.body.codigo.toUpperCase(),
         descripcion: req.body.descripcion.toUpperCase(),
         estado: req.body.estado
     };
+    console.log(data);
     TipoUsuario.create(data, (err: any, objeto: any) => {
+        console.log(objeto);
         res = util.responceCrear(req, res, err, objeto);
     });
 }
