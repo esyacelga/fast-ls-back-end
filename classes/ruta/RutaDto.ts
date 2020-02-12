@@ -2,7 +2,8 @@ import {SectorDto} from "../direccion/SectorDto";
 import {ModeloDisponibilidad} from "./ModeloDisponibilidad";
 
 export class RutaDto {
-    _id: string = '';
+    // @ts-ignore
+    _id: string;
     sectorIncial: SectorDto = new SectorDto();
     sectorFinal: SectorDto = new SectorDto();
     disponibilidad: ModeloDisponibilidad = new ModeloDisponibilidad();
