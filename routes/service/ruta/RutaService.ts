@@ -26,8 +26,8 @@ export const ObtenerIntegrantes = async (req: Request, res: Response) => {
 
 
     if (lstIntegrantes) {
-        const lstIds: string[] = util.obtenerListaCampo(lstIntegrantes,'tipoUsuarioPersona');
-        console.log('Aca: ',lstIds);
+        const lstIds: string[] = util.obtenerListaCampo(lstIntegrantes, 'tipoUsuarioPersona');
+        console.log('Aca: ', lstIds);
         const respuesta = await TipoUsuarioPersona.find().populate('persona').where('_id').in(lstIds);
 
         res = util.responceBuscar(req, res, null, respuesta);
@@ -36,11 +36,65 @@ export const ObtenerIntegrantes = async (req: Request, res: Response) => {
 
 }
 
+export const ObtenerRutaPersona = async (req: Request, res: Response) => {
+    const data: RutaDto = req.body as RutaDto;
+    let objRuta: RutaDto = (await RutaModeloPersistencia.findOne().where('disponibilidad').equals(data.disponibilidad._id)) as unknown as RutaDto;
+    if (isNullOrUndefined(objRuta)) {
+        res = util.responceBuscar(req, res, null, null);
+        return;
+    }
+
+    if (data && data.lstIntegrantes && data.lstIntegrantes.length > 0) {
+        let objRutaDetalle: RutaIntegranteDto = data.lstIntegrantes[0];
+        objRutaDetalle.rutaModeloPersistencia = objRuta._id;
+        const lstRuta: RutaIntegranteDto[] =
+            (await RutaIntegranteModeloPersistencia.find()
+                .where('rutaModeloPersistencia').equals(objRuta._id)
+                .where('tipoUsuarioPersona').equals(objRutaDetalle.tipoUsuarioPersona)) as unknown as RutaIntegranteDto[];
+        res = util.responceBuscar(req, res, null, lstRuta);
+        return;
+    }
+    res = util.responceBuscar(req, res, null, []);
+    return;
+}
+
+export const RegistrarSolicitud = async (req: Request, res: Response) => {
+    let rutaDetalle: RutaIntegranteDto;
+    let objRuta: RutaDto;
+    const data: RutaDto = req.body as RutaDto;
+    // @ts-ignore
+    data.sectorFinal = undefined;
+    // @ts-ignore
+    data.sectorIncial = undefined;
+    // @ts-ignore
+    data._id = null;
+
+    //objRuta = (await RutaModeloPersistencia.create(data)) as unknown as RutaDto;
+    RutaModeloPersistencia.create(data).then(obj=>{
+        console.log(obj);
+        res = util.responceCrear(req, res, null, obj);
+        return res;
+    })
+
+    console.log('sasas',objRuta);
+    if (data && data.lstIntegrantes && data.lstIntegrantes.length > 0) {
+        let objRutaDetalle: RutaIntegranteDto = data.lstIntegrantes[0];
+        objRutaDetalle.rutaModeloPersistencia = objRuta._id;
+        console.log(objRutaDetalle);
+        rutaDetalle = (await (RutaIntegranteModeloPersistencia.create(objRutaDetalle))) as unknown as RutaIntegranteDto;
+        objRuta.lstIntegrantes = [];
+        objRuta.lstIntegrantes.push(rutaDetalle);
+    }
+    res = util.responceCrear(req, res, null, objRuta);
+    return res;
+
+}
+
+
 export const Registrar = async (req: Request, res: Response) => {
     let rutaDetalle: RutaIntegranteDto;
     const data: RutaDto = req.body as RutaDto;
     let objRuta: RutaDto = (await RutaModeloPersistencia.findOne().where('disponibilidad').equals(data.disponibilidad._id)) as unknown as RutaDto;
-
     if (isNullOrUndefined(objRuta)) {
         console.log('Va a crear:  ', data);
         // @ts-ignore
@@ -50,9 +104,6 @@ export const Registrar = async (req: Request, res: Response) => {
         // @ts-ignore
         data._id = null;
         objRuta = (await RutaModeloPersistencia.create(data)) as unknown as RutaDto;
-    }else{
-        res = util.responceCrear(req, res, {messaje:'Ruta no encontrada'}, null);
-        return res;
     }
 
     if (data && data.lstIntegrantes && data.lstIntegrantes.length > 0) {
