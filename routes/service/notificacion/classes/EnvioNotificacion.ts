@@ -4,7 +4,7 @@ export class EnvioNotificacion {
 
     generarMensaje(tittuloNotificacion: string, detalleNotificacion: string, lstPlayerid: string[], key?: string, valor?: string, ruta?: string): OneSignalMessage {
         const mensaje = new OneSignalMessage();
-        mensaje.app_id='207a69ab-4d96-44f8-a6ce-828f0eb13cf3',
+        mensaje.app_id='7aefa706-f4b4-47cf-9c8f-7f1d9830fcda',
         mensaje.headings.en = tittuloNotificacion;
         mensaje.contents.en = detalleNotificacion;
         mensaje.include_player_ids = lstPlayerid;
@@ -19,7 +19,7 @@ export class EnvioNotificacion {
         const data = this.generarMensaje(tittuloNotificacion, detalleNotificacion, lstPlayerid, key, valor, ruta);
         var headers = {
             "Content-Type": "application/json; charset=utf-8",
-            "Authorization": "Basic NGEwMGZmMjItY2NkNy0xMWUzLTk5ZDUtMDAwYzI5NDBlNjJj"
+            "Authorization": "Basic YTExODU0MWEtYTkxZS00OWFiLTk2MTYtZjhmMWE5MDA5ODc0"
         };
         var options = {
             host: "onesignal.com",

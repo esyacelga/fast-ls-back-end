@@ -25,7 +25,7 @@ export class CommonsMethods {
     responceBuscar(peticion: Request, respuesta: Response, error: any, objeto: any) {
         if (error) {
             const mensaje = error.messaje;
-            const opcion = error.opcion;
+            const opcion = error.opcion || false;
             console.log(mensaje)
             console.log(opcion)
             return respuesta.status(500).json({

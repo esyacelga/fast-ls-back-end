@@ -21,6 +21,7 @@ import vehiculoRoute from "./routes/route/ruta/VehiculoRoute";
 import disponibilidadRoute from "./routes/route/ruta/DisponibilidadRoute";
 import estadoRutaRoute from "./routes/route/ruta/EstadoRutaRoute";
 import rutaRoute from "./routes/route/ruta/RutaRoute";
+import commonRoute from "./routes/route/common/CommonRoute";
 
 const server = new Server();
 
@@ -38,6 +39,7 @@ server.app.use(fileUpload({useTempFiles: true}));
 server.app.use('/ruta', rutaRoute);
 server.app.use('/user', userRoutes);
 server.app.use('/posts', postRoutes);
+server.app.use('/common', commonRoute);
 server.app.use('/sector', sectorRoute);
 server.app.use('/usuario', usuarioRoute);
 server.app.use('/persona', personaRoute);
