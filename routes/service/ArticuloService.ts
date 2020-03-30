@@ -49,8 +49,11 @@ export const Registrar = (req: Request, res: Response) => {
         descripcion: req.body.descripcion,
         estado: req.body.estado,
         fechaCreacion: new Date(),
-        imgs: req.body.img
+        imgs: req.body.img,
+        portada: null
     };
+    if (req.body.img.length > 0 && req.body.img && req.body.img[0])
+        data.portada = req.body.img;
     Articulo.create(data, (err: any, objeto: any) => {
         res = util.responceCrear(req, res, err, objeto);
     });
@@ -59,15 +62,18 @@ export const Registrar = (req: Request, res: Response) => {
 
 export const RegistrarArticulo = (req: Request, res: Response) => {
     const data = {
-        portada: req.body.portada,
+        portada: null,
         articuloSegmento: req.body.articuloSegmento,
         unidadCosto: req.body.unidadCosto,
         unidadAlmacenada: req.body.unidadAlmacenada,
         descripcion: req.body.descripcion,
         estado: req.body.estado,
         fechaCreacion: new Date(),
-        imgs: req.body.img
+        imgs: req.body.img[0]
     };
+
+    if (req.body.img.length > 0 && req.body.img && req.body.img[0])
+        data.portada = req.body.img;
     Articulo.create(data, (err: any, objeto: any) => {
         res = util.responceCrear(req, res, err, objeto);
     });

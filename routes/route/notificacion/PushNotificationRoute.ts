@@ -12,18 +12,11 @@ const notificacionRoute = Router();
 /**
  * Crea un registro
  */
-notificacionRoute.put('/', enviarNotificacion);
-
-
-notificacionRoute.put('/enviarNotificacionMasiva', enviarNotificacionMasiva);
-
-notificacionRoute.post('/', registrarNotificacion);
-
-
-notificacionRoute.put('/actualizar', actualizarNotificacion);
-
 notificacionRoute.put('/obtenerTodos', obtenerTodos);
-
+notificacionRoute.put('/', enviarNotificacion);
+notificacionRoute.post('/', registrarNotificacion);
+notificacionRoute.put('/actualizar', actualizarNotificacion);
+notificacionRoute.put('/enviarNotificacionMasiva', enviarNotificacionMasiva);
 
 export default notificacionRoute;
 

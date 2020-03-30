@@ -69,14 +69,13 @@ export const RegistrarSolicitud = async (req: Request, res: Response) => {
     // @ts-ignore
     data._id = null;
 
-    //objRuta = (await RutaModeloPersistencia.create(data)) as unknown as RutaDto;
+    objRuta = (await RutaModeloPersistencia.create(data)) as unknown as RutaDto;
     RutaModeloPersistencia.create(data).then(obj=>{
         console.log(obj);
         res = util.responceCrear(req, res, null, obj);
         return res;
     })
 
-    console.log('sasas',objRuta);
     if (data && data.lstIntegrantes && data.lstIntegrantes.length > 0) {
         let objRutaDetalle: RutaIntegranteDto = data.lstIntegrantes[0];
         objRutaDetalle.rutaModeloPersistencia = objRuta._id;
