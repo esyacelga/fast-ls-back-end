@@ -56,7 +56,7 @@ server.app.use('/tipoUsuarioPersona', tipoUsuarioPersonaRoute);
 
 
 // Conectar DB
-mongoose.connect('mongodb://localhost:27017/black-cat',
+mongoose.connect('mongodb+srv://esyacelga:seya1922@cluster0.ck0re.gcp.mongodb.net/black-cat?retryWrites=true&w=majority',
     {useNewUrlParser: true, useCreateIndex: true}, (err) => {
         if (err) throw err;
         console.log('Base de datos ONLINE');
