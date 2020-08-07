@@ -6,24 +6,18 @@ import {Usuario} from "../../../models/usuario.model";
 import {TipoUsuario} from "../../../models/persona/TipoUsuarioModel";
 import {PersonaModeloPersistencia} from "../../../models/persona/PersonaModel";
 import {PersonaDto} from "../../../classes/persona/Persona";
-import {ModeloTipoUsuarioPersona} from "../../../classes/persona/ModeloTipoUsuarioPersona";
+import {ModeloTipoUsuario, ModeloTipoUsuarioPersona} from "../../../classes/persona/ModeloTipoUsuarioPersona";
 import FileSystem from "../../../classes/file-system";
 
 const util = new CommonsMethods();
 const fileSystem = new FileSystem();
+
 export const ObtenerTodos = (req: Request, res: Response) => {
     TipoUsuarioPersona.find({}, (error, objeto) => {
         res = util.responceBuscar(req, res, error, objeto);
     }).populate('persona').populate('tipoUsuario').populate('usuario');
 }
 
-
-export const ObtenerPersonaPor = (req: Request, res: Response) => {
-    TipoUsuarioPersona.find({}, (error, objeto) => {
-        console.log('Esto es el objeto',objeto);
-        res = util.responceBuscar(req, res, error, objeto);
-    }).populate('persona').populate('tipoUsuario').populate('usuario');
-}
 
 export const ObtenerPorPersona = (req: Request, res: Response) => {
     TipoUsuarioPersona.find({}, (error, objeto) => {
@@ -33,18 +27,28 @@ export const ObtenerPorPersona = (req: Request, res: Response) => {
 
 export const ObtenerPorTipoUsuario = (req: Request, res: Response) => {
     TipoUsuarioPersona.find({}, (error, objeto) => {
-        console.log('Esto es el objeto...',objeto);
+        console.log('Esto es el objeto...', objeto);
         res = util.responceBuscar(req, res, error, objeto);
     }).populate('persona').populate('tipoUsuario').populate('usuario').where('tipoUsuario').equals(req.body.tipoUsuario);
 }
 
-function obtenerPersonaCorreo(correo: string) {
-    const promesa = new Promise(async (resolve: any, reject: any) => {
-        PersonaModeloPersistencia.findOne({}, (error, objeto) => {
-            resolve(objeto);
-        }).where('correo').equals(correo);
-    })
-    return promesa;
+export const BuscarPersonaCorreo = async (req: Request, res: Response) => {
+    console.log(req.body.correo);
+    const objPersona: PersonaDto = (await PersonaModeloPersistencia.findOne().where('correo').equals(req.body.correo)) as unknown as PersonaDto;
+    const objTipoUsuario: ModeloTipoUsuario = (await TipoUsuario.findOne().where('codigo').equals('CLIENTE') as ModeloTipoUsuario);
+    if (!objPersona) {
+        return util.responceBuscar(req, res, null, null);
+    }
+    const lstTipoUsuarioPersona: ModeloTipoUsuarioPersona[] = (await TipoUsuarioPersona.find().populate('tipoUsuario').populate('persona').populate('usuario')
+        .where('persona').equals(objPersona._id)
+        .where('tipoUsuario').equals(objTipoUsuario._id)) as unknown as ModeloTipoUsuarioPersona[];
+
+
+    console.log(lstTipoUsuarioPersona);
+    if (lstTipoUsuarioPersona.length > 0)
+        return util.responceBuscar(req, res, null, lstTipoUsuarioPersona[0]);
+    else
+        return util.responceBuscar(req, res, null, null);
 }
 
 
@@ -134,7 +138,7 @@ async function crearTipoUsuarioPersona(persona: any, usuario: any, request: Requ
 }
 
 /**
- * Registra un persona en  todas las tablas relacionadas a este
+ * Registra un persona del formulario de registro de la aplicacion
  * @param req
  * @param res
  * @constructor
@@ -142,7 +146,7 @@ async function crearTipoUsuarioPersona(persona: any, usuario: any, request: Requ
 export const Registrar = async (req: Request, res: Response) => {
     let usuario = await PersonaModeloPersistencia.findOne().where('correo').equals(req.body.correo);
     if (usuario) {
-        res = util.responceCrear(req, res, {message: 'El correo ingresado ya existe'});
+        res = util.responceCrear(req, res, {message: 'El correo o nombre de usuario ingresado ya existe'});
         return res;
     }
     const persona = await crearPersona(req, res);
@@ -167,14 +171,32 @@ export const Insertar = async (req: Request, res: Response) => {
 
 
 async function crearPersona(request: Request, res: Response) {
-    const persona = {
-        avatar: request.body.avatar,
-        nombres: request.body.nombres.toUpperCase(),
-        apellidos: request.body.apellidos.toUpperCase(),
-        identificacion: request.body.identificacion,
-        correo: request.body.correo.toLowerCase(),
-        fechaNacimiento: request.body.fechaNacimiento,
-        sector: request.body.sector,
+    let persona = {};
+    if (request.body.google === true) {
+        persona = {
+            avatar: request.body.avatar,
+            displayName: request.body.displayName,
+            picture: request.body.picture,
+            google: request.body.google,
+            nombres: request.body.nombres.toUpperCase(),
+            apellidos: request.body.apellidos.toUpperCase(),
+            identificacion: request.body.identificacion,
+            correo: request.body.correo.toLowerCase(),
+            fechaNacimiento: request.body.fechaNacimiento,
+
+        }
+    } else {
+        persona = {
+            avatar: request.body.avatar,
+            displayName: request.body.displayName,
+            google: request.body.google,
+            nombres: request.body.nombres.toUpperCase(),
+            apellidos: request.body.apellidos.toUpperCase(),
+            identificacion: request.body.identificacion,
+            correo: request.body.correo.toLowerCase(),
+            fechaNacimiento: request.body.fechaNacimiento,
+            sector: request.body.sector,
+        }
     }
     return await PersonaModeloPersistencia.create(persona);
 }

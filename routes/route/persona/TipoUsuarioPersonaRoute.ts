@@ -1,9 +1,12 @@
 import {Router} from 'express';
 import {
-    Actualizar, ActualizarPhoto,
+    Actualizar,
+    ActualizarPhoto,
+    BuscarPersonaCorreo,
     BusquedaPersonaClave,
     Insertar,
-    ObtenerPorPersona, ObtenerPorTipoUsuario,
+    ObtenerPorPersona,
+    ObtenerPorTipoUsuario,
     ObtenerTodos,
     Registrar
 } from "../../service/persona/TipoUsuarioPersonaService";
@@ -27,11 +30,15 @@ tipoUsuarioPersonaRoute.put('/ObtenerPorPersona', ObtenerPorPersona);
 tipoUsuarioPersonaRoute.put('/ObtenerPorTipoUsuario', ObtenerPorTipoUsuario);
 
 
-
 /**
  * Validación del correo y clave
  */
 tipoUsuarioPersonaRoute.put('/BusquedaPersonaClave', BusquedaPersonaClave);
+
+/**
+ * Obtiene la persona por correo electronico
+ */
+tipoUsuarioPersonaRoute.put('/BuscarPersonaCorreo', BuscarPersonaCorreo);
 
 /**
  * Crea un registro en persona, usuario y tipo_usuario

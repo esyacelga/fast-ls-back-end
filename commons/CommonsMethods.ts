@@ -30,7 +30,7 @@ export class CommonsMethods {
             console.log(opcion)
             return respuesta.status(500).json({
                 ok: false,
-                message: 'Error cargando la lista de obejtos',
+                message: 'Error:',
                 errors: this.cargarError(mensaje, opcion)
             })
         }

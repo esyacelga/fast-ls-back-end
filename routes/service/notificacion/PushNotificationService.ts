@@ -8,6 +8,11 @@ import {Notificador} from "../../../classes/notificacion/Notificador";
 import {ModeloTipoUsuarioPersona} from "../../../classes/persona/ModeloTipoUsuarioPersona";
 
 const util = new CommonsMethods();
+/**
+ * Método de envío de notificación
+ * @param req
+ * @param res
+ */
 export const enviarNotificacion = async (req: Request, res: Response) => {
     const data = {
         tittuloNotificacion: req.body.tittuloNotificacion,

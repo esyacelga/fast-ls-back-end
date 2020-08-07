@@ -17,17 +17,14 @@ export const ObtenerPersonaPorId = (req: Request, res: Response) => {
 }
 
 
-
 export const Registrar = (req: Request, res: Response) => {
     const data = {
-        primerNombre: req.body.primerNombre,
-        segundoNombre: req.body.segundoNombre,
-        primerApellido: req.body.primerApellido,
-        segundoApellido: req.body.segundoApellido,
+        nombres: req.body.nombres,
+        apellidos: req.body.apellidos,
         identificacion: req.body.identificacion,
+        correo: req.body.correo,
         sector: req.body.sector,
-        fechaNacimiento: req.body.fechaNacimiento,
-        descripcion: req.body.descripcion
+        fechaNacimiento: req.body.fechaNacimiento
     };
     PersonaModeloPersistencia.create(data, (err: any, objeto: any) => {
         res = util.responceCrear(req, res, err, objeto);

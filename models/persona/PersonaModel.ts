@@ -6,11 +6,19 @@ const personaModeloPersistencia = new Schema({
         type: String,
         default: 'av-1.png'
     },
-    nombres: {type: String, required: [true, 'Los nombres son necesarios']},
-    apellidos: {type: String, required: [true, 'Apellidos son necesarios']},
+    picture: {
+        type: String,
+    },
+        google: {
+        type: Boolean,
+        default: false
+    },
+    nombres: {type: String},
+    apellidos: {type: String},
+    displayName: {type: String},
     identificacion: {type: String},
     correo: {type: String},
-    sector: {required: [true, 'sector es necesario'], type: Schema.Types.ObjectId, ref: 'Sector'},
+    sector: {type: Schema.Types.ObjectId, ref: 'Sector'},
     fechaNacimiento: {type: Date}
 });
 personaModeloPersistencia.plugin(uniqueValidator, {message: '{PATH} debe de ser único'});

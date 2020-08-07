@@ -15,6 +15,7 @@ const usuarioSchema = new Schema({
         type: String,
         default: 'av-1.png'
     },
+
     email: {
         type: String,
         unique: true,
@@ -22,7 +23,6 @@ const usuarioSchema = new Schema({
     },
     password: {
         type: String,
-        required: [true, 'La contraseña es necesaria']
     }
 
 });
