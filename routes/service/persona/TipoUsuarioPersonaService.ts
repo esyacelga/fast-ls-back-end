@@ -207,7 +207,7 @@ async function crearUsuario(req: Request, res: Response) {
         avatar: req.body.avatar,
         playerId: req.body.playerId,
         clave: req.body.clave,
-        estado: req.body.estado
+        estado: 1
     };
     return await UsuarioModel.create(data);
 }

@@ -38,7 +38,6 @@ export const Actualizar = (req: Request, res: Response) => {
         playerId: req.body.playerId,
         estado: req.body.estado
     };
-    console.log(data);
     UsuarioModel.findByIdAndUpdate(req.body._id, data, {new: true}, (err, userDB) => {
         res = util.responceGuardar(req, res, err, userDB);
     });

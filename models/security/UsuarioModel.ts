@@ -8,7 +8,7 @@ const usuarioModel = new Schema({
         type: String,
         default: 'av-1.png'
     },
-    estado: {type: Number, default: 1}
+    estado: {type: Number, required: [true, 'El estado es necesario'], default: 1}
 });
 usuarioModel.plugin(uniqueValidator, {message: '{PATH} debe de ser único'});
 
