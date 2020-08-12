@@ -26,8 +26,6 @@ export class CommonsMethods {
         if (error) {
             const mensaje = error.messaje;
             const opcion = error.opcion || false;
-            console.log(mensaje)
-            console.log(opcion)
             return respuesta.status(500).json({
                 ok: false,
                 message: 'Error:',

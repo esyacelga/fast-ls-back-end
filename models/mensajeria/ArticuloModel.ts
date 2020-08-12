@@ -7,10 +7,12 @@ const articulo = new Schema({
     unidadCosto: {type: Number, required: [true, 'unidadCosto es necesario']},
     articuloSegmento: {type: Schema.Types.ObjectId, ref: 'ArticuloSegmento'},
     fechaCreacion: {type: Date},
-    portada:{type:String},
-    imgs: [{
+    portada: {type: String},
+    img: [{
         type: String
     }],
+    esServicio: {type: Boolean, default: false},
+    permiteComentar: {type: Boolean, default: false},
     estado: {type: Number, required: [true, 'El estado es necesario']}
 });
 articulo.plugin(uniqueValidator, {message: '{PATH} debe de ser único'});

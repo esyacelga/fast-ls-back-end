@@ -2,6 +2,7 @@ export interface SolcitudCabeceraModel {
     _id: string;
     usuario: string;
     estado: number;
+    fechaCreacion: Date;
     lstSolcitudDetalle: SolcitudDetalleModel[]
 }
 

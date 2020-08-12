@@ -38,8 +38,8 @@ export class EnvioNotificacion {
         });
 
         req.on('error', function (e: any) {
-            console.log("ERROR:");
-            console.log(e);
+            console.error("ERROR:");
+            console.error(e);
         });
 
         req.write(JSON.stringify(data));

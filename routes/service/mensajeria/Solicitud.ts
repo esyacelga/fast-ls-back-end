@@ -13,7 +13,6 @@ export const actualizarSolicitud = (req: Request, res: Response) => {
         estado: req.body.estado,
         fechaModificacion: new Date()
     }
-    console.log(solicitud);
     SolicitudCabecera.findByIdAndUpdate(req.body._id, solicitud, {new: true}, (err, userDB) => {
         res = util.responceGuardar(req, res, err, userDB);
     });
@@ -22,8 +21,9 @@ export const actualizarSolicitud = (req: Request, res: Response) => {
 
 export const Registrar = (req: Request, res: Response) => {
     const data = <SolcitudCabeceraModel>req.body;
+    data.fechaCreacion = new Date();
     SolicitudDetalle.insertMany(data.lstSolcitudDetalle, (err: any, lstResultado: any) => {
-        const solicitudCabecera = new SolicitudClass(data.usuario, data.estado, util.obtenerListaIDs(lstResultado));
+        const solicitudCabecera = new SolicitudClass(data.usuario, data.estado, util.obtenerListaIDs(lstResultado), new Date());
         SolicitudCabecera.create(solicitudCabecera, (err: any, objeto: any) => {
             res = util.responceCrear(req, res, err, objeto);
         });
@@ -31,15 +31,6 @@ export const Registrar = (req: Request, res: Response) => {
 }
 export const obtenerPedidos = async (req: Request, res: Response) => {
     const lstCab: Pedido[] = (await obtenerCabecera(1)) as Pedido[];
-    for (let i of lstCab) {
-        i.usuario = 'hola'
-        // @ts-ignore
-        i.de = 'tttas';
-        console.log(i);
-    }
-    /* const lstKeys = util.convertirObjListaArreglo(lstCab);
-     const lstPed: PedidoDetalle[] = (await obtenerDetalle(lstKeys)) as PedidoDetalle[];*/
-    //console.log(lstCab)
     res = util.responceCrear(req, res, null, lstCab);
 }
 
@@ -60,7 +51,7 @@ export const obtenerCabecera = async (estado: number) => {
             populate: {
                 path: 'solicitudDetalle'
             }
-        })
+        }).sort({fechaCreacion: -1})
     })
 
     return promesa;

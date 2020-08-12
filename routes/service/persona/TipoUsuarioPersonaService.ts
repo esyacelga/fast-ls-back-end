@@ -75,12 +75,13 @@ export const BusquedaPersonaClave = async (req: Request, res: Response) => {
 
 export const obtenerUsuariosNotificacion = async (tipoUsuario: string) => {
     const lstPlayerId: string[] = [];
-    const tipoUsuaro = await obtenerTipoUsuarioXDescripcion(tipoUsuario);
-    if (!tipoUsuaro)
+    const objTipoUsuario = await obtenerTipoUsuarioXDescripcion(tipoUsuario);
+    if (!objTipoUsuario)
         return [];
 
     // @ts-ignore
-    const lstIpoUsuario = <[]>await obtenerTipoUsuarioPersona(tipoUsuaro._id);
+    const lstIpoUsuario = <[]>await obtenerTipoUsuarioPersona(objTipoUsuario._id);
+    console.log(lstIpoUsuario);
     if (!lstIpoUsuario)
         return [];
     // @ts-ignore
@@ -188,6 +189,8 @@ async function crearPersona(request: Request, res: Response) {
     } else {
         persona = {
             avatar: request.body.avatar,
+            numeroTelefonoCelular: request.body.numeroTelefonoCelular,
+            numeroTelefonoConvencional: request.body.numeroTelefonoConvencional,
             displayName: request.body.displayName,
             google: request.body.google,
             nombres: request.body.nombres.toUpperCase(),

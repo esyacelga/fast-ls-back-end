@@ -22,13 +22,12 @@ export const enviarNotificacion = async (req: Request, res: Response) => {
         grupoUsuarios: req.body.grupoUsuarios
     };
     const lstPlayer: string[] = await obtenerUsuariosNotificacion(data.grupoUsuarios);
-    const notificacion = new EnvioNotificacion();
-    console.log('Enviando notificacion...');
     console.log(lstPlayer);
+    console.log('lstPlayer');
+    const notificacion = new EnvioNotificacion();
     notificacion.enviar(data.tittuloNotificacion, data.detalleNotificacion, lstPlayer, data.key, data.valor, '');
     res = util.responceBuscar(req, res, null, data);
 }
-
 
 export const obtenerTodos = (req: Request, res: Response) => {
     NotificacionModel.find({}, (error, objeto) => {
@@ -36,31 +35,28 @@ export const obtenerTodos = (req: Request, res: Response) => {
     }).where('estado').in([1, 2]);
 }
 
-
 export const enviarNotificacionMasiva = async (req: Request, res: Response) => {
     const lstPlayerId: string[] = [];
     const notificacion = new EnvioNotificacion();
     const notificador: Notificador = (await NotificacionModel.findOne().populate('tipoUsuario').where('_id').equals(req.body._id)) as unknown as Notificador;
-    if (!notificador){
-       return res = util.responceBuscar(req, res, {message:'No se encuentra la notificacion'}, notificador);
+    if (!notificador) {
+        return res = util.responceBuscar(req, res, {message: 'No se encuentra la notificacion'}, notificador);
     }
     const lstTipoUsuarioPersona: ModeloTipoUsuarioPersona[] = (await TipoUsuarioPersona.find().populate('usuario').where('tipoUsuario').equals(notificador.tipoUsuario._id)) as unknown as ModeloTipoUsuarioPersona[];
-    if (!lstTipoUsuarioPersona){
-        return res = util.responceBuscar(req, res, {message:'No se existen player ids'}, notificador);
+    if (!lstTipoUsuarioPersona) {
+        return res = util.responceBuscar(req, res, {message: 'No se existen player ids'}, notificador);
     }
     for (const dato of lstTipoUsuarioPersona) {
         if (dato.usuario.playerId !== '' && dato.usuario.playerId !== null) {
             lstPlayerId.push(dato.usuario.playerId);
         }
     }
-
-    NotificacionModel.findByIdAndUpdate(req.body._id, {estado:2}, {new: true}, (err, userDB) => {
+    NotificacionModel.findByIdAndUpdate(req.body._id, {estado: 2}, {new: true}, (err, userDB) => {
         res = util.responceCrear(req, res, err, userDB);
         notificacion.enviar(notificador.titulo, notificador.mensajeTitulo, lstPlayerId, notificador.key, notificador.keyPayload, '');
     });
     return res;
 }
-
 
 export const registrarNotificacion = async (req: Request, res: Response) => {
     const data = {
@@ -76,7 +72,6 @@ export const registrarNotificacion = async (req: Request, res: Response) => {
         res = util.responceCrear(req, res, err, objeto);
     });
 }
-
 
 export const actualizarNotificacion = async (req: Request, res: Response) => {
     const data = {
