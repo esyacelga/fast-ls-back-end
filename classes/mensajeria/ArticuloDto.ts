@@ -10,6 +10,7 @@ export class ArticuloDto {
     public portada: string = '';
     public conteoLike: Number = 0;
     public conteoDisLike: Number = 0;
+    public conteoComentarios: Number = 0;
 
 
 }

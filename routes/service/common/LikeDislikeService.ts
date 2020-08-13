@@ -14,14 +14,11 @@ export const IngresarLike = (req: Request, res: Response) => {
     let result: LikeDislike;
     objetoLikeDislike.modificacionFecha = new Date();
     LikeDislikeModel.findOne({}, async (error, objeto: LikeDislike) => {
-        console.log()
         if (objeto && objeto._id) {
             result = (await LikeDislikeModel.findByIdAndUpdate(objeto._id, objetoLikeDislike) as unknown as LikeDislike);
         } else {
             result = (await LikeDislikeModel.create(objetoLikeDislike) as unknown as LikeDislike);
         }
-        // result = (await LikeDislikeModel.create(objetoLikeDislike) as unknown as LikeDislike);
-        console.log(objetoLikeDislike.articulo);
         const obj = await actualizarConteoLikeDislike(objetoLikeDislike.articulo);
         result.articulo = obj;
         return res = util.responceActualizar(req, res, null, result);
