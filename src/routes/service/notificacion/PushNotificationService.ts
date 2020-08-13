@@ -4,8 +4,8 @@ import {EnvioNotificacion} from "./classes/EnvioNotificacion";
 import {obtenerUsuariosNotificacion} from "../persona/TipoUsuarioPersonaService";
 import {NotificacionModel} from "../../../models/notificacion/notificacion.model";
 import {TipoUsuarioPersona} from "../../../models/persona/TipoUsuarioPersonaModel";
-import {Notificador} from "../../../classes/notificacion/Notificador";
-import {ModeloTipoUsuarioPersona} from "../../../classes/persona/ModeloTipoUsuarioPersona";
+import {Notificador} from "../../../src/classes/notificacion/Notificador";
+import {ModeloTipoUsuarioPersona} from "../../../src/classes/persona/ModeloTipoUsuarioPersona";
 
 const util = new CommonsMethods();
 /**

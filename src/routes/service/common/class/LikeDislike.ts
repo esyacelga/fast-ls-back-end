@@ -1,5 +1,5 @@
-import {PersonaDto} from "../../../../classes/persona/Persona";
-import {ArticuloDto} from "../../../../classes/mensajeria/ArticuloDto";
+import {PersonaDto} from "../../../../src/classes/persona/Persona";
+import {ArticuloDto} from "../../../../src/classes/mensajeria/ArticuloDto";
 
 export class LikeDislike {
     // @ts-ignore

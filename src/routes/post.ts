@@ -1,7 +1,7 @@
 import {Response, Router} from 'express';
 import {Post} from '../models/post.model';
 import {FileUpload} from '../interfaces/file-upload';
-import FileSystem from '../classes/file-system';
+import FileSystem from '../src/classes/file-system';
 
 
 const postRoutes = Router();

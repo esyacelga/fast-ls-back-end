@@ -1,5 +1,5 @@
 import * as nodemailer from "nodemailer";
-import config  from "../../classes/common/Configs";
+import config  from "../../src/classes/common/Configs";
 
 class Mail {
 

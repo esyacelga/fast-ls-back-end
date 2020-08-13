@@ -1,9 +1,9 @@
 import {CommonsMethods} from "../../commons/CommonsMethods";
 import {Request, Response} from "express";
 import {Articulo} from "../../models/mensajeria/ArticuloModel";
-import FileSystem from "../../classes/file-system";
+import FileSystem from "../../src/classes/file-system";
 import {isNull} from "util";
-import {ArticuloDto} from "../../classes/mensajeria/ArticuloDto";
+import {ArticuloDto} from "../../src/classes/mensajeria/ArticuloDto";
 
 const util = new CommonsMethods();
 const fileSystem = new FileSystem();

@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
 import {CommonsMethods} from "../../../commons/CommonsMethods";
 import {RutaModeloPersistencia} from "../../../models/ruta/RutaModeloPersistencia";
-import {RutaDto} from "../../../classes/ruta/RutaDto";
+import {RutaDto} from "../../../src/classes/ruta/RutaDto";
 import {RutaIntegranteModeloPersistencia} from "../../../models/ruta/RutaIntegranteModeloPersistencia";
 
 const util = new CommonsMethods();

@@ -3,7 +3,7 @@ import {SolicitudCabecera, SolicitudDetalle} from "../../../models/mensajeria/So
 import {Request, Response} from "express";
 import {SolcitudCabeceraModel} from "./class/SolcitudMap";
 import {SolicitudClass} from "./class/SolicitudClass";
-import {Pedido} from "../../../classes/mensajeria/solicitud/Pedido";
+import {Pedido} from "../../../src/classes/mensajeria/solicitud/Pedido";
 import {Articulo} from "../../../models/mensajeria/ArticuloModel";
 
 const util = new CommonsMethods();

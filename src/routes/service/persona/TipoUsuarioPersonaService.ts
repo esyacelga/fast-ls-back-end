@@ -5,9 +5,9 @@ import {UsuarioModel} from "../../../models/security/UsuarioModel";
 import {Usuario} from "../../../models/usuario.model";
 import {TipoUsuario} from "../../../models/persona/TipoUsuarioModel";
 import {PersonaModeloPersistencia} from "../../../models/persona/PersonaModel";
-import {PersonaDto} from "../../../classes/persona/Persona";
-import {ModeloTipoUsuario, ModeloTipoUsuarioPersona} from "../../../classes/persona/ModeloTipoUsuarioPersona";
-import FileSystem from "../../../classes/file-system";
+import {PersonaDto} from "../../../src/classes/persona/Persona";
+import {ModeloTipoUsuario, ModeloTipoUsuarioPersona} from "../../../src/classes/persona/ModeloTipoUsuarioPersona";
+import FileSystem from "../../../src/classes/file-system";
 
 const util = new CommonsMethods();
 const fileSystem = new FileSystem();

@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 import {FileUpload} from "../../interfaces/file-upload";
-import FileSystem from "../../classes/file-system";
+import FileSystem from "../../src/classes/file-system";
 
 const fileSystem = new FileSystem();
 
