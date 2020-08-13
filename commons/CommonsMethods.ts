@@ -22,6 +22,23 @@ export class CommonsMethods {
         return datoError;
     }
 
+    responceActualizar(peticion: Request, respuesta: Response, error: any, objeto: any) {
+        if (error) {
+            const mensaje = error.messaje;
+            const opcion = error.opcion || false;
+            return respuesta.status(500).json({
+                ok: false,
+                message: 'Error al actualizar:',
+                errors: this.cargarError(mensaje, opcion)
+            })
+        }
+        respuesta.status(200).json({
+            ok: true,
+            objeto: objeto
+        })
+        return respuesta;
+    };
+
     responceBuscar(peticion: Request, respuesta: Response, error: any, objeto: any) {
         if (error) {
             const mensaje = error.messaje;
@@ -82,24 +99,7 @@ export class CommonsMethods {
         return respuesta;
     };
 
-    responceActualizar(peticion: Request, respuesta: Response, error: any, objeto: any) {
-        var id = peticion.params.id;
-        if (error) {
-            return respuesta.status(500).json({
-                ok: false,
-                mensaje: 'Error al actualizar objeto',
-                errors: error
-            });
-        }
-        if (!objeto) {
-            return respuesta.status(400).json({
-                ok: false,
-                mensaje: 'El objeto con el id ' + id + ' no existe',
-                errors: {message: 'No existe un objeto con ese ID'}
-            });
-        }
-        return respuesta;
-    };
+
 
 
     responceGuardar(peticion: Request, respuesta: Response, error: any, objeto: any) {

@@ -12,6 +12,8 @@ const articulo = new Schema({
         type: String
     }],
     esServicio: {type: Boolean, default: false},
+    conteoLike: {type: Number, default: 0},
+    conteoDisLike: {type: Number, default: 0},
     permiteComentar: {type: Boolean, default: false},
     estado: {type: Number, required: [true, 'El estado es necesario']}
 });

@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
 import {CommonsMethods} from "../../../commons/CommonsMethods";
 import {ItemComment} from "./class/ItemComment";
-import {ItemComentarioModel} from "../../../models/mensajeria/ItemComentarioModel";
+import {ItemComentarioModel} from "../../../models/common/ItemComentarioModel";
 import {ArticuloDto} from "../../../classes/mensajeria/ArticuloDto";
 
 const util = new CommonsMethods();

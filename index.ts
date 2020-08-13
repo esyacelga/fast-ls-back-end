@@ -23,6 +23,7 @@ import estadoRutaRoute from "./routes/route/ruta/EstadoRutaRoute";
 import rutaRoute from "./routes/route/ruta/RutaRoute";
 import commonRoute from "./routes/route/common/CommonRoute";
 import comentarioRoute from "./routes/route/common/CommentItemRoute";
+import likeDislikeRoute from "./routes/route/common/LikeDislikeRoute";
 
 const server = new Server();
 
@@ -48,6 +49,7 @@ server.app.use('/articulo', articuloRoute);
 server.app.use('/solicitud', solcitudRoute);
 server.app.use('/tipoArticulo', tipoArticulo);
 server.app.use('/commentario', comentarioRoute);
+server.app.use('/likeDislike', likeDislikeRoute);
 server.app.use('/tipoUsuario', tipoUsuaroRoute);
 server.app.use('/vehiculoRoute', vehiculoRoute);
 server.app.use('/notificacion', notificacionRoute);
