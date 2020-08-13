@@ -2,9 +2,10 @@
   "name": "backend-server-ley-rutas",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "node app.js",
+    "build": "tsc",
+    "start": "tsc && node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -37,5 +38,17 @@
     "@types/nodemailer": "^6.4.0",
     "@types/underscore": "^1.10.21",
     "@types/uniqid": "^4.1.2"
-  }
+  },
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "lib": ["es2015"],
+  "include": [
+    "src/**/*"
+  ]
 }

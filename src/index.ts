@@ -1,4 +1,4 @@
-import Server from './src/classes/server';
+import Server from './classes/server';
 import mongoose from 'mongoose';
 
 

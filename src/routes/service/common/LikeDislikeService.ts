@@ -2,7 +2,7 @@ import {Request, Response} from "express";
 import {CommonsMethods} from "../../../commons/CommonsMethods";
 import {LikeDislike} from "./class/LikeDislike";
 import {LikeDislikeModel} from "../../../models/common/LikeDislikeModel";
-import {ArticuloDto} from "../../../src/classes/mensajeria/ArticuloDto";
+import {ArticuloDto} from "../../../classes/mensajeria/ArticuloDto";
 import * as _ from 'underscore';
 import {Articulo} from "../../../models/mensajeria/ArticuloModel";
 

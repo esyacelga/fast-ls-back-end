@@ -1,10 +1,10 @@
 import {Request, Response} from "express";
 import {CommonsMethods} from "../../../commons/CommonsMethods";
 import {DisponibilidadModeloPersistencia} from "../../../models/ruta/DisponibilidadModeloPersistencia";
-import {ModeloDisponibilidad} from "../../../src/classes/ruta/ModeloDisponibilidad";
+import {ModeloDisponibilidad} from "../../../classes/ruta/ModeloDisponibilidad";
 import {TipoUsuarioPersona} from "../../../models/persona/TipoUsuarioPersonaModel";
 import {TipoUsuario} from "../../../models/persona/TipoUsuarioModel";
-import {ModeloTipoUsuario, ModeloTipoUsuarioPersona} from "../../../src/classes/persona/ModeloTipoUsuarioPersona";
+import {ModeloTipoUsuario, ModeloTipoUsuarioPersona} from "../../../classes/persona/ModeloTipoUsuarioPersona";
 import {isNullOrUndefined} from "util";
 
 const util = new CommonsMethods();

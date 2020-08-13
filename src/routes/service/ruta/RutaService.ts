@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
 import {CommonsMethods} from "../../../commons/CommonsMethods";
 import {RutaModeloPersistencia} from "../../../models/ruta/RutaModeloPersistencia";
-import {RutaDto, RutaIntegranteDto} from "../../../src/classes/ruta/RutaDto";
+import {RutaDto, RutaIntegranteDto} from "../../../classes/ruta/RutaDto";
 import {isNullOrUndefined} from "util";
 import {RutaIntegranteModeloPersistencia} from "../../../models/ruta/RutaIntegranteModeloPersistencia";
 import {TipoUsuarioPersona} from "../../../models/persona/TipoUsuarioPersonaModel";
