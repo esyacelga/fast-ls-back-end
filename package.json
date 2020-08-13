@@ -8,6 +8,10 @@
     "start": "tsc && node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node": "10.16.2",
+    "npm": "2.15.12"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
