@@ -7,23 +7,23 @@ import fileUpload from 'express-fileupload';
 import cors from 'cors';
 import userRoutes from './routes/usuario';
 import postRoutes from './routes/post';
-import tipoArticulo from "./routes/TipoArticuloRoute";
-import articuloSegmentoRoute from "./routes/ArticuloSegmentoRoute";
-import articuloRoute from "./routes/ArticuloRoute";
-import sectorRoute from "./routes/route/direccion/SectorRoute";
-import tipoUsuaroRoute from "./routes/route/persona/TipoUsuarioRoute";
-import personaRoute from "./routes/route/persona/PersonaRoute";
-import usuarioRoute from "./routes/route/persona/UsuarioRoute";
-import tipoUsuarioPersonaRoute from "./routes/route/persona/TipoUsuarioPersonaRoute";
-import solcitudRoute from "./routes/route/mensajeria/SolicitudRoute";
-import notificacionRoute from "./routes/route/notificacion/PushNotificationRoute";
-import vehiculoRoute from "./routes/route/ruta/VehiculoRoute";
-import disponibilidadRoute from "./routes/route/ruta/DisponibilidadRoute";
-import estadoRutaRoute from "./routes/route/ruta/EstadoRutaRoute";
 import rutaRoute from "./routes/route/ruta/RutaRoute";
 import commonRoute from "./routes/route/common/CommonRoute";
+import usuarioRoute from "./routes/route/persona/UsuarioRoute";
+import sectorRoute from "./routes/route/direccion/SectorRoute";
+import personaRoute from "./routes/route/persona/PersonaRoute";
+import solcitudRoute from "./routes/route/mensajeria/SolicitudRoute";
+import articuloRoute from "./routes/ArticuloRoute";
+import tipoArticulo from "./routes/TipoArticuloRoute";
 import comentarioRoute from "./routes/route/common/CommentItemRoute";
 import likeDislikeRoute from "./routes/route/common/LikeDislikeRoute";
+import tipoUsuaroRoute from "./routes/route/persona/TipoUsuarioRoute";
+import vehiculoRoute from "./routes/route/ruta/VehiculoRoute";
+import notificacionRoute from "./routes/route/notificacion/PushNotificationRoute";
+import estadoRutaRoute from "./routes/route/ruta/EstadoRutaRoute";
+import articuloSegmentoRoute from "./routes/ArticuloSegmentoRoute";
+import disponibilidadRoute from "./routes/route/ruta/DisponibilidadRoute";
+import tipoUsuarioPersonaRoute from "./routes/route/persona/TipoUsuarioPersonaRoute";
 
 const server = new Server();
 
@@ -68,5 +68,4 @@ mongoose.connect('mongodb+srv://esyacelga:seya1922@cluster0.ck0re.gcp.mongodb.ne
 
 // Levantar express
 server.start(() => {
-    console.log(`Servidor corriendo en puerto ${server.port}`);
 });
