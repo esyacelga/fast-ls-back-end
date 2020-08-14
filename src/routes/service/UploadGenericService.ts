@@ -5,11 +5,7 @@ import FileSystem from "../../classes/file-system";
 const fileSystem = new FileSystem();
 
 export const SubirImagen = async (req: Request, res: Response) => {
-
-
-    console.log("Informacion del diectorio...");
     const path = req.get('directorio') || '';
-
     if (!req.files) {
         return res.status(400).json({
             ok: false,
@@ -23,8 +19,6 @@ export const SubirImagen = async (req: Request, res: Response) => {
         });
     }
 
-    console.log("Informacion del diectorio");
-    console.log(path);
 
     // @ts-ignore
     const file: FileUpload = req.files.image;

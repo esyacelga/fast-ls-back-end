@@ -34,7 +34,6 @@ export const PaginarArticulos = async (req: Request, res: Response) => {
 }
 
 
-
 export const ObtenerTodos = (req: Request, res: Response) => {
     var body = req.body;
     Articulo.find({}, (error, objeto) => {
@@ -54,11 +53,22 @@ export const Registrar = (req: Request, res: Response) => {
         esServicio: isNull(req.body.estado) ? false : req.body.esServicio,
         permiteComentarios: isNull(req.body.estado) ? false : req.body.permiteComentarios,
         fechaCreacion: new Date(),
-        imgs: req.body.img,
+        img: req.body.img,
         portada: null
     };
-    if (req.body.img.length > 0 && req.body.img && req.body.img[0])
-        data.portada = req.body.img;
+
+    if (req.body.img) {
+        if (Array.isArray(req.body.img) === true && req.body.img.length > 0) {
+            data.portada = req.body.img[0];
+            data.img = req.body.img;
+        } else {
+            // @ts-ignore
+            objArticulo.portada = imagen;
+            // @ts-ignore
+            objArticulo.img.push(imagen);
+        }
+    }
+
     Articulo.create(data, (err: any, objeto: any) => {
         res = util.responceCrear(req, res, err, objeto);
     });
@@ -74,7 +84,7 @@ export const RegistrarArticulo = (req: Request, res: Response) => {
         descripcion: req.body.descripcion,
         estado: req.body.estado,
         fechaCreacion: new Date(),
-        imgs: req.body.img[0]
+        img: req.body.img[0]
     };
 
     if (req.body.img.length > 0 && req.body.img && req.body.img[0])
@@ -89,17 +99,25 @@ export const Actualizar = async (req: Request, res: Response) => {
     // @ts-ignore
     const imagen: string[] = fileSystem.imagenesDeTempHaciaPost(req.body.articuloSegmento);
     const objArticulo: ArticuloDto = req.body as ArticuloDto;
-
-    //const imagenCopia= Articulo.findOne()
+    console.log(imagen);
     const imagenCopia: ArticuloDto = (await Articulo.findOne().where('_id').equals(objArticulo._id)) as unknown as ArticuloDto;
 
-    if (imagen && imagen.length > 0 && imagen[0]) {
-        objArticulo.portada = imagen[0];
-        objArticulo.img = imagen;
+
+    if (imagen) {
+        if (Array.isArray(imagen) === true && imagen.length > 0) {
+            objArticulo.portada = imagen[0];
+            objArticulo.img = imagen;
+        } else {
+            // @ts-ignore
+            objArticulo.portada = imagen;
+            // @ts-ignore
+            objArticulo.img.push(imagen);
+        }
     } else {
         objArticulo.portada = imagenCopia.portada;
         objArticulo.img = imagenCopia.img;
     }
+    console.log(objArticulo);
     Articulo.findByIdAndUpdate(req.body._id, objArticulo, {new: true}, (err, userDB) => {
         res = util.responceGuardar(req, res, err, userDB);
     });
