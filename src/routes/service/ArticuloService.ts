@@ -83,6 +83,7 @@ export const RegistrarArticulo = (req: Request, res: Response) => {
         unidadAlmacenada: req.body.unidadAlmacenada,
         descripcion: req.body.descripcion,
         estado: req.body.estado,
+        esBanner:req.body.esBanner,
         fechaCreacion: new Date(),
         img: req.body.img[0]
     };

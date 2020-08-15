@@ -11,6 +11,7 @@ const articulo = new Schema({
     img: [{
         type: String
     }],
+    esBanner: {type: Boolean, default: false},
     esServicio: {type: Boolean, default: false},
     conteoLike: {type: Number, default: 0},
     conteoDisLike: {type: Number, default: 0},
