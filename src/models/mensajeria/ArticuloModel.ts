@@ -2,7 +2,7 @@ import {model, Schema,} from "mongoose";
 import uniqueValidator from "mongoose-unique-validator";
 
 const articulo = new Schema({
-    descripcion: {type: String, required: [true, 'El descripcion es necesario']},
+    descripcion: {type: String, required: [true, 'La descripcion es necesario']},
     unidadAlmacenada: {type: Number, required: [true, 'unidadAlmacenada es necesario']},
     unidadCosto: {type: Number, required: [true, 'unidadCosto es necesario']},
     articuloSegmento: {type: Schema.Types.ObjectId, ref: 'ArticuloSegmento'},

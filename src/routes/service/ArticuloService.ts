@@ -57,15 +57,25 @@ export const Registrar = (req: Request, res: Response) => {
         portada: null
     };
 
+    console.log('1111');
+    console.log(req.body.img);
     if (req.body.img) {
         if (Array.isArray(req.body.img) === true && req.body.img.length > 0) {
             data.portada = req.body.img[0];
             data.img = req.body.img;
         } else {
-            // @ts-ignore
-            objArticulo.portada = imagen;
-            // @ts-ignore
-            objArticulo.img.push(imagen);
+            if (Array.isArray(req.body.img) === true && req.body.img.length === 0) {
+                // @ts-ignore
+                data.portada = null;
+                // @ts-ignore
+                data.img = req.body.img;
+            }
+            if (Array.isArray(req.body.img) === false ) {
+                // @ts-ignore
+                data.portada = req.body.img;
+                // @ts-ignore
+                data.img = req.body.img;
+            }
         }
     }
 
@@ -83,7 +93,7 @@ export const RegistrarArticulo = (req: Request, res: Response) => {
         unidadAlmacenada: req.body.unidadAlmacenada,
         descripcion: req.body.descripcion,
         estado: req.body.estado,
-        esBanner:req.body.esBanner,
+        esBanner: req.body.esBanner,
         fechaCreacion: new Date(),
         img: req.body.img[0]
     };
