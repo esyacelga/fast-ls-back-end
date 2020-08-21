@@ -1,7 +1,7 @@
 {
   "name": "backend-server-ley-rutas",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backen de Rutas para Volarys",
   "main": "dist/index.js",
   "scripts": {
     "build": "rimraf ./dist && tsc",
