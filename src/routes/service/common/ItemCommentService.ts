@@ -17,6 +17,13 @@ export const IngresarComentario = async (req: Request, res: Response) => {
     return util.responceCrear(req, res, null, result);
 }
 
+export const EliminarComentario = async (req: Request, res: Response) => {
+    console.log('**');
+    const objetoComentarioArticulo: ItemComment = req.body as ItemComment;
+    (await ItemComentarioModel.deleteOne(objetoComentarioArticulo) as unknown as ItemComment);
+    return util.responceCrear(req, res, null, '');
+}
+
 
 export const ObtenerComentariosPorArticulo = (req: Request, res: Response) => {
     const objetoArticulo: ArticuloDto = req.body as ArticuloDto;

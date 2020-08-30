@@ -1,5 +1,9 @@
 import {Router} from 'express';
-import {IngresarComentario, ObtenerComentariosPorArticulo} from "../../service/common/ItemCommentService";
+import {
+    EliminarComentario,
+    IngresarComentario,
+    ObtenerComentariosPorArticulo
+} from "../../service/common/ItemCommentService";
 
 
 const comentarioRoute = Router();
@@ -9,6 +13,9 @@ const comentarioRoute = Router();
  * Crea un registro
  */
 comentarioRoute.post('/', IngresarComentario);
+
+
+comentarioRoute.put('/eliminar', EliminarComentario);
 
 
 comentarioRoute.put('/obtenerTodos', ObtenerComentariosPorArticulo);
