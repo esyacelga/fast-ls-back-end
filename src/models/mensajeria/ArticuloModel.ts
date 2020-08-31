@@ -3,8 +3,8 @@ import uniqueValidator from "mongoose-unique-validator";
 
 const articulo = new Schema({
     descripcion: {type: String, required: [true, 'La descripcion es necesario']},
-    unidadAlmacenada: {type: Number, required: [true, 'unidadAlmacenada es necesario']},
-    unidadCosto: {type: Number, required: [true, 'unidadCosto es necesario']},
+    unidadAlmacenada: {type: Number, default: 0},
+    unidadCosto: {type: Number, default: 0},
     articuloSegmento: {type: Schema.Types.ObjectId, ref: 'ArticuloSegmento'},
     fechaCreacion: {type: Date},
     portada: {type: String},
@@ -13,6 +13,8 @@ const articulo = new Schema({
     }],
     esBanner: {type: Boolean, default: false},
     esServicio: {type: Boolean, default: false},
+    verObservacion: {type: Boolean, default: false},
+    obsevacion: {type: String},
     conteoLike: {type: Number, default: 0},
     conteoDisLike: {type: Number, default: 0},
     conteoComentarios: {type: Number, default: 0},

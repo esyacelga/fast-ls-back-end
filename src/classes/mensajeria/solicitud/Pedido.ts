@@ -1,6 +1,7 @@
 export class Pedido {
     _id: string = '';
     estado: number = 0;
+    fechaCreacion: Date = new Date();
     solicitudDetalle: PedidoDetalle[] = [];
     usuario: string = '';
     tipoUsuarioPersona: TipoUsuarioPersona = new TipoUsuarioPersona();

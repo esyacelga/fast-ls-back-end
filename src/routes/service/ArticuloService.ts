@@ -24,7 +24,6 @@ export const PaginarArticulos = async (req: Request, res: Response) => {
         .sort({_id: -1})
         .skip(skip)
         .limit(10)
-        //   .populate('usuario', '-password')
         .exec();
     res.json({
         ok: true,
@@ -42,6 +41,7 @@ export const ObtenerTodos = (req: Request, res: Response) => {
 }
 
 export const Registrar = (req: Request, res: Response) => {
+    console.log('Hola');
     if (req.body.articuloSegmento)
         req.body.img = fileSystem.imagenesDeTempHaciaPost(req.body.articuloSegmento);
     const data = {
@@ -49,6 +49,8 @@ export const Registrar = (req: Request, res: Response) => {
         unidadCosto: req.body.unidadCosto,
         unidadAlmacenada: req.body.unidadAlmacenada,
         descripcion: req.body.descripcion,
+        verObservacion: req.body.verObservacion,
+        obsevacion: req.body.obsevacion,
         estado: req.body.estado,
         esServicio: isNull(req.body.estado) ? false : req.body.esServicio,
         permiteComentarios: isNull(req.body.estado) ? false : req.body.permiteComentarios,
@@ -57,8 +59,6 @@ export const Registrar = (req: Request, res: Response) => {
         portada: null
     };
 
-    console.log('1111');
-    console.log(req.body.img);
     if (req.body.img) {
         if (Array.isArray(req.body.img) === true && req.body.img.length > 0) {
             data.portada = req.body.img[0];
@@ -70,7 +70,7 @@ export const Registrar = (req: Request, res: Response) => {
                 // @ts-ignore
                 data.img = req.body.img;
             }
-            if (Array.isArray(req.body.img) === false ) {
+            if (Array.isArray(req.body.img) === false) {
                 // @ts-ignore
                 data.portada = req.body.img;
                 // @ts-ignore
@@ -86,6 +86,7 @@ export const Registrar = (req: Request, res: Response) => {
 
 
 export const RegistrarArticulo = (req: Request, res: Response) => {
+    console.log('111');
     const data = {
         portada: null,
         articuloSegmento: req.body.articuloSegmento,
@@ -108,17 +109,23 @@ export const RegistrarArticulo = (req: Request, res: Response) => {
 
 export const Actualizar = async (req: Request, res: Response) => {
     // @ts-ignore
-    const imagen: string[] = fileSystem.imagenesDeTempHaciaPost(req.body.articuloSegmento);
+    let imagen: string[] = fileSystem.imagenesDeTempHaciaPost(req.body.articuloSegmento);
     const objArticulo: ArticuloDto = req.body as ArticuloDto;
-    console.log(imagen);
     const imagenCopia: ArticuloDto = (await Articulo.findOne().where('_id').equals(objArticulo._id)) as unknown as ArticuloDto;
 
+    if (Array.isArray(imagen) === true && imagen.length === 0) {
+        // @ts-ignore
+        imagen = null;
+    }
 
     if (imagen) {
         if (Array.isArray(imagen) === true && imagen.length > 0) {
             objArticulo.portada = imagen[0];
             objArticulo.img = imagen;
-        } else {
+        } else if (Array.isArray(imagen) === true && imagen.length === 0) {
+            objArticulo.portada = '';
+            objArticulo.img = imagen;
+        } else if (Array.isArray(imagen) === false) {
             // @ts-ignore
             objArticulo.portada = imagen;
             // @ts-ignore
@@ -128,9 +135,11 @@ export const Actualizar = async (req: Request, res: Response) => {
         objArticulo.portada = imagenCopia.portada;
         objArticulo.img = imagenCopia.img;
     }
-    console.log(objArticulo);
     Articulo.findByIdAndUpdate(req.body._id, objArticulo, {new: true}, (err, userDB) => {
-        res = util.responceGuardar(req, res, err, userDB);
+        if (userDB)
+            res = util.responceGuardar(req, res, null, userDB);
+        if (err)
+            res = util.responceGuardar(req, res, err, null);
     });
 };
 

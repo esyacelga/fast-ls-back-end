@@ -8,6 +8,8 @@ export class ArticuloDto {
     public estado: boolean = false;
     public fechaCreacion: Date = new Date();
     public portada: string = '';
+    public verObservacion: boolean = false;
+    public obsevacion: string = '';
     public esBanner: boolean = false;
     public conteoLike: Number = 0;
     public conteoDisLike: Number = 0;
