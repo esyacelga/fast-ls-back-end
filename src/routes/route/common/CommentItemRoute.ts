@@ -2,7 +2,8 @@ import {Router} from 'express';
 import {
     EliminarComentario,
     IngresarComentario,
-    ObtenerComentariosPorArticulo
+    ObtenerComentariosPorArticulo,
+    ObtenerTodosNotificaciones,
 } from "../../service/common/ItemCommentService";
 
 
@@ -15,10 +16,12 @@ const comentarioRoute = Router();
 comentarioRoute.post('/', IngresarComentario);
 
 
+comentarioRoute.put('/ObtenerTodosNotificaciones', ObtenerTodosNotificaciones);
+
+
 comentarioRoute.put('/eliminar', EliminarComentario);
 
 
 comentarioRoute.put('/obtenerTodos', ObtenerComentariosPorArticulo);
-
 
 export default comentarioRoute;

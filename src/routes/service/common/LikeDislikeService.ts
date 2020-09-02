@@ -2,9 +2,11 @@ import {Request, Response} from "express";
 import {CommonsMethods} from "../../../commons/CommonsMethods";
 import {LikeDislike} from "./class/LikeDislike";
 import {LikeDislikeModel} from "../../../models/common/LikeDislikeModel";
-import {ArticuloDto} from "../../../classes/mensajeria/ArticuloDto";
+import {ArticuloClass, ArticuloDto} from "../../../classes/mensajeria/ArticuloDto";
 import * as _ from 'underscore';
 import {Articulo} from "../../../models/mensajeria/ArticuloModel";
+import {NotificacionMensajeClass} from "../../../classes/common/NotificacionMensajeClass";
+import {NotificacionMensajeModel} from "../../../models/notificacion/notificacionMensaje.model";
 
 const util = new CommonsMethods();
 
@@ -18,6 +20,14 @@ export const IngresarLike = (req: Request, res: Response) => {
             result = (await LikeDislikeModel.findByIdAndUpdate(objeto._id, objetoLikeDislike) as unknown as LikeDislike);
         } else {
             result = (await LikeDislikeModel.create(objetoLikeDislike) as unknown as LikeDislike);
+        }
+        const objArticulo: ArticuloClass = (await Articulo.findOne().populate('articuloSegmento').where('_id').equals(result.articulo._id) as unknown as ArticuloClass);
+        if (result.like === true) {
+            const objNotificacion = new NotificacionMensajeClass(result.articulo, result.persona, 1, 'NULL', result.persona, true, false, objArticulo.articuloSegmento._id, objArticulo.articuloSegmento.descripcion);
+            NotificacionMensajeModel.create(objNotificacion);
+        } else {
+            const objNotificacion = new NotificacionMensajeClass(result.articulo, result.persona, 1, 'NULL', result.persona, false, true, objArticulo.articuloSegmento._id, objArticulo.articuloSegmento.descripcion);
+            NotificacionMensajeModel.create(objNotificacion);
         }
         const obj = await actualizarConteoLikeDislike(objetoLikeDislike.articulo);
         result.articulo = obj;

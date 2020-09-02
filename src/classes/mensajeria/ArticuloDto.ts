@@ -14,6 +14,17 @@ export class ArticuloDto {
     public conteoLike: Number = 0;
     public conteoDisLike: Number = 0;
     public conteoComentarios: Number = 0;
+}
 
+export class ArticuloClass {
+    public _id: string = '';
+    public descripcion: string = '';
+    public articuloSegmento: ArticuloSegmentoClass = new ArticuloSegmentoClass();
 
+}
+
+export class ArticuloSegmentoClass {
+    public _id: string = '';
+    public descripcion: string = '';
+    public estado: Number = 1;
 }
