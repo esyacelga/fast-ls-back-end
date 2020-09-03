@@ -34,10 +34,8 @@ class Mail {
 
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
-                console.log(error);
                 return error;
             } else {
-                console.log('Enviado');
                 return "E-mail enviado com sucesso!";
             }
         });

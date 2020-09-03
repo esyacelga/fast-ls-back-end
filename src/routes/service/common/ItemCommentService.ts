@@ -30,7 +30,7 @@ export const IngresarComentario = async (req: Request, res: Response) => {
 
 
 export const ObtenerTodosNotificaciones = async (req: Request, res: Response) => {
-    const lstNotificacion: NotificacionMensajeInterface [] = (await NotificacionMensajeModel.find().populate('articulo').populate('persona').populate('personaPrivado') as unknown as NotificacionMensajeInterface []);
+    const lstNotificacion: NotificacionMensajeInterface [] = (await NotificacionMensajeModel.find().populate('articulo').populate('persona').populate('personaPrivado').sort({created: -1}) as unknown as NotificacionMensajeInterface []);
     const lstNotificacionDto: NotificacionMensajeDto[] = [];
     for (const objNotificacion of lstNotificacion) {
         let mensajeTitulo = '';

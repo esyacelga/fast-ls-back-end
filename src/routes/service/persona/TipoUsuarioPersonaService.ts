@@ -33,7 +33,6 @@ export const ObtenerPorTipoUsuario = (req: Request, res: Response) => {
 }
 
 export const BuscarPersonaCorreo = async (req: Request, res: Response) => {
-    console.log(req.body.correo);
     const objPersona: PersonaDto = (await PersonaModeloPersistencia.findOne().where('correo').equals(req.body.correo)) as unknown as PersonaDto;
     const objTipoUsuario: ModeloTipoUsuario = (await TipoUsuario.findOne().where('codigo').equals('CLIENTE') as ModeloTipoUsuario);
     if (!objPersona) {
@@ -44,7 +43,6 @@ export const BuscarPersonaCorreo = async (req: Request, res: Response) => {
         .where('tipoUsuario').equals(objTipoUsuario._id)) as unknown as ModeloTipoUsuarioPersona[];
 
 
-    console.log(lstTipoUsuarioPersona);
     if (lstTipoUsuarioPersona.length > 0)
         return util.responceBuscar(req, res, null, lstTipoUsuarioPersona[0]);
     else
@@ -81,7 +79,6 @@ export const obtenerUsuariosNotificacion = async (tipoUsuario: string) => {
 
     // @ts-ignore
     const lstIpoUsuario = <[]>await obtenerTipoUsuarioPersona(objTipoUsuario._id);
-    console.log(lstIpoUsuario);
     if (!lstIpoUsuario)
         return [];
     // @ts-ignore
@@ -123,7 +120,6 @@ function actualizarUsuario(usuario: any, playerId: string) {
     usuario.playerId = playerId;
     Usuario.findByIdAndUpdate(usuario._id, usuario, {new: true}, (err, userDB) => {
         if (err) throw err;
-        console.log(userDB);
         return 0;
     });
 }

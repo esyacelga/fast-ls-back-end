@@ -6,6 +6,10 @@ import {NotificacionModel} from "../../../models/notificacion/notificacion.model
 import {TipoUsuarioPersona} from "../../../models/persona/TipoUsuarioPersonaModel";
 import {Notificador} from "../../../classes/notificacion/Notificador";
 import {ModeloTipoUsuarioPersona} from "../../../classes/persona/ModeloTipoUsuarioPersona";
+import {NotificacionMensajeClass} from "../../../classes/common/NotificacionMensajeClass";
+import {NotificacionMensajeModel} from "../../../models/notificacion/notificacionMensaje.model";
+import {ArticuloDto} from "../../../classes/mensajeria/ArticuloDto";
+import {PersonaDto} from "../../../classes/persona/Persona";
 
 const util = new CommonsMethods();
 /**
@@ -22,10 +26,10 @@ export const enviarNotificacion = async (req: Request, res: Response) => {
         grupoUsuarios: req.body.grupoUsuarios
     };
     const lstPlayer: string[] = await obtenerUsuariosNotificacion(data.grupoUsuarios);
-    console.log(lstPlayer);
-    console.log('lstPlayer');
     const notificacion = new EnvioNotificacion();
     notificacion.enviar(data.tittuloNotificacion, data.detalleNotificacion, lstPlayer, data.key, data.valor, '');
+    const objNotificacion = new NotificacionMensajeClass(new ArticuloDto(), new PersonaDto(), 3, 'NULL', new PersonaDto(), false, false, data.detalleNotificacion, '');
+    NotificacionMensajeModel.create(objNotificacion);
     res = util.responceBuscar(req, res, null, data);
 }
 

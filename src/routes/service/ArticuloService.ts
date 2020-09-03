@@ -41,7 +41,6 @@ export const ObtenerTodos = (req: Request, res: Response) => {
 }
 
 export const Registrar = (req: Request, res: Response) => {
-    console.log('Hola');
     if (req.body.articuloSegmento)
         req.body.img = fileSystem.imagenesDeTempHaciaPost(req.body.articuloSegmento);
     const data = {
@@ -86,7 +85,6 @@ export const Registrar = (req: Request, res: Response) => {
 
 
 export const RegistrarArticulo = (req: Request, res: Response) => {
-    console.log('111');
     const data = {
         portada: null,
         articuloSegmento: req.body.articuloSegmento,

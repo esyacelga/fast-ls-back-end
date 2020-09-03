@@ -5,10 +5,9 @@ import {ArticuloSegmento} from "../../models/mensajeria/ArticuloSegmentoModel";
 const util = new CommonsMethods();
 
 export const ObtenerTodosArticuloSegmento = (req: Request, res: Response) => {
-    var body = req.body;
     ArticuloSegmento.find({}, (error, objeto) => {
         res = util.responceBuscar(req, res, error, objeto);
-    }).where('estado').equals(1);
+    }).populate('tipoArticulo').where('estado').equals(1);
 }
 
 

@@ -32,13 +32,11 @@ export class EnvioNotificacion {
         var https = require('https');
         var req = https.request(options, function (res: any) {
             res.on('data', function (data: any) {
-                console.log("Response:");
                 console.log(JSON.parse(data));
             });
         });
 
         req.on('error', function (e: any) {
-            console.error("ERROR:");
             console.error(e);
         });
 
