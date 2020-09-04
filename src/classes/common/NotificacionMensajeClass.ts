@@ -14,6 +14,7 @@ export interface NotificacionMensajeInterface {
     like: boolean;
     dislike: boolean;
     nombreSegmento: string;
+    playerId: string;
 }
 
 export class NotificacionMensajeClass {
@@ -21,29 +22,39 @@ export class NotificacionMensajeClass {
     public tipoNotificacion: number;
     public created: Date;
     public persona: PersonaDto;
-    public personaPrivado: PersonaDto;
     public articulo: ArticuloDto;
     public mensaje: string;
     public like: boolean;
     public dislike: boolean;
     public idSegmento: string;
     public nombreSegmento: string;
+    public playerId: string;
 
 
     constructor(articulo: ArticuloDto, persona: PersonaDto, tipoNotificacion: number, mensaje: string,
-                personaPrivado: PersonaDto, like: boolean, dislike: boolean, idSegmento: string, nombreSegmento: string) {
+                like: boolean, dislike: boolean, idSegmento: string,
+                nombreSegmento: string, playerId: string) {
         this.mensaje = mensaje;
         this.persona = persona;
         this.articulo = articulo;
         this.tipoNotificacion = tipoNotificacion;
         this.estado = true;
         this.created = new Date();
-        this.personaPrivado = personaPrivado;
         this.like = like;
         this.dislike = dislike;
         this.idSegmento = idSegmento;
         this.nombreSegmento = nombreSegmento;
+        this.playerId = playerId;
     }
+}
+
+export interface DtoNotificacion {
+    tipoNotificacion: Number,
+    estado: Boolean,
+    mensaje: String,
+    idSegmento: String,
+    nombreSegmento: String,
+    created: Date
 }
 
 
@@ -53,26 +64,26 @@ export class NotificacionMensajeDto {
     public picture: string;
     public titulo: string;
     public mensaje: string;
-    public idPersona: string;
+    public playerId: string;
     public tipoNotificacon: number;
     public portada: string;
     public idSegmento: string;
-    public nombreSegmentro: string;
+    public nombreSegmento: string;
     public like: boolean;
 
     constructor(id: string, displayName: string, picture: string, titulo: string, mensaje: string,
-                idPersona: string, tipoNotificacon: number, portada: string,
-                idSegmento: string, nombreSegmentro: string, like: boolean) {
+                playerId: string, tipoNotificacon: number, portada: string,
+                idSegmento: string, nombreSegmento: string, like: boolean) {
         this._id = id;
         this.displayName = displayName;
         this.picture = picture;
         this.titulo = titulo;
         this.mensaje = mensaje;
-        this.idPersona = idPersona;
+        this.playerId = playerId;
         this.tipoNotificacon = tipoNotificacon;
         this.portada = portada;
         this.idSegmento = idSegmento;
-        this.nombreSegmentro = nombreSegmentro;
+        this.nombreSegmento = nombreSegmento;
         this.like = like;
     }
 }

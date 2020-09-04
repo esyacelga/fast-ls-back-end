@@ -5,7 +5,6 @@ import {TipoUsuario} from "../../../models/persona/TipoUsuarioModel";
 const util = new CommonsMethods();
 
 export const ObtenerTodos = (req: Request, res: Response) => {
-    var body = req.body;
     TipoUsuario.find({}, (error, objeto) => {
         res = util.responceBuscar(req, res, error, objeto);
     }).where('estado').equals(1);
@@ -33,7 +32,6 @@ export const ObtenerUsuarios = () => {
 }
 
 export const Registrar = (req: Request, res: Response) => {
-    console.log('*11*');
     const data = {
         codigo: req.body.codigo.toUpperCase(),
         descripcion: req.body.descripcion.toUpperCase(),

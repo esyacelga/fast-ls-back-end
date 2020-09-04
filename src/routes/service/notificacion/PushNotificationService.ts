@@ -6,10 +6,8 @@ import {NotificacionModel} from "../../../models/notificacion/notificacion.model
 import {TipoUsuarioPersona} from "../../../models/persona/TipoUsuarioPersonaModel";
 import {Notificador} from "../../../classes/notificacion/Notificador";
 import {ModeloTipoUsuarioPersona} from "../../../classes/persona/ModeloTipoUsuarioPersona";
-import {NotificacionMensajeClass} from "../../../classes/common/NotificacionMensajeClass";
+import {DtoNotificacion, NotificacionMensajeClass} from "../../../classes/common/NotificacionMensajeClass";
 import {NotificacionMensajeModel} from "../../../models/notificacion/notificacionMensaje.model";
-import {ArticuloDto} from "../../../classes/mensajeria/ArticuloDto";
-import {PersonaDto} from "../../../classes/persona/Persona";
 
 const util = new CommonsMethods();
 /**
@@ -28,9 +26,7 @@ export const enviarNotificacion = async (req: Request, res: Response) => {
     const lstPlayer: string[] = await obtenerUsuariosNotificacion(data.grupoUsuarios);
     const notificacion = new EnvioNotificacion();
     notificacion.enviar(data.tittuloNotificacion, data.detalleNotificacion, lstPlayer, data.key, data.valor, '');
-    const objNotificacion = new NotificacionMensajeClass(new ArticuloDto(), new PersonaDto(), 3, 'NULL', new PersonaDto(), false, false, data.detalleNotificacion, '');
-    NotificacionMensajeModel.create(objNotificacion);
-    res = util.responceBuscar(req, res, null, data);
+    return util.responceBuscar(req, res, null, data);
 }
 
 export const obtenerTodos = (req: Request, res: Response) => {
@@ -55,6 +51,15 @@ export const enviarNotificacionMasiva = async (req: Request, res: Response) => {
             lstPlayerId.push(dato.usuario.playerId);
         }
     }
+    let obj: DtoNotificacion = {
+        created: new Date(),
+        tipoNotificacion: 2,
+        idSegmento: notificador.titulo,
+        mensaje: notificador.mensajeTitulo,
+        nombreSegmento: notificador.keyPayload,
+        estado: true
+    };
+    NotificacionMensajeModel.create(obj);
     NotificacionModel.findByIdAndUpdate(req.body._id, {estado: 2}, {new: true}, (err, userDB) => {
         res = util.responceCrear(req, res, err, userDB);
         notificacion.enviar(notificador.titulo, notificador.mensajeTitulo, lstPlayerId, notificador.key, notificador.keyPayload, '');
@@ -77,6 +82,22 @@ export const registrarNotificacion = async (req: Request, res: Response) => {
     });
 }
 
+export const registrarNotificacionSimple = async (req: Request, res: Response) => {
+    const data: NotificacionMensajeClass = req.body as NotificacionMensajeClass;
+    const resultado: NotificacionMensajeClass = (await NotificacionMensajeModel.create(data)) as unknown as NotificacionMensajeClass;
+    util.responceCrear(req, res, null, resultado);
+}
+
+
+export const enviarNotificacionSimple = async (req: Request, res: Response) => {
+    const lstPlayerId: string[] = [];
+    const notificacion = new EnvioNotificacion();
+    const data: NotificacionMensajeClass = req.body as NotificacionMensajeClass;
+    lstPlayerId.push(data.playerId);
+    notificacion.enviar(data.idSegmento, data.mensaje, lstPlayerId, 'INDIVIDUAL', data.nombreSegmento, '');
+    util.responceCrear(req, res, null, notificacion);
+}
+
 export const actualizarNotificacion = async (req: Request, res: Response) => {
     const data = {
         titulo: req.body.titulo,
@@ -87,7 +108,6 @@ export const actualizarNotificacion = async (req: Request, res: Response) => {
         estado: req.body.estado,
         created: new Date()
     };
-    console.log(data);
     NotificacionModel.findByIdAndUpdate(req.body._id, data, {new: true}, (err, userDB) => {
         res = util.responceCrear(req, res, err, userDB);
     });

@@ -27,7 +27,6 @@ export const ObtenerPorPersona = (req: Request, res: Response) => {
 
 export const ObtenerPorTipoUsuario = (req: Request, res: Response) => {
     TipoUsuarioPersona.find({}, (error, objeto) => {
-        console.log('Esto es el objeto...', objeto);
         res = util.responceBuscar(req, res, error, objeto);
     }).populate('persona').populate('tipoUsuario').populate('usuario').where('tipoUsuario').equals(req.body.tipoUsuario);
 }
@@ -41,8 +40,6 @@ export const BuscarPersonaCorreo = async (req: Request, res: Response) => {
     const lstTipoUsuarioPersona: ModeloTipoUsuarioPersona[] = (await TipoUsuarioPersona.find().populate('tipoUsuario').populate('persona').populate('usuario')
         .where('persona').equals(objPersona._id)
         .where('tipoUsuario').equals(objTipoUsuario._id)) as unknown as ModeloTipoUsuarioPersona[];
-
-
     if (lstTipoUsuarioPersona.length > 0)
         return util.responceBuscar(req, res, null, lstTipoUsuarioPersona[0]);
     else

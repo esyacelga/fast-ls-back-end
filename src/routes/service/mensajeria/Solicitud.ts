@@ -55,13 +55,14 @@ export const obtenerCabecera = async (estado: number) => {
     const promesa = new Promise(async (resolve: any, reject: any) => {
         SolicitudCabecera.find({}, async (error, lstPedido: Pedido[]) => {
             let lstAuxiliar: Pedido[] = lstPedido;
-            for (let it of lstAuxiliar) {
-                for (let ita of it.solicitudDetalle) {
-                    // @ts-ignore
-                    ita.articulo = await Articulo.findOne().where('_id').equals(ita.articulo._id);
+            if (lstAuxiliar)
+                for (let it of lstAuxiliar) {
+                    for (let ita of it.solicitudDetalle) {
+                        // @ts-ignore
+                        ita.articulo = await Articulo.findOne().where('_id').equals(ita.articulo._id);
+                    }
+                    it.usuario = 'hola......77712123234.............';
                 }
-                it.usuario = 'hola......77712123234.............';
-            }
             resolve(lstAuxiliar);
         }).populate({
             path: 'solicitudDetalle',

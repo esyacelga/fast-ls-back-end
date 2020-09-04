@@ -15,7 +15,7 @@ const notificacionModel = new Schema({
     keyPayload: {
         type: String
     },
-    tipoUsuario: {required: [true, 'El estado es necesario'], type: Schema.Types.ObjectId, ref: 'TipoUsuario'},
+    tipoUsuario: {required: [true, 'El segmentdo de usuarios a los que la notificación se enviará es necesaria especificarla'], type: Schema.Types.ObjectId, ref: 'TipoUsuario'},
     estado: {
         type: Number,
         required: [true, 'El titulo notificacion es necesario']

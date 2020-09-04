@@ -21,8 +21,8 @@ export const IngresarComentario = async (req: Request, res: Response) => {
     const objArticulo: ArticuloClass = (await Articulo.findOne().populate('articuloSegmento').where('_id').equals(objComentario._id) as unknown as ArticuloClass);
     const objNotificacion = new NotificacionMensajeClass(
         result.articulo, result.persona, 0,
-        result.comentario, result.persona, false, false,
-        objArticulo.articuloSegmento._id, objArticulo.articuloSegmento.descripcion);
+        result.comentario, false, false,
+        objArticulo.articuloSegmento._id, objArticulo.articuloSegmento.descripcion, '');
     NotificacionMensajeModel.create(objNotificacion);
     result.articulo = objComentario;
     return util.responceCrear(req, res, null, result);
@@ -32,6 +32,9 @@ export const IngresarComentario = async (req: Request, res: Response) => {
 export const ObtenerTodosNotificaciones = async (req: Request, res: Response) => {
     const lstNotificacion: NotificacionMensajeInterface [] = (await NotificacionMensajeModel.find().populate('articulo').populate('persona').populate('personaPrivado').sort({created: -1}) as unknown as NotificacionMensajeInterface []);
     const lstNotificacionDto: NotificacionMensajeDto[] = [];
+    let displayName = '';
+    let picture = '';
+    let portada = '';
     for (const objNotificacion of lstNotificacion) {
         let mensajeTitulo = '';
         if (objNotificacion.tipoNotificacion === 0)
@@ -48,10 +51,25 @@ export const ObtenerTodosNotificaciones = async (req: Request, res: Response) =>
             estadoExperiencia = false;
         }
 
+        if (objNotificacion.persona && objNotificacion.persona.displayName) {
+            // @ts-ignore
+            displayName = objNotificacion.persona.displayName;
+        }
+
+        if (objNotificacion.persona && objNotificacion.persona.picture) {
+            // @ts-ignore
+            picture = objNotificacion.persona.picture;
+        }
+
+        if (objNotificacion.articulo && objNotificacion.articulo.portada) {
+            // @ts-ignore
+            portada = objNotificacion.articulo.portada;
+        }
+
         const notificacion: NotificacionMensajeDto = new NotificacionMensajeDto(objNotificacion._id,
-            objNotificacion.persona.displayName, objNotificacion.persona.picture, mensajeTitulo,
-            objNotificacion.mensaje, objNotificacion.personaPrivado._id, objNotificacion.tipoNotificacion,
-            objNotificacion.articulo.portada, objNotificacion.idSegmento, objNotificacion.nombreSegmento, estadoExperiencia);
+            displayName, picture, mensajeTitulo,
+            objNotificacion.mensaje, objNotificacion.playerId, objNotificacion.tipoNotificacion,
+            portada, objNotificacion.idSegmento, objNotificacion.nombreSegmento, estadoExperiencia);
         lstNotificacionDto.push(notificacion);
     }
     return util.responceBuscar(req, res, null, lstNotificacionDto);

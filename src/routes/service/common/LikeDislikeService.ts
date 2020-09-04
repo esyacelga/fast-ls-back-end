@@ -23,10 +23,10 @@ export const IngresarLike = (req: Request, res: Response) => {
         }
         const objArticulo: ArticuloClass = (await Articulo.findOne().populate('articuloSegmento').where('_id').equals(result.articulo._id) as unknown as ArticuloClass);
         if (result.like === true) {
-            const objNotificacion = new NotificacionMensajeClass(result.articulo, result.persona, 1, 'NULL', result.persona, true, false, objArticulo.articuloSegmento._id, objArticulo.articuloSegmento.descripcion);
+            const objNotificacion = new NotificacionMensajeClass(result.articulo, result.persona, 1, 'NULL', true, false, objArticulo.articuloSegmento._id, objArticulo.articuloSegmento.descripcion, '');
             NotificacionMensajeModel.create(objNotificacion);
         } else {
-            const objNotificacion = new NotificacionMensajeClass(result.articulo, result.persona, 1, 'NULL', result.persona, false, true, objArticulo.articuloSegmento._id, objArticulo.articuloSegmento.descripcion);
+            const objNotificacion = new NotificacionMensajeClass(result.articulo, result.persona, 1, 'NULL', false, true, objArticulo.articuloSegmento._id, objArticulo.articuloSegmento.descripcion, '');
             NotificacionMensajeModel.create(objNotificacion);
         }
         const obj = await actualizarConteoLikeDislike(objetoLikeDislike.articulo);

@@ -3,11 +3,6 @@ import {model, Schema} from 'mongoose';
 const notificacionMensajeModel = new Schema({
     articulo: {type: Schema.Types.ObjectId, ref: 'Articulo'},
     persona: {
-        required: [true, 'El estado es necesario'],
-        type: Schema.Types.ObjectId,
-        ref: 'PersonaModeloPersistencia'
-    },
-    personaPrivado: {
         type: Schema.Types.ObjectId,
         ref: 'PersonaModeloPersistencia'
     },
@@ -27,6 +22,9 @@ const notificacionMensajeModel = new Schema({
     },
     like: {
         type: Boolean,
+    },
+    playerId: {
+        type: String,
     },
     dislike: {
         type: Boolean,
