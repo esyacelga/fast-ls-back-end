@@ -22,7 +22,8 @@ export const IngresarComentario = async (req: Request, res: Response) => {
     const objNotificacion = new NotificacionMensajeClass(
         result.articulo, result.persona, 0,
         result.comentario, false, false,
-        objArticulo.articuloSegmento._id, objArticulo.articuloSegmento.descripcion, '');
+        objArticulo.articuloSegmento._id,
+        objArticulo.articuloSegmento.descripcion, '', objArticulo.articuloSegmento.esServicio);
     NotificacionMensajeModel.create(objNotificacion);
     result.articulo = objComentario;
     return util.responceCrear(req, res, null, result);
@@ -42,12 +43,12 @@ export const ObtenerTodosNotificaciones = async (req: Request, res: Response) =>
 
         let estadoExperiencia: boolean = false;
         if (objNotificacion.tipoNotificacion === 1 && objNotificacion.like) {
-            mensajeTitulo = ' indica que tubo una experiencia positiva';
+            mensajeTitulo = ' le gustó el segmento';
             estadoExperiencia = true;
         }
 
         if (objNotificacion.tipoNotificacion === 1 && objNotificacion.dislike) {
-            mensajeTitulo = ' indica que tubo una experiencia negativa  ';
+            mensajeTitulo = ' no le gustó el segmeto ';
             estadoExperiencia = false;
         }
 
@@ -69,7 +70,7 @@ export const ObtenerTodosNotificaciones = async (req: Request, res: Response) =>
         const notificacion: NotificacionMensajeDto = new NotificacionMensajeDto(objNotificacion._id,
             displayName, picture, mensajeTitulo,
             objNotificacion.mensaje, objNotificacion.playerId, objNotificacion.tipoNotificacion,
-            portada, objNotificacion.idSegmento, objNotificacion.nombreSegmento, estadoExperiencia);
+            portada, objNotificacion.idSegmento, objNotificacion.nombreSegmento, estadoExperiencia, objNotificacion.esServicio);
         lstNotificacionDto.push(notificacion);
     }
     return util.responceBuscar(req, res, null, lstNotificacionDto);

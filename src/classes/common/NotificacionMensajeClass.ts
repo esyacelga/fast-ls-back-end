@@ -15,6 +15,7 @@ export interface NotificacionMensajeInterface {
     dislike: boolean;
     nombreSegmento: string;
     playerId: string;
+    esServicio: boolean;
 }
 
 export class NotificacionMensajeClass {
@@ -29,11 +30,12 @@ export class NotificacionMensajeClass {
     public idSegmento: string;
     public nombreSegmento: string;
     public playerId: string;
+    public esServicio: boolean;
 
 
     constructor(articulo: ArticuloDto, persona: PersonaDto, tipoNotificacion: number, mensaje: string,
                 like: boolean, dislike: boolean, idSegmento: string,
-                nombreSegmento: string, playerId: string) {
+                nombreSegmento: string, playerId: string, esServicio: boolean) {
         this.mensaje = mensaje;
         this.persona = persona;
         this.articulo = articulo;
@@ -45,6 +47,7 @@ export class NotificacionMensajeClass {
         this.idSegmento = idSegmento;
         this.nombreSegmento = nombreSegmento;
         this.playerId = playerId;
+        this.esServicio = esServicio;
     }
 }
 
@@ -70,10 +73,12 @@ export class NotificacionMensajeDto {
     public idSegmento: string;
     public nombreSegmento: string;
     public like: boolean;
+    public esServicio: boolean;
+
 
     constructor(id: string, displayName: string, picture: string, titulo: string, mensaje: string,
                 playerId: string, tipoNotificacon: number, portada: string,
-                idSegmento: string, nombreSegmento: string, like: boolean) {
+                idSegmento: string, nombreSegmento: string, like: boolean, esServicio: boolean) {
         this._id = id;
         this.displayName = displayName;
         this.picture = picture;
@@ -85,5 +90,6 @@ export class NotificacionMensajeDto {
         this.idSegmento = idSegmento;
         this.nombreSegmento = nombreSegmento;
         this.like = like;
+        this.esServicio = esServicio;
     }
 }

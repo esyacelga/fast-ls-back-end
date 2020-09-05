@@ -1,6 +1,7 @@
 import {CommonsMethods} from "../../commons/CommonsMethods";
 import {Request, Response} from "express";
 import {ArticuloSegmento} from "../../models/mensajeria/ArticuloSegmentoModel";
+import {ArticuloSegmentoInterface} from "../../classes/interface/inventario/ArticuloSegmentoInterface";
 
 const util = new CommonsMethods();
 
@@ -20,23 +21,15 @@ export const ObtenerSegmentoPortTipoArticulo = (req: Request, res: Response) => 
 
 
 export const RegistrarArticuloSegmento = (req: Request, res: Response) => {
-    const data = {
-        tipoArticulo: req.body.tipoArticulo,
-        descripcion: req.body.descripcion,
-        estado: req.body.estado
-    };
+    const data: ArticuloSegmentoInterface = req.body as ArticuloSegmentoInterface;
     ArticuloSegmento.create(data, (err: any, objeto: any) => {
         res = util.responceCrear(req, res, err, objeto);
     });
 }
 
 export const ActualizarArticuloSegmento = (req: Request, res: Response) => {
-    const tipoArt = {
-        tipoArticulo: req.body.tipoArticulo,
-        descripcion: req.body.descripcion,
-        estado: req.body.estado,
-    }
-    ArticuloSegmento.findByIdAndUpdate(req.body._id, tipoArt, {new: true}, (err, userDB) => {
+    const data: ArticuloSegmentoInterface = req.body as ArticuloSegmentoInterface;
+    ArticuloSegmento.findByIdAndUpdate(req.body._id, data, {new: true}, (err, userDB) => {
         res = util.responceGuardar(req, res, err, userDB);
     });
 };

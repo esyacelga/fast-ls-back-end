@@ -32,6 +32,9 @@ const notificacionMensajeModel = new Schema({
     created: {
         type: Date
     },
+    esServicio: {
+        type: Boolean
+    },
 });
 
 
