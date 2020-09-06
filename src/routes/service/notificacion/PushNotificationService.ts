@@ -25,7 +25,7 @@ export const enviarNotificacion = async (req: Request, res: Response) => {
     };
     const lstPlayer: string[] = await obtenerUsuariosNotificacion(data.grupoUsuarios);
     const notificacion = new EnvioNotificacion();
-    notificacion.enviar(data.tittuloNotificacion, data.detalleNotificacion, lstPlayer, data.key, data.valor, '');
+    notificacion.enviar(data.tittuloNotificacion, data.detalleNotificacion, lstPlayer, 'ruta', data.valor, 'main/tabs/config');
     return util.responceBuscar(req, res, null, data);
 }
 
@@ -62,7 +62,7 @@ export const enviarNotificacionMasiva = async (req: Request, res: Response) => {
     NotificacionMensajeModel.create(obj);
     NotificacionModel.findByIdAndUpdate(req.body._id, {estado: 2}, {new: true}, (err, userDB) => {
         res = util.responceCrear(req, res, err, userDB);
-        notificacion.enviar(notificador.titulo, notificador.mensajeTitulo, lstPlayerId, notificador.key, notificador.keyPayload, '');
+        notificacion.enviar(notificador.titulo, notificador.mensajeTitulo, lstPlayerId, 'ruta', notificador.keyPayload, 'main/tabs/config');
     });
     return res;
 }
@@ -94,7 +94,7 @@ export const enviarNotificacionSimple = async (req: Request, res: Response) => {
     const notificacion = new EnvioNotificacion();
     const data: NotificacionMensajeClass = req.body as NotificacionMensajeClass;
     lstPlayerId.push(data.playerId);
-    notificacion.enviar(data.idSegmento, data.mensaje, lstPlayerId, 'INDIVIDUAL', data.nombreSegmento, '');
+    notificacion.enviar(data.idSegmento, data.mensaje, lstPlayerId, 'ruta', data.nombreSegmento, 'main/tabs/config');
     util.responceCrear(req, res, null, notificacion);
 }
 
