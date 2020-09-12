@@ -24,6 +24,7 @@ import estadoRutaRoute from "./routes/route/ruta/EstadoRutaRoute";
 import articuloSegmentoRoute from "./routes/ArticuloSegmentoRoute";
 import disponibilidadRoute from "./routes/route/ruta/DisponibilidadRoute";
 import tipoUsuarioPersonaRoute from "./routes/route/persona/TipoUsuarioPersonaRoute";
+import parametroRoute from "./routes/route/common/parametroRoute";
 
 const server = new Server();
 
@@ -47,6 +48,7 @@ server.app.use('/usuario', usuarioRoute);
 server.app.use('/persona', personaRoute);
 server.app.use('/articulo', articuloRoute);
 server.app.use('/solicitud', solcitudRoute);
+server.app.use('/parametro', parametroRoute);
 server.app.use('/tipoArticulo', tipoArticulo);
 server.app.use('/commentario', comentarioRoute);
 server.app.use('/likeDislike', likeDislikeRoute);

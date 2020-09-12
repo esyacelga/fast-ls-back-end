@@ -6,6 +6,11 @@ import {SolicitudCabeceraDto, SolicitudClass} from "./class/SolicitudClass";
 import {Pedido} from "../../../classes/mensajeria/solicitud/Pedido";
 import {Articulo} from "../../../models/mensajeria/ArticuloModel";
 import {ModeloUsuario} from "../../../classes/persona/ModeloTipoUsuarioPersona";
+import {TipoUsuarioPersona} from "../../../models/persona/TipoUsuarioPersonaModel";
+import {TipoUsuario} from "../../../models/persona/TipoUsuarioModel";
+import {TipoUsuarioInterface} from "../../../classes/interface/persona/TipoUsuarioInterface";
+import {PedidoInterface} from "../../../classes/interface/mensajeria/PedidoInterface";
+import {TipoUsuarioPersonaInterface} from "../../../classes/interface/persona/TipoUsuarioPersonaInterface";
 
 const util = new CommonsMethods();
 
@@ -32,7 +37,7 @@ export const Registrar = (req: Request, res: Response) => {
 }
 export const obtenerPedidos = async (req: Request, res: Response) => {
     const lstCab: Pedido[] = (await obtenerCabecera(1)) as Pedido[];
-    res = util.responceCrear(req, res, null, lstCab);
+    return util.responceBuscar(req, res, null, lstCab);
 }
 
 /**
@@ -61,7 +66,7 @@ export const obtenerCabecera = async (estado: number) => {
                         // @ts-ignore
                         ita.articulo = await Articulo.findOne().where('_id').equals(ita.articulo._id);
                     }
-                    it.usuario = 'hola......77712123234.............';
+                    it.usuario = '';
                 }
             resolve(lstAuxiliar);
         }).populate({
@@ -73,6 +78,61 @@ export const obtenerCabecera = async (estado: number) => {
     })
 
     return promesa;
+}
+
+export const setearTipoUsuarioPesona = (lstPedido: PedidoInterface[], lstTipoUsuarioPersona: TipoUsuarioPersonaInterface[]) => {
+    const lstNewPedido: PedidoInterface[] = [];
+    for (const pedido of lstPedido) {
+        for (const tipoUsuarioPersona of lstTipoUsuarioPersona) {
+            const valorIncial = tipoUsuarioPersona.usuario._id;
+            const valorFinal = pedido.usuario._id;
+            if (new String(valorIncial).valueOf() == new String(valorFinal).valueOf()) {
+                let datoPedido:PedidoInterface ={
+                    tipoUsuarioPersona: tipoUsuarioPersona,
+                    usuario:pedido.usuario,
+                    _id:pedido._id,
+                    estado:pedido.estado,
+                    fechaCreacion:pedido.fechaCreacion,
+                    solicitudDetalle:pedido.solicitudDetalle
+                }
+                lstNewPedido.push(datoPedido)
+            }
+
+        }
+    }
+    return lstNewPedido
+}
+
+export const obtenerPedidoPorEstado = async (req: Request, res: Response) => {
+    let lstPedido: PedidoInterface[] = (await SolicitudCabecera.find().populate('solicitudDetalle').populate('usuario').where('estado').equals(req.body.estado).sort({fechaCreacion: -1})) as unknown as PedidoInterface[];
+    const tipoUsuario: TipoUsuarioInterface = (await TipoUsuario.findOne().where('codigo').equals('CLIENTE').where('estado').equals(1)) as unknown as TipoUsuarioInterface;
+    const lstTipoUsuarioPersona: TipoUsuarioPersonaInterface[] = (await TipoUsuarioPersona.find().populate('usuario').populate('persona').where('tipoUsuario').equals(tipoUsuario._id).where('estado').equals(1)) as unknown as TipoUsuarioPersonaInterface[];
+    lstPedido = setearTipoUsuarioPesona(lstPedido, lstTipoUsuarioPersona);
+    return res = util.responceBuscar(req, res, null, lstPedido);
+    //console.log(lstPedido);
+    //return util.responceBuscar(req, res, null, lstPedido);
+    /*    const promesa = new Promise(async (resolve: any, reject: any) => {
+            SolicitudCabecera.find({estado: req.body.estado}, async (error, lstPedido: Pedido[]) => {
+                /!*           let lstAuxiliar: Pedido[] = lstPedido;
+                           if (lstAuxiliar)
+                               for (let it of lstAuxiliar) {
+                                   console.log(it);
+                                   for (let ita of it.solicitudDetalle) {
+                                       // @ts-ignore
+                                       ita.articulo = await Articulo.findOne().where('_id').equals(ita.articulo._id);
+                                   }
+                                   it.usuario = '';
+                               }
+                           resolve(lstAuxiliar);
+                       }).populate({
+                           path: 'solicitudDetalle',
+                           populate: {
+                               path: 'solicitudDetalle'
+                           }*!/
+            }).where('estado').equals(req.body.estado).sort({fechaCreacion: -1})
+        })*/
+
+    //return promesa;
 }
 
 

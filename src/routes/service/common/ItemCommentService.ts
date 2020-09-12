@@ -43,12 +43,12 @@ export const ObtenerTodosNotificaciones = async (req: Request, res: Response) =>
 
         let estadoExperiencia: boolean = false;
         if (objNotificacion.tipoNotificacion === 1 && objNotificacion.like) {
-            mensajeTitulo = ' le gustó el segmento';
+            mensajeTitulo = ' recomienda';
             estadoExperiencia = true;
         }
 
         if (objNotificacion.tipoNotificacion === 1 && objNotificacion.dislike) {
-            mensajeTitulo = ' no le gustó el segmeto ';
+            mensajeTitulo = ' no recomienda ';
             estadoExperiencia = false;
         }
 

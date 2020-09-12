@@ -1,3 +1,5 @@
+import {ModeloUsuario} from "../../persona/ModeloTipoUsuarioPersona";
+
 export class Pedido {
     _id: string = '';
     estado: number = 0;
@@ -10,6 +12,7 @@ export class Pedido {
 export class TipoUsuarioPersona {
     _id: string = '';
     persona: Persona = new Persona();
+    usuario: ModeloUsuario = new ModeloUsuario();
 }
 
 export class Persona {
