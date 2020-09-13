@@ -4,6 +4,7 @@ import {Articulo} from "../../models/mensajeria/ArticuloModel";
 import FileSystem from "../../classes/file-system";
 import {isNull} from "util";
 import {ArticuloDto} from "../../classes/mensajeria/ArticuloDto";
+import {ArticuloInterface} from "../../classes/interface/inventario/ArticuloInterface";
 
 const util = new CommonsMethods();
 const fileSystem = new FileSystem();
@@ -106,9 +107,15 @@ export const RegistrarArticulo = (req: Request, res: Response) => {
 
 
 export const Actualizar = async (req: Request, res: Response) => {
+    let objArticulo: ArticuloInterface = req.body as ArticuloInterface;
+    console.log(objArticulo);
+    if (objArticulo.estado === 0) {
+        objArticulo = (await Articulo.findByIdAndUpdate(objArticulo._id, objArticulo)) as unknown as ArticuloInterface
+        return util.responceActualizar(req, res, null, objArticulo);
+    }
+
     // @ts-ignore
     let imagen: string[] = fileSystem.imagenesDeTempHaciaPost(req.body.articuloSegmento);
-    const objArticulo: ArticuloDto = req.body as ArticuloDto;
     const imagenCopia: ArticuloDto = (await Articulo.findOne().where('_id').equals(objArticulo._id)) as unknown as ArticuloDto;
 
     if (Array.isArray(imagen) === true && imagen.length === 0) {

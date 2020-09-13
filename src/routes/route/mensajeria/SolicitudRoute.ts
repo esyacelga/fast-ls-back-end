@@ -1,8 +1,10 @@
 import {Router} from 'express';
 import {
-    actualizarSolicitud, obtenerPedidoPorEstado,
+    actualizarSolicitud,
+    obtenerPedidoPorEstado,
     obtenerPedidoPorUsuario,
     obtenerPedidos,
+    obtenerPedidoUsuario,
     Registrar
 } from "../../service/mensajeria/Solicitud";
 
@@ -19,6 +21,8 @@ solcitudRoute.put('/obtenerPedidos', obtenerPedidos);
 
 
 solcitudRoute.put('/obtenerPedidoPorEstado', obtenerPedidoPorEstado);
+
+solcitudRoute.put('/obtenerPedidoUsuario', obtenerPedidoUsuario);
 
 
 solcitudRoute.put('/obtenerPedidoPorUsuario', obtenerPedidoPorUsuario);

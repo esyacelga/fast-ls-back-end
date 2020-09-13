@@ -1,5 +1,10 @@
 import {Router} from 'express';
-import {actualizaParametro, crearParametro, obtenerTodos} from "../../service/common/ParametroService";
+import {
+    actualizaParametro,
+    crearParametro,
+    obtenerParametroPorCodigo,
+    obtenerTodos
+} from "../../service/common/ParametroService";
 
 const parametroRoute = Router();
 
@@ -9,11 +14,11 @@ const parametroRoute = Router();
  */
 parametroRoute.post('/', crearParametro);
 
-
-parametroRoute.put('/actualizaParametro', actualizaParametro);
-
+parametroRoute.put('/', actualizaParametro);
 
 parametroRoute.put('/obtenerTodos', obtenerTodos);
+
+parametroRoute.put('/obtenerParametroPorCodigo', obtenerParametroPorCodigo);
 
 
 export default parametroRoute;

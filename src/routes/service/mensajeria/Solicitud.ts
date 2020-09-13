@@ -154,6 +154,20 @@ export const obtenerPedidoPorEstado = async (req: Request, res: Response) => {
     return util.responceBuscar(req, res, null, lstPedido);
 }
 
+export const obtenerPedidoUsuario = async (req: Request, res: Response) => {
+    let lstPedido: PedidoInterface[] = (await SolicitudCabecera.find().populate('solicitudDetalle').populate('usuario')
+        .where('estado').equals(2)
+        .where('usuario').equals(req.body.usuario)
+        .sort({fechaCreacion: -1})) as unknown as PedidoInterface[];
+    const lstNumberString: string[] = obtenerKeyDetalle(lstPedido);
+    const lstDetalle: PedidoDetalleInterface[] = (await SolicitudDetalle.find().populate('articulo').where('_id').in(lstNumberString)) as unknown as PedidoDetalleInterface[];
+    lstPedido = setearDetalle(lstPedido, lstDetalle);
+    const tipoUsuario: TipoUsuarioInterface = (await TipoUsuario.findOne().where('codigo').equals('CLIENTE').where('estado').equals(1)) as unknown as TipoUsuarioInterface;
+    const lstTipoUsuarioPersona: TipoUsuarioPersonaInterface[] = (await TipoUsuarioPersona.find().populate('usuario').populate('persona').where('tipoUsuario').equals(tipoUsuario._id).where('estado').equals(1)) as unknown as TipoUsuarioPersonaInterface[];
+    lstPedido = setearTipoUsuarioPesona(lstPedido, lstTipoUsuarioPersona);
+    return util.responceBuscar(req, res, null, lstPedido);
+}
+
 
 export const obtenerDetalle = async (lstKeys: string[]) => {
     const promesa = new Promise(async (resolve: any, reject: any) => {

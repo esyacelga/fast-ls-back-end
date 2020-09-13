@@ -5,7 +5,7 @@ const parametroModel = new Schema({
     codigo: {type: String, required: [true, 'El codigo es necesario']},
     valor: {type: String, required: [true, 'El valor es necesario']},
     creacionFecha: {type: Date},
-    estado: {type: Number, required: [true, 'El estado es necesario']}
+    estado: {type: Number, default:1}
 });
 parametroModel.plugin(uniqueValidator, {message: '{PATH} debe de ser único'});
 
