@@ -158,7 +158,7 @@ export const obtenerPedidoUsuario = async (req: Request, res: Response) => {
     let lstPedido: PedidoInterface[] = (await SolicitudCabecera.find().populate('solicitudDetalle').populate('usuario')
         .where('estado').equals(2)
         .where('usuario').equals(req.body.usuario)
-        .sort({fechaCreacion: -1})) as unknown as PedidoInterface[];
+        .sort({fechaCreacion: 1})) as unknown as PedidoInterface[];
     const lstNumberString: string[] = obtenerKeyDetalle(lstPedido);
     const lstDetalle: PedidoDetalleInterface[] = (await SolicitudDetalle.find().populate('articulo').where('_id').in(lstNumberString)) as unknown as PedidoDetalleInterface[];
     lstPedido = setearDetalle(lstPedido, lstDetalle);

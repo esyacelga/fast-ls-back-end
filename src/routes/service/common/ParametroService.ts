@@ -28,7 +28,7 @@ export const obtenerTodos = async (req: Request, res: Response) => {
 
 export const obtenerParametroPorCodigo = async (req: Request, res: Response) => {
     const codigo = req.body.codigo;
-    ParametroModel.find({}, (error, objeto) => {
+    ParametroModel.findOne({}, (error, objeto) => {
         return res = util.responceBuscar(req, res, error, objeto);
     }).where('codigo').equals(codigo);
 }
