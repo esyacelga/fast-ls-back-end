@@ -11,6 +11,8 @@ export class ArticuloDto {
     public portada: string = '';
     public verObservacion: boolean = false;
     public obsevacion: string = '';
+    public obsevacionLarga: string = '';
+    public ocultarBotonSolicitar: boolean = false;
     public esBanner: boolean = false;
     public conteoLike: Number = 0;
     public conteoDisLike: Number = 0;

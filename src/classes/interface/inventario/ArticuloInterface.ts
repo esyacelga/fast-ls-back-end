@@ -10,6 +10,7 @@ export interface ArticuloInterface {
     portada: string;
     verObservacion: boolean;
     obsevacion: string;
+    obsevacionLarga: string;
     esBanner: boolean;
     ocultarBotonSolicitar: boolean;
     horaInicio: Date,

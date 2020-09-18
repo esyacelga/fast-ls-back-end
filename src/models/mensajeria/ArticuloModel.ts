@@ -15,6 +15,7 @@ const articulo = new Schema({
     esServicio: {type: Boolean, default: false},
     verObservacion: {type: Boolean, default: false},
     obsevacion: {type: String},
+    obsevacionLarga: {type: String},
     conteoLike: {type: Number, default: 0},
     conteoDisLike: {type: Number, default: 0},
     conteoComentarios: {type: Number, default: 0},
