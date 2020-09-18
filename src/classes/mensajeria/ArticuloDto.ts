@@ -15,6 +15,8 @@ export class ArticuloDto {
     public conteoLike: Number = 0;
     public conteoDisLike: Number = 0;
     public conteoComentarios: Number = 0;
+    public horaInicio: Date = new Date();
+    public horaFin: Date = new Date();
 }
 
 export class ArticuloClass {

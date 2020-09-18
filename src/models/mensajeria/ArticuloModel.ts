@@ -19,6 +19,9 @@ const articulo = new Schema({
     conteoDisLike: {type: Number, default: 0},
     conteoComentarios: {type: Number, default: 0},
     permiteComentar: {type: Boolean, default: false},
+    ocultarBotonSolicitar: {type: Boolean, default: false},
+    horaInicio: {type: Date},
+    horaFin: {type: Date},
     estado: {type: Number, required: [true, 'El estado es necesario']}
 });
 articulo.plugin(uniqueValidator, {message: '{PATH} debe de ser único'});

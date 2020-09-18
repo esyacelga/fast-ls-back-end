@@ -54,7 +54,10 @@ export const Registrar = (req: Request, res: Response) => {
         estado: req.body.estado,
         esServicio: isNull(req.body.estado) ? false : req.body.esServicio,
         permiteComentarios: isNull(req.body.estado) ? false : req.body.permiteComentarios,
+        ocultarBotonSolicitar: isNull(req.body.ocultarBotonSolicitar) ? false : req.body.ocultarBotonSolicitar,
         fechaCreacion: new Date(),
+        horaInicio: req.body.horaInicio,
+        horaFin: req.body.horaFin,
         img: req.body.img,
         portada: null
     };
@@ -94,6 +97,9 @@ export const RegistrarArticulo = (req: Request, res: Response) => {
         descripcion: req.body.descripcion,
         estado: req.body.estado,
         esBanner: req.body.esBanner,
+        ocultarBotonSolicitar: isNull(req.body.ocultarBotonSolicitar) ? false : req.body.ocultarBotonSolicitar,
+        horaInicio: req.body.horaInicio,
+        horaFin: req.body.horaFin,
         fechaCreacion: new Date(),
         img: req.body.img[0]
     };
@@ -108,9 +114,8 @@ export const RegistrarArticulo = (req: Request, res: Response) => {
 
 export const Actualizar = async (req: Request, res: Response) => {
     let objArticulo: ArticuloInterface = req.body as ArticuloInterface;
-    console.log(objArticulo);
     if (objArticulo.estado === 0) {
-        objArticulo = (await Articulo.findByIdAndUpdate(objArticulo._id, objArticulo)) as unknown as ArticuloInterface
+        objArticulo = (await Articulo.findByIdAndUpdate(objArticulo._id, objArticulo)) as unknown as ArticuloInterface;
         return util.responceActualizar(req, res, null, objArticulo);
     }
 

@@ -229,3 +229,8 @@ export const Actualizar = (req: Request, res: Response) => {
     });
 };
 
+export const eliminar = (req: Request, res: Response) => {
+    TipoUsuarioPersona.deleteOne({'_id': req.body.idTabla}, (err) => {
+        res = util.responceGuardar(req, res, err, {});
+    });
+};

@@ -11,6 +11,9 @@ export interface ArticuloInterface {
     verObservacion: boolean;
     obsevacion: string;
     esBanner: boolean;
+    ocultarBotonSolicitar: boolean;
+    horaInicio: Date,
+    horaFin: Date,
     conteoLike: Number;
     conteoDisLike: Number;
     conteoComentarios: Number;

@@ -3,7 +3,7 @@ import {
     Actualizar,
     ActualizarPhoto,
     BuscarPersonaCorreo,
-    BusquedaPersonaClave,
+    BusquedaPersonaClave, eliminar,
     Insertar,
     ObtenerPorPersona,
     ObtenerPorTipoUsuario,
@@ -55,6 +55,9 @@ tipoUsuarioPersonaRoute.post('/insertar', Insertar);
  * Actualiza un registro
  */
 tipoUsuarioPersonaRoute.put('/', Actualizar);
+
+
+tipoUsuarioPersonaRoute.put('/eliminar', eliminar);
 
 /**
  * Actualiza la foto de perfil del usuario

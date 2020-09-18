@@ -7,7 +7,7 @@ const util = new CommonsMethods();
 export const ObtenerTodos = (req: Request, res: Response) => {
     TipoArticulo.find({}, (error, objeto) => {
         res = util.responceBuscar(req, res, error, objeto);
-    }).where('estado').equals(1);
+    }).where('estado').equals(1).sort({codigo: 1});
 }
 
 
