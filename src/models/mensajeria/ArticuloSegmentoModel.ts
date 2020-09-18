@@ -6,6 +6,8 @@ const articuloSegmento = new Schema({
     tipoArticulo:{	type: Schema.Types.ObjectId,	ref: 'TipoArticulo' },
     estado: { type: Number, required: [true, 'El estado es necesario'] },
     esServicio:{ type: Boolean, required: [true, 'El estado es necesario'] },
+    esServicioTransporte:{ type: Boolean, required: [true, 'El estado es necesario'] },
+
 });
 articuloSegmento.plugin(uniqueValidator, {message: '{PATH} debe de ser único'});
 

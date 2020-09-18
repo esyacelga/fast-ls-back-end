@@ -5,6 +5,7 @@ export interface ArticuloSegmentoInterface {
     descripcion: string,
     tipoArticulo: TipoArticuloInterface,
     estado: number,
-    esServicio:boolean
+    esServicio:boolean,
+    esServicioTransporte:boolean,
 }
 
