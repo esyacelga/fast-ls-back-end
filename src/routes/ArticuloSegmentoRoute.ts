@@ -13,6 +13,7 @@ const articuloSegmentoRoute = Router();
 articuloSegmentoRoute.put('/obtenerTodosArticuloSegmento', ObtenerTodosArticuloSegmento);
 
 
+
 /**
  * Obtiene por tipo articulo
  */
