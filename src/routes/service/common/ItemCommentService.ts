@@ -70,7 +70,7 @@ export const ObtenerTodosNotificaciones = async (req: Request, res: Response) =>
         const notificacion: NotificacionMensajeDto = new NotificacionMensajeDto(objNotificacion._id,
             displayName, picture, mensajeTitulo,
             objNotificacion.mensaje, objNotificacion.playerId, objNotificacion.tipoNotificacion,
-            portada, objNotificacion.idSegmento, objNotificacion.nombreSegmento, estadoExperiencia, objNotificacion.esServicio);
+            portada, objNotificacion.idSegmento, objNotificacion.nombreSegmento, estadoExperiencia, objNotificacion.esServicio, objNotificacion.created);
         lstNotificacionDto.push(notificacion);
     }
     return util.responceBuscar(req, res, null, lstNotificacionDto);
