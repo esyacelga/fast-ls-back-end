@@ -3,7 +3,7 @@ import {
     actualizarNotificacion,
     enviarNotificacion, enviarNotificacionMasiva, enviarNotificacionSimple,
     obtenerTodos,
-    registrarNotificacion, registrarNotificacionSimple
+    registrarNotificacion, registrarNotificacionSimple, generarSubscripcion, obtenerkey, generarPush
 } from "../../service/notificacion/PushNotificationService";
 
 const notificacionRoute = Router();
@@ -15,6 +15,11 @@ const notificacionRoute = Router();
 notificacionRoute.put('/', enviarNotificacion);
 notificacionRoute.post('/', registrarNotificacion);
 notificacionRoute.put('/obtenerTodos', obtenerTodos);
+
+notificacionRoute.put('/generarSubscripcion', generarSubscripcion);
+notificacionRoute.put('/obtenerkey', obtenerkey);
+notificacionRoute.put('/generarPush', generarPush);
+
 notificacionRoute.put('/actualizar', actualizarNotificacion);
 notificacionRoute.put('/enviarNotificacionSimple', enviarNotificacionSimple);
 notificacionRoute.put('/enviarNotificacionMasiva', enviarNotificacionMasiva);

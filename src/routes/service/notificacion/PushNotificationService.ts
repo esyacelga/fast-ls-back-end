@@ -10,6 +10,49 @@ import {DtoNotificacion, NotificacionMensajeClass} from "../../../classes/common
 import {NotificacionMensajeModel} from "../../../models/notificacion/notificacionMensaje.model";
 
 const util = new CommonsMethods();
+
+export const generarSubscripcion = async (req: Request, res: Response) => {
+    const data = {
+        tittuloNotificacion: req.body.tittuloNotificacion,
+        detalleNotificacion: req.body.detalleNotificacion,
+        key: req.body.key,
+        valor: req.body.valor,
+        grupoUsuarios: req.body.grupoUsuarios
+    };
+    const lstPlayer: string[] = await obtenerUsuariosNotificacion(data.grupoUsuarios);
+    const notificacion = new EnvioNotificacion();
+    notificacion.enviar(data.tittuloNotificacion, data.detalleNotificacion, lstPlayer, 'ruta', data.valor, 'main/tabs/config');
+    return util.responceBuscar(req, res, null, data);
+}
+
+
+export const obtenerkey = async (req: Request, res: Response) => {
+    const data = {
+        tittuloNotificacion: req.body.tittuloNotificacion,
+        detalleNotificacion: req.body.detalleNotificacion,
+        key: req.body.key,
+        valor: req.body.valor,
+        grupoUsuarios: req.body.grupoUsuarios
+    };
+    const lstPlayer: string[] = await obtenerUsuariosNotificacion(data.grupoUsuarios);
+    const notificacion = new EnvioNotificacion();
+    notificacion.enviar(data.tittuloNotificacion, data.detalleNotificacion, lstPlayer, 'ruta', data.valor, 'main/tabs/config');
+    return util.responceBuscar(req, res, null, data);
+}
+
+export const generarPush = async (req: Request, res: Response) => {
+    const data = {
+        tittuloNotificacion: req.body.tittuloNotificacion,
+        detalleNotificacion: req.body.detalleNotificacion,
+        key: req.body.key,
+        valor: req.body.valor,
+        grupoUsuarios: req.body.grupoUsuarios
+    };
+    const lstPlayer: string[] = await obtenerUsuariosNotificacion(data.grupoUsuarios);
+    const notificacion = new EnvioNotificacion();
+    notificacion.enviar(data.tittuloNotificacion, data.detalleNotificacion, lstPlayer, 'ruta', data.valor, 'main/tabs/config');
+    return util.responceBuscar(req, res, null, data);
+}
 /**
  * Método de envío de notificación
  * @param req
