@@ -25,7 +25,6 @@ import articuloSegmentoRoute from "./routes/ArticuloSegmentoRoute";
 import disponibilidadRoute from "./routes/route/ruta/DisponibilidadRoute";
 import tipoUsuarioPersonaRoute from "./routes/route/persona/TipoUsuarioPersonaRoute";
 import parametroRoute from "./routes/route/common/parametroRoute";
-import * as path from "path";
 
 const server = new Server();
 
@@ -61,13 +60,9 @@ server.app.use('/articuloSegmento', articuloSegmentoRoute);
 server.app.use('/disponibilidadRoute', disponibilidadRoute);
 server.app.use('/tipoUsuarioPersona', tipoUsuarioPersonaRoute);
 
-server.app.set('views', path.join(__dirname,'views'));
-server.app.set('view engine', 'ejs');
-
-server.app.get('/',(req,res)=>{
-    res.render('index');
+server.app.get('/', (req, res)=>{
+    res.send('<h1>Volarys Activo (NODE.js)</h1>')
 })
-
 
 // Conectar DB
 mongoose.connect('mongodb+srv://esyacelga:seya1922@cluster0.ck0re.gcp.mongodb.net/black-cat?retryWrites=true&w=majority',
