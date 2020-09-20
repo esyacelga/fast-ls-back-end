@@ -149,6 +149,8 @@ export const obtenerPedidoPorEstado = async (req: Request, res: Response) => {
     const lstDetalle: PedidoDetalleInterface[] = (await SolicitudDetalle.find().populate('articulo').where('_id').in(lstNumberString)) as unknown as PedidoDetalleInterface[];
     lstPedido = setearDetalle(lstPedido, lstDetalle);
     const tipoUsuario: TipoUsuarioInterface = (await TipoUsuario.findOne().where('codigo').equals('CLIENTE').where('estado').equals(1)) as unknown as TipoUsuarioInterface;
+    if(!tipoUsuario)
+        return util.responceBuscar(req, res, null, null);
     const lstTipoUsuarioPersona: TipoUsuarioPersonaInterface[] = (await TipoUsuarioPersona.find().populate('usuario').populate('persona').where('tipoUsuario').equals(tipoUsuario._id).where('estado').equals(1)) as unknown as TipoUsuarioPersonaInterface[];
     lstPedido = setearTipoUsuarioPesona(lstPedido, lstTipoUsuarioPersona);
     return util.responceBuscar(req, res, null, lstPedido);
