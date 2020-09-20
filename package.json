@@ -13,7 +13,7 @@
     "serve": "node dist/index.js",
     "watch-node": "nodemon dist/server.js",
     "watch-ts": "tsc -w",
-    "vapid": "web-push generate-vapid-keys --json > vapid.json && copy vapid.json dist  "
+    "vapid": "web-push generate-vapid-keys --json > vapid.json && cp vapid.json dist  "
   },
   "engines": {
     "node": "10.16.2",
