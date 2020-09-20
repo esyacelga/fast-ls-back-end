@@ -9,31 +9,20 @@ import {ModeloTipoUsuarioPersona} from "../../../classes/persona/ModeloTipoUsuar
 import {DtoNotificacion, NotificacionMensajeClass} from "../../../classes/common/NotificacionMensajeClass";
 import {NotificacionMensajeModel} from "../../../models/notificacion/notificacionMensaje.model";
 import {ModuloJson} from "../../../push";
-//import {obtenerKey} from "../../../push";
-
+import {KeyInteface, ObjSubscripcionInterface} from "../../../interfaces/ObjSubscripcionInterface";
+import {SubscriptionModel} from "../../../models/notificacion/Subscription.model";
 
 const util = new CommonsMethods();
 
 export const generarSubscripcion = async (req: Request, res: Response) => {
-    //const d = getKey();
-    const data = {
-        tittuloNotificacion: req.body.tittuloNotificacion,
-
-        detalleNotificacion: req.body.detalleNotificacion,
-        key: req.body.key,
-        valor: req.body.valor,
-        grupoUsuarios: req.body.grupoUsuarios
-    };
-    const lstPlayer: string[] = await obtenerUsuariosNotificacion(data.grupoUsuarios);
-    const notificacion = new EnvioNotificacion();
-    notificacion.enviar(data.tittuloNotificacion, data.detalleNotificacion, lstPlayer, 'ruta', data.valor, 'main/tabs/config');
-    return util.responceBuscar(req, res, null, data);
+    const subs: ObjSubscripcionInterface = req.body as ObjSubscripcionInterface;
+    const obj: KeyInteface = await SubscriptionModel.create(subs.keys) as unknown as KeyInteface;
+    return util.responceBuscar(req, res, null, obj);
 }
 
 
 export const obtenerkey = async (req: Request, res: Response) => {
-    const data =  ModuloJson.getKey();
-    console.log(data);
+    let data = ModuloJson.getKey();
     return util.responceBuscar(req, res, null, data);
 }
 
