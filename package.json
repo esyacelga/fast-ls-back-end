@@ -7,7 +7,7 @@
     "build": "rimraf ./dist && tsc",
     "start": "npm run build && node dist/index.js",
     "startw": "npm run build && npm run copyw && copy vapid.json dist  && node dist/index.js",
-    "startl": "npm run build && npm run copyl && copy vapid.json dist && node dist/index.js",
+    "startl": "npm run build && npm run copyl && cp vapid.json dist && node dist/index.js",
     "copyw": "@powershell copy 'src/assets/*' 'dist/assets/'",
     "copyl": "cp -r src/assets/* dist/assets/",
     "serve": "node dist/index.js",
