@@ -1,5 +1,6 @@
+
 // @ts-ignore
-import * as vapid from "./assets/json/vapid.json"
+import * as vapid from "./vapid.json"
 //const valor = require('src/assets/json/vapid.json')
 
 
@@ -8,13 +9,6 @@ module.exports.getKey = () => {
     return vapid.publicKey;
 }
 
-
-
-function bar() {
-
-    console.log('bar');
-
-}
 
 const ModuloJson = {
     getKey: function () {

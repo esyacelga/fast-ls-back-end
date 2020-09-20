@@ -6,10 +6,14 @@
   "scripts": {
     "build": "rimraf ./dist && tsc",
     "start": "npm run build && node dist/index.js",
+    "startw": "npm run build && npm run copyw && copy vapid.json dist  && node dist/index.js",
+    "startl": "npm run build && npm run copyl && copy vapid.json dist && node dist/index.js",
+    "copyw": "@powershell copy 'src/assets/*' 'dist/assets/'",
+    "copyl": "copy 'src/assets/*' 'dist/assets/'",
     "serve": "node dist/index.js",
     "watch-node": "nodemon dist/server.js",
     "watch-ts": "tsc -w",
-    "vapid": "web-push generate-vapid-keys --json > src/assets/vapid.json"
+    "vapid": "web-push generate-vapid-keys --json > vapid.json && copy vapid.json dist  "
   },
   "engines": {
     "node": "10.16.2",
