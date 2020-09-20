@@ -11,7 +11,7 @@ module.exports.getKey = () => {
 
 const ModuloJson = {
     getKey: function () {
-        return vapid.privateKey;
+        return vapid.publicKey;
         //return vapid.privateKey);
     }
 };
