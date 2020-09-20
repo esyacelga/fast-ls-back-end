@@ -9,7 +9,7 @@
     "startw": "npm run build && npm run copyw && copy vapid.json dist  && node dist/index.js",
     "startl": "npm run build && npm run copyl && copy vapid.json dist && node dist/index.js",
     "copyw": "@powershell copy 'src/assets/*' 'dist/assets/'",
-    "copyl": "cp './assets/*' 'dist/assets/'",
+    "copyl": "cp src/assets/* dist/assets/",
     "serve": "node dist/index.js",
     "watch-node": "nodemon dist/server.js",
     "watch-ts": "tsc -w",
