@@ -8,12 +8,17 @@ import {Notificador} from "../../../classes/notificacion/Notificador";
 import {ModeloTipoUsuarioPersona} from "../../../classes/persona/ModeloTipoUsuarioPersona";
 import {DtoNotificacion, NotificacionMensajeClass} from "../../../classes/common/NotificacionMensajeClass";
 import {NotificacionMensajeModel} from "../../../models/notificacion/notificacionMensaje.model";
+import {ModuloJson} from "../../../push";
+//import {obtenerKey} from "../../../push";
+
 
 const util = new CommonsMethods();
 
 export const generarSubscripcion = async (req: Request, res: Response) => {
+    //const d = getKey();
     const data = {
         tittuloNotificacion: req.body.tittuloNotificacion,
+
         detalleNotificacion: req.body.detalleNotificacion,
         key: req.body.key,
         valor: req.body.valor,
@@ -27,18 +32,11 @@ export const generarSubscripcion = async (req: Request, res: Response) => {
 
 
 export const obtenerkey = async (req: Request, res: Response) => {
-    const data = {
-        tittuloNotificacion: req.body.tittuloNotificacion,
-        detalleNotificacion: req.body.detalleNotificacion,
-        key: req.body.key,
-        valor: req.body.valor,
-        grupoUsuarios: req.body.grupoUsuarios
-    };
-    const lstPlayer: string[] = await obtenerUsuariosNotificacion(data.grupoUsuarios);
-    const notificacion = new EnvioNotificacion();
-    notificacion.enviar(data.tittuloNotificacion, data.detalleNotificacion, lstPlayer, 'ruta', data.valor, 'main/tabs/config');
+    const data =  ModuloJson.getKey();
+    console.log(data);
     return util.responceBuscar(req, res, null, data);
 }
+
 
 export const generarPush = async (req: Request, res: Response) => {
     const data = {
@@ -58,6 +56,7 @@ export const generarPush = async (req: Request, res: Response) => {
  * @param req
  * @param res
  */
+
 export const enviarNotificacion = async (req: Request, res: Response) => {
     const data = {
         tittuloNotificacion: req.body.tittuloNotificacion,

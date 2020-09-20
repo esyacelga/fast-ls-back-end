@@ -65,12 +65,11 @@ server.app.get('/', (req, res)=>{
 })
 
 // Conectar DB
-mongoose.connect('mongodb+srv://esyacelga:seya1922@cluster0.ck0re.gcp.mongodb.net/black-cat?retryWrites=true&w=majority',
+mongoose.connect('mongodb://167.172.179.203:27017/volarys',
     {useNewUrlParser: true, useCreateIndex: true}, (err) => {
         if (err) throw err;
         console.log('Base de datos ONLINE');
     })
-
 // Levantar express
 server.start(() => {
 });

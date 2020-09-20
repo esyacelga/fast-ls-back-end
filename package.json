@@ -9,7 +9,7 @@
     "serve": "node dist/index.js",
     "watch-node": "nodemon dist/server.js",
     "watch-ts": "tsc -w",
-    "generate-vapid": "./node_modules/web-push/src/cli.js generate-vapid-keys --json"
+    "vapid": "web-push generate-vapid-keys --json > src/assets/vapid.json"
   },
   "engines": {
     "node": "10.16.2",
@@ -65,7 +65,7 @@
   ],
   "include": [
     "src/**/*.ts",
-    "src/**/*.ejs"
+    "src/**/*.d.ts"
   ],
   "exclude": [
     "node_modules"

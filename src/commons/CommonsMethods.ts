@@ -38,7 +38,6 @@ export class CommonsMethods {
         })
         return respuesta;
     };
-
     responceBuscar(peticion: Request, respuesta: Response, error: any, objeto: any) {
         if (error) {
             const mensaje = error.messaje;
