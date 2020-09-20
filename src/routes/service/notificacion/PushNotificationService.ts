@@ -9,14 +9,14 @@ import {ModeloTipoUsuarioPersona} from "../../../classes/persona/ModeloTipoUsuar
 import {DtoNotificacion, NotificacionMensajeClass} from "../../../classes/common/NotificacionMensajeClass";
 import {NotificacionMensajeModel} from "../../../models/notificacion/notificacionMensaje.model";
 import {ModuloJson} from "../../../push";
-import {KeyInteface, ObjSubscripcionInterface} from "../../../interfaces/ObjSubscripcionInterface";
+import {KeyInteface} from "../../../interfaces/ObjSubscripcionInterface";
 import {SubscriptionModel} from "../../../models/notificacion/Subscription.model";
 
 const util = new CommonsMethods();
 
 export const generarSubscripcion = async (req: Request, res: Response) => {
-    const subs: ObjSubscripcionInterface = req.body as ObjSubscripcionInterface;
-    const obj: KeyInteface = await SubscriptionModel.create(subs.keys) as unknown as KeyInteface;
+    const subs: KeyInteface = req.body as KeyInteface;
+    const obj: KeyInteface = await SubscriptionModel.create(subs) as unknown as KeyInteface;
     return util.responceBuscar(req, res, null, obj);
 }
 
