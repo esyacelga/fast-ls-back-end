@@ -9,15 +9,33 @@ import {ModeloTipoUsuarioPersona} from "../../../classes/persona/ModeloTipoUsuar
 import {DtoNotificacion, NotificacionMensajeClass} from "../../../classes/common/NotificacionMensajeClass";
 import {NotificacionMensajeModel} from "../../../models/notificacion/notificacionMensaje.model";
 import {ModuloJson} from "../../../push";
-import {KeyInteface} from "../../../interfaces/ObjSubscripcionInterface";
+import {
+    KeyClass,
+    ObjSubscripcionClass,
+    ObjSubscripcionInterface,
+    PushSubscriptionClass
+} from "../../../interfaces/ObjSubscripcionInterface";
 import {SubscriptionModel} from "../../../models/notificacion/Subscription.model";
+// @ts-ignore
+import webPuss from 'web-push';
 
 const util = new CommonsMethods();
+const vapidKeys = {
+    publicKey: 'BMQDf5kB60GNn8ZPXpxJ_AXKpip3pReYB2u4Pnn9clmMj2eu1TX8Yh-Uklc_N68Z-ELhp2SeTvuBRYowNTKQtAs',
+    privateKey: '3FRdTfEWZScUpSAVQgE6i4lyxoKVNm4eT20R22LQSj8'
+}
+
+webPuss.setVapidDetails(
+    'mailto:esyacelga@hotmail.com',
+    vapidKeys.publicKey,
+    vapidKeys.privateKey
+);
 
 export const generarSubscripcion = async (req: Request, res: Response) => {
-    const subs: KeyInteface = req.body as KeyInteface;
-    const obj: KeyInteface = await SubscriptionModel.create(subs) as unknown as KeyInteface;
-    return util.responceBuscar(req, res, null, obj);
+    const subs: ObjSubscripcionInterface = req.body as ObjSubscripcionInterface;
+    const objSubscripcion: ObjSubscripcionClass = new ObjSubscripcionClass(subs.keys.auth, subs.keys.p256dh, subs.endpoint)
+    const obj: ObjSubscripcionClass = await SubscriptionModel.create(objSubscripcion) as unknown as ObjSubscripcionClass;
+    return util.responceCrear(req, res, null, obj);
 }
 
 
@@ -28,17 +46,21 @@ export const obtenerkey = async (req: Request, res: Response) => {
 
 
 export const generarPush = async (req: Request, res: Response) => {
-    const data = {
-        tittuloNotificacion: req.body.tittuloNotificacion,
-        detalleNotificacion: req.body.detalleNotificacion,
-        key: req.body.key,
-        valor: req.body.valor,
-        grupoUsuarios: req.body.grupoUsuarios
-    };
-    const lstPlayer: string[] = await obtenerUsuariosNotificacion(data.grupoUsuarios);
-    const notificacion = new EnvioNotificacion();
-    notificacion.enviar(data.tittuloNotificacion, data.detalleNotificacion, lstPlayer, 'ruta', data.valor, 'main/tabs/config');
-    return util.responceBuscar(req, res, null, data);
+    const lstSubscripciones: ObjSubscripcionClass[] = SubscriptionModel.find() as unknown as ObjSubscripcionClass[];
+    if (lstSubscripciones && lstSubscripciones.length > 0)
+        for (var i = 0; lstSubscripciones.length > i; i++) {
+            const keyObj: KeyClass = new KeyClass(lstSubscripciones[i].auth, lstSubscripciones[i].p256dh)
+            const objSubs: PushSubscriptionClass = new PushSubscriptionClass(lstSubscripciones[i].endpoint, keyObj);
+            webPuss.sendNotification(objSubs, 'Nuevo pedido generado').then(
+            ).catch((error: any) => {
+                    if (error.statusCode === 410) {
+                        console.log('Se debe borrar la subscripcion');
+                    }
+                }
+            );
+        }
+    return util.responceBuscar(req, res, null, 'Enviado');
+
 }
 /**
  * Método de envío de notificación
