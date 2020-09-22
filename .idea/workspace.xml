@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4502a6b4-65c7-446c-9aa1-eb8025ea9f52" name="Default Changelist" comment="Correccion consulta">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/ObjSubscripcionInterface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/ObjSubscripcionInterface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/notificacion/Subscription.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/notificacion/Subscription.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/push.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/push.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/service/notificacion/PushNotificationService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/service/notificacion/PushNotificationService.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -23,8 +18,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/routes/service/notificacion/PushNotificationService.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="385">
-              <caret line="59" column="14" lean-forward="true" selection-start-line="59" selection-start-column="14" selection-end-line="59" selection-end-column="14" />
+            <state relative-caret-position="340">
+              <caret line="60" column="33" selection-start-line="60" selection-start-column="33" selection-end-line="60" selection-end-column="33" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
@@ -53,8 +48,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/interfaces/ObjSubscripcionInterface.ts">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="185">
+              <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vapid.json">
+          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
-              <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
             </state>
           </provider>
         </entry>
@@ -62,7 +66,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/node_modules/@types/web-push/index.d.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
+            <state relative-caret-position="185">
               <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
             </state>
           </provider>
@@ -81,8 +85,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>find</find>
-      <find>find(</find>
       <find>obtenerPedidos</find>
       <find>where(</find>
       <find>obtenerCabecera</find>
@@ -111,6 +113,8 @@
       <find>default</find>
       <find>generarSubscripcion</find>
       <find>generarPush</find>
+      <find>.find()</find>
+      <find>.delete</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -178,10 +182,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="618" />
+    <option name="y" value="145" />
+    <option name="width" value="1456" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -246,19 +250,19 @@
     <property name="ts.external.directory.path" value="D:\progamas\WebStorm 2018.3.4\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\proyectos-ionic\proyecto\fast-ls-back-end\src\assets\json" />
-      <recent name="D:\proyectos-ionic\proyecto\fast-ls-back-end\src" />
-      <recent name="D:\proyectos-ionic\proyecto\fast-ls-back-end\src\view" />
-      <recent name="D:\proyectos-ionic\ley-rutas-app-back-end\src" />
-      <recent name="D:\proyectos-ionic\ley-rutas-app-back-end\models\common" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\proyectos-ionic\proyecto\fast-ls-back-end\src\interfaces" />
       <recent name="D:\proyectos-ionic\proyecto\fast-ls-back-end\src\models\notificacion" />
       <recent name="D:\proyectos-ionic\proyecto\fast-ls-back-end\dist\assets" />
       <recent name="D:\proyectos-ionic\proyecto\fast-ls-back-end\src\assets" />
       <recent name="D:\proyectos-ionic\proyecto\fast-ls-back-end\dist" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\proyectos-ionic\proyecto\fast-ls-back-end\src\assets\json" />
+      <recent name="D:\proyectos-ionic\proyecto\fast-ls-back-end\src" />
+      <recent name="D:\proyectos-ionic\proyecto\fast-ls-back-end\src\view" />
+      <recent name="D:\proyectos-ionic\ley-rutas-app-back-end\src" />
+      <recent name="D:\proyectos-ionic\ley-rutas-app-back-end\models\common" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -359,7 +363,7 @@
       <workItem from="1600520628772" duration="544000" />
       <workItem from="1600552724523" duration="27020000" />
       <workItem from="1600696248131" duration="692000" />
-      <workItem from="1600781144992" duration="2059000" />
+      <workItem from="1600781144992" duration="8373000" />
     </task>
     <task id="LOCAL-00001" summary="Correciones modelado">
       <created>1566050802511</created>
@@ -463,7 +467,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="630292000" />
+    <option name="totallyTimeSpent" value="636606000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -476,7 +480,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14172813" />
       <window_info id="npm" order="1" side_tool="true" />
@@ -794,13 +797,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vapid.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/models/notificacion/notificacion.model.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
@@ -829,20 +825,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/interfaces/ObjSubscripcionInterface.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@types/web-push/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
@@ -850,10 +832,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/interfaces/ObjSubscripcionInterface.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@types/web-push/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vapid.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/routes/service/notificacion/PushNotificationService.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="59" column="14" lean-forward="true" selection-start-line="59" selection-start-column="14" selection-end-line="59" selection-end-column="14" />
+        <state relative-caret-position="340">
+          <caret line="60" column="33" selection-start-line="60" selection-start-column="33" selection-end-line="60" selection-end-column="33" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
           </folding>
