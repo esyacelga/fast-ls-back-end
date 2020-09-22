@@ -45,20 +45,39 @@ export const obtenerkey = async (req: Request, res: Response) => {
 }
 
 
-export const generarPush = async (req: Request, res: Response) => {
-    const lstSubscripciones: ObjSubscripcionClass[] = SubscriptionModel.find() as unknown as ObjSubscripcionClass[];
+export const enviarNotificiaconPWA = async (titulo: string, mensaje: string) => {
+    const lstSubscripciones: ObjSubscripcionClass[] = await SubscriptionModel.find() as unknown as ObjSubscripcionClass[];
+    const payLoad = {
+        notification: {
+            data: {url: 'https://www.youtube.com/watch?v=0vSEmEdYKro&t=580s'},
+            title: titulo,
+            body: mensaje,
+            vibrate: [100, 50, 100]
+        }
+    }
     if (lstSubscripciones && lstSubscripciones.length > 0)
         for (var i = 0; lstSubscripciones.length > i; i++) {
             const keyObj: KeyClass = new KeyClass(lstSubscripciones[i].auth, lstSubscripciones[i].p256dh)
             const objSubs: PushSubscriptionClass = new PushSubscriptionClass(lstSubscripciones[i].endpoint, keyObj);
-            webPuss.sendNotification(objSubs, 'Nuevo pedido generado').then(
+            console.log(objSubs);
+            await webPuss.sendNotification(objSubs, JSON.stringify(payLoad)).then(() => {
+                    //res.status(200).json({message: 'Newsletter sent successfully.'})
+                }
             ).catch((error: any) => {
                     if (error.statusCode === 410) {
-                        console.log('Se debe borrar la subscripcion');
+                        // @ts-ignore
+                        SubscriptionModel.deleteOne({'_id': lstSubscripciones[i]._id}, (err) => {
+                            console.log('Borrado');
+                        });
                     }
                 }
             );
         }
+
+}
+
+export const generarPush = async (req: Request, res: Response) => {
+    await this.enviarNotificiaconPWA('Pruebas', 'Holas');
     return util.responceBuscar(req, res, null, 'Enviado');
 
 }
