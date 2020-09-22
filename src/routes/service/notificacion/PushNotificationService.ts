@@ -77,12 +77,12 @@ export const enviarNotificiaconPWA = async (titulo: string, mensaje: string) => 
 }
 
 export const generarPush = async (req: Request, res: Response) => {
-    await this.enviarNotificiaconPWA('Pruebas', 'Holas');
+    await enviarNotificiaconPWA('Pruebas', 'Holas');
     return util.responceBuscar(req, res, null, 'Enviado');
 }
 
 export const pwaPushNotification = async (req: Request, res: Response) => {
-    await this.enviarNotificiaconPWA(req.body.titulo, req.body.mensaje);
+    await enviarNotificiaconPWA(req.body.titulo, req.body.mensaje);
     return util.responceBuscar(req, res, null, 'Enviado');
 }
 
