@@ -12,7 +12,6 @@ import {TipoUsuarioInterface} from "../../../classes/interface/persona/TipoUsuar
 import {PedidoDTO, PedidoInterface} from "../../../classes/interface/mensajeria/PedidoInterface";
 import {TipoUsuarioPersonaInterface} from "../../../classes/interface/persona/TipoUsuarioPersonaInterface";
 import {PedidoDetalleInterface} from "../../../classes/interface/mensajeria/PedidoDetalleInterface";
-import {enviarNotificiaconPWA} from "../notificacion/PushNotificationService";
 
 const util = new CommonsMethods();
 
@@ -33,7 +32,7 @@ export const Registrar = (req: Request, res: Response) => {
     SolicitudDetalle.insertMany(data.lstSolcitudDetalle, (err: any, lstResultado: any) => {
         const solicitudCabecera = new SolicitudClass(data.usuario, data.estado, util.obtenerListaIDs(lstResultado), new Date());
         SolicitudCabecera.create(solicitudCabecera, (err: any, objeto: any) => {
-            enviarNotificiaconPWA('Nuevo:', 'Un nuevo pedido a sido generado');
+            //enviarNotificiaconPWA('Nuevo:', 'Un nuevo pedido a sido generado');
             res = util.responceCrear(req, res, err, objeto);
         });
     });
@@ -151,7 +150,7 @@ export const obtenerPedidoPorEstado = async (req: Request, res: Response) => {
     const lstDetalle: PedidoDetalleInterface[] = (await SolicitudDetalle.find().populate('articulo').where('_id').in(lstNumberString)) as unknown as PedidoDetalleInterface[];
     lstPedido = setearDetalle(lstPedido, lstDetalle);
     const tipoUsuario: TipoUsuarioInterface = (await TipoUsuario.findOne().where('codigo').equals('CLIENTE').where('estado').equals(1)) as unknown as TipoUsuarioInterface;
-    if(!tipoUsuario)
+    if (!tipoUsuario)
         return util.responceBuscar(req, res, null, null);
     const lstTipoUsuarioPersona: TipoUsuarioPersonaInterface[] = (await TipoUsuarioPersona.find().populate('usuario').populate('persona').where('tipoUsuario').equals(tipoUsuario._id).where('estado').equals(1)) as unknown as TipoUsuarioPersonaInterface[];
     lstPedido = setearTipoUsuarioPesona(lstPedido, lstTipoUsuarioPersona);

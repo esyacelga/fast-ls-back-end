@@ -1,9 +1,16 @@
 import {Router} from 'express';
 import {
     actualizarNotificacion,
-    enviarNotificacion, enviarNotificacionMasiva, enviarNotificacionSimple,
+    enviarNotificacion,
+    enviarNotificacionMasiva,
+    enviarNotificacionSimple,
     obtenerTodos,
-    registrarNotificacion, registrarNotificacionSimple, generarSubscripcion, obtenerkey, generarPush
+    registrarNotificacion,
+    registrarNotificacionSimple,
+    generarSubscripcion,
+    obtenerkey,
+    generarPush,
+    pwaPushNotification
 } from "../../service/notificacion/PushNotificationService";
 
 const notificacionRoute = Router();
@@ -14,6 +21,7 @@ const notificacionRoute = Router();
  */
 notificacionRoute.put('/', enviarNotificacion);
 notificacionRoute.post('/', registrarNotificacion);
+notificacionRoute.put('/pwaPushNotification', pwaPushNotification);
 notificacionRoute.put('/obtenerTodos', obtenerTodos);
 
 notificacionRoute.put('/generarSubscripcion', generarSubscripcion);
