@@ -147,9 +147,7 @@ export const setearDetalle = (lstPedido: PedidoInterface[], lstDetalle: PedidoDe
 
 export const obtenerPedidoPorEstado = async (req: Request, res: Response) => {
     let lstPedido: PedidoInterface[] = (await SolicitudCabecera.find().populate('solicitudDetalle').populate('usuario').where('estado').equals(req.body.estado).sort({fechaCreacion: -1})) as unknown as PedidoInterface[];
-
     lstPedido = _.filter(lstPedido, function(elem) { return elem.usuario !== null; });
-    console.log(lstPedido);
     const lstNumberString: string[] = obtenerKeyDetalle(lstPedido);
     const lstDetalle: PedidoDetalleInterface[] = (await SolicitudDetalle.find().populate('articulo').where('_id').in(lstNumberString)) as unknown as PedidoDetalleInterface[];
     lstPedido = setearDetalle(lstPedido, lstDetalle);
