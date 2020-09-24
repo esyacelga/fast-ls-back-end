@@ -65,7 +65,7 @@ server.app.get('/', (req, res)=>{
 })
 
 // Conectar DB
-mongoose.connect('mongodb://167.172.179.203:27017/volarys',
+mongoose.connect('mongodb://localhost:27017/volarys',
     {useNewUrlParser: true, useCreateIndex: true}, (err) => {
         if (err) throw err;
         console.log('Base de datos ONLINE');
