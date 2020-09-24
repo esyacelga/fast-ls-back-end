@@ -30,6 +30,7 @@ export const RegistrarArticuloSegmento = (req: Request, res: Response) => {
 
 export const ActualizarArticuloSegmento = (req: Request, res: Response) => {
     const data: ArticuloSegmentoInterface = req.body as ArticuloSegmentoInterface;
+    data.estado = data.estado === null ? 1 : data.estado;
     ArticuloSegmento.findByIdAndUpdate(req.body._id, data, {new: true}, (err, userDB) => {
         res = util.responceGuardar(req, res, err, userDB);
     });
