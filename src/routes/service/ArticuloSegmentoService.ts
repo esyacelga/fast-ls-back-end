@@ -22,6 +22,7 @@ export const ObtenerSegmentoPortTipoArticulo = (req: Request, res: Response) => 
 
 export const RegistrarArticuloSegmento = (req: Request, res: Response) => {
     const data: ArticuloSegmentoInterface = req.body as ArticuloSegmentoInterface;
+    data.estado = 1;
     ArticuloSegmento.create(data, (err: any, objeto: any) => {
         res = util.responceCrear(req, res, err, objeto);
     });
