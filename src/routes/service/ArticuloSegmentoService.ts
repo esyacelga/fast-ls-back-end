@@ -8,7 +8,7 @@ const util = new CommonsMethods();
 export const ObtenerTodosArticuloSegmento = (req: Request, res: Response) => {
     ArticuloSegmento.find({}, (error, objeto) => {
         res = util.responceBuscar(req, res, error, objeto);
-    }).populate('tipoArticulo').where('estado').equals(1);
+    }).populate('tipoArticulo').where('estado').equals(1).sort({descripcion: 1});
 }
 
 
@@ -16,7 +16,7 @@ export const ObtenerSegmentoPortTipoArticulo = (req: Request, res: Response) => 
     var body = req.body;
     ArticuloSegmento.find({}, (error, objeto) => {
         res = util.responceBuscar(req, res, error, objeto);
-    }).where('tipoArticulo').equals(body.tipoArticulo);
+    }).where('tipoArticulo').equals(body.tipoArticulo).sort({descripcion: 1});
 }
 
 
