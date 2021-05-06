@@ -38,7 +38,7 @@
     "mongoose-unique-validator": "^2.0.3",
     "nodemailer": "^6.4.11",
     "nodemon": "^2.0.4",
-    "underscore": "^1.10.2",
+    "underscore": "^1.12.1",
     "uniqid": "^5.2.0",
     "urlsafe-base64": "^1.0.0",
     "web-push": "^3.4.4"
