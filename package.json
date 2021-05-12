@@ -36,7 +36,7 @@
     "latest": "^0.2.0",
     "mongoose": "^5.9.29",
     "mongoose-unique-validator": "^2.0.3",
-    "nodemailer": "^6.4.11",
+    "nodemailer": "^6.4.16",
     "nodemon": "^2.0.4",
     "underscore": "^1.10.2",
     "uniqid": "^5.2.0",
